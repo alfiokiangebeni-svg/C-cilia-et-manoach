@@ -1,0 +1,33 @@
+name: Tests NumZoo
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  jeux:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    defaults:
+      run:
+        working-directory: app
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm install
+      - run: npx playwright install --with-deps chromium
+      - name: Les 63 niveaux (3 âges × 7 jeux × 3 niveaux)
+        run: |
+          npm test | tee resultat.txt
+          grep -q "FAIL" resultat.txt && exit 1 || true
+          grep -q 'ERR \[\]' resultat.txt
+      - name: Écrans, langues, espace parents
+        run: npm run test:ecrans
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: captures
+          path: app/test/out/

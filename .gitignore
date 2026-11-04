@@ -1,0 +1,15 @@
+# Secrets de signature : ne jamais publier
+*.keystore
+*.jks
+keystore.properties
+
+# Sorties de build Android
+app/android/build/
+app/android/assets/
+
+# Sorties des tests (captures régénérables)
+app/test/out/
+
+# Outils
+node_modules/
+.DS_Store

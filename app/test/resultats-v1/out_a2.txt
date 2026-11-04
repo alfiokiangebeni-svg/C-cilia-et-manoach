@@ -1,0 +1,14 @@
+2 race 0 OK stars 3
+2 race 1 OK stars 3
+2 race 2 OK stars 3
+2 fish 0 OK stars 3
+2 fish 1 OK stars 3
+2 fish 2 OK stars 3
+2 feed 0 OK stars 3
+2 feed 1 OK stars 3
+2 feed 2 OK stars 3
+2 monster 0 OK stars 3
+2 monster 1 OK stars 3
+2 monster 2 OK stars 3
+zoo 🦁🐘🦒🦓🐒🦛🐊🦜🐢🐠🐬🐙
+ERR []

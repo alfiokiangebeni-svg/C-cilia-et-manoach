@@ -1,0 +1,11 @@
+1 link 0 OK stars 3
+1 link 1 OK stars 3
+1 link 2 OK stars 3
+1 sort 0 OK stars 3
+1 sort 1 OK stars 3
+1 sort 2 OK stars 3
+1 color 0 OK stars 3
+1 color 1 OK stars 3
+1 color 2 OK stars 3
+zoo 🦁🐘🦒🦓🐒🦛🐊🦜🐢
+ERR []

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>NumZoo</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- Accueil -->
+<section id="home" class="screen bg-sky">
+  <div class="hills"></div>
+  <div class="home-corner">
+    <button class="round" id="home-lang" aria-label="Langue">🌍</button>
+    <button class="round" id="home-sound" aria-label="Son">🔊</button>
+  </div>
+  <div class="logo" id="logo"></div>
+  <div class="tagline" data-t="tagline"></div>
+  <div class="home-row">
+    <div id="home-av1"></div>
+    <button class="btn big green pulse" id="home-play">▶ <span data-t="play"></span></button>
+    <div id="home-av2"></div>
+  </div>
+</section>
+
+<!-- Langue -->
+<section id="lang" class="screen bg-sky">
+  <div class="hills"></div>
+  <div class="center-col">
+    <div class="h1">🌍 <span data-t="chooseLang"></span></div>
+    <div class="grid-langs" id="lang-grid"></div>
+  </div>
+</section>
+
+<!-- Profils -->
+<section id="profiles" class="screen bg-sky">
+  <div class="hills"></div>
+  <div class="topbar">
+    <button class="round" data-back>⬅</button>
+    <div class="title" data-t="whoPlays"></div>
+    <button class="round" id="prof-parents" aria-label="Parents">🔐</button>
+  </div>
+  <div class="center-col"><div class="profiles" id="profile-list"></div></div>
+</section>
+
+<!-- Création : personnage -->
+<section id="create" class="screen bg-sky">
+  <div class="hills"></div>
+  <div class="topbar">
+    <button class="round" data-back>⬅</button>
+    <div class="title" data-t="chooseAvatar"></div>
+    <div style="width:3.6rem"></div>
+  </div>
+  <div class="center-col" style="gap:1rem">
+    <div class="avatar-pick" id="avatar-pick"></div>
+    <div class="shirt-pick" id="shirt-pick"></div>
+    <div class="row">
+      <input class="name-input" id="name-input" maxlength="12" autocomplete="off">
+      <button class="btn green" id="create-next">➜</button>
+    </div>
+  </div>
+</section>
+
+<!-- Âge -->
+<section id="age" class="screen bg-sky">
+  <div class="hills"></div>
+  <div class="topbar">
+    <button class="round" data-back>⬅</button>
+    <div class="title" data-t="chooseAge"></div>
+    <div style="width:3.6rem"></div>
+  </div>
+  <div class="center-col"><div class="ages" id="age-list"></div></div>
+</section>
+
+<!-- Carte des jeux -->
+<section id="hub" class="screen bg-sky">
+  <div class="hills"></div>
+  <div class="topbar">
+    <button class="round" data-back>⬅</button>
+    <div class="chip" id="hub-player"></div>
+    <div class="title" data-t="map"></div>
+    <div class="chip" id="hub-age"></div>
+    <div class="chip">⭐ <span id="hub-stars">0</span></div>
+  </div>
+  <div class="games" id="game-grid"></div>
+</section>
+
+<!-- Niveaux -->
+<section id="levels" class="screen bg-sky">
+  <div class="hills"></div>
+  <div class="topbar">
+    <button class="round" data-back>⬅</button>
+    <div class="title" id="levels-title"></div>
+    <div style="width:3.6rem"></div>
+  </div>
+  <div class="center-col">
+    <div class="level-desc" id="levels-desc"></div>
+    <div class="levels" id="levels-list"></div>
+  </div>
+</section>
+
+<!-- Jeu -->
+<section id="play" class="screen">
+  <div class="game-area" id="area"></div>
+  <div class="play-top">
+    <button class="round" data-back>⬅</button>
+    <div class="progress"><i id="prog"></i></div>
+    <div class="chip" id="play-level"></div>
+  </div>
+</section>
+
+<!-- Zoo -->
+<section id="zoo" class="screen bg-sky">
+  <div class="hills"></div>
+  <div class="topbar">
+    <button class="round" data-back>⬅</button>
+    <div class="title">🏞️ <span data-t="myZoo"></span></div>
+    <div class="chip" id="zoo-count"></div>
+  </div>
+  <div class="zoo-grid" id="zoo-grid"></div>
+  <div class="free-pages" id="free-pages"></div>
+</section>
+
+<!-- Coloriage libre -->
+<section id="free" class="screen color-bg">
+  <div class="topbar">
+    <button class="round" data-back>⬅</button>
+    <div class="title" style="color:#fff;-webkit-text-stroke:.22rem #f15bb5;text-shadow:0 .2rem 0 #f15bb5">🎨 <span data-t="freeColor"></span></div>
+    <button class="btn green" id="free-done">✔ <span data-t="finish"></span></button>
+  </div>
+  <div class="color-stage" id="free-stage"></div>
+  <div class="palette" id="free-pal"></div>
+</section>
+
+<!-- Célébration -->
+<div id="celebrate">
+  <div class="rays"></div>
+  <div class="spot l"></div><div class="spot r"></div>
+  <div id="cel-garland-top"></div><div id="cel-garland-bottom"></div>
+  <div class="cel-box">
+    <div id="cel-avatar"></div>
+    <div class="cel-card">
+      <div class="cel-title" id="cel-title"></div>
+      <div class="cel-stars" id="cel-stars"><span>⭐</span><span>⭐</span><span>⭐</span></div>
+      <div id="cel-sub" style="font-size:1.4rem"></div>
+      <div class="cel-animal" id="cel-animal"></div>
+      <div class="cel-btns">
+        <button class="btn blue" id="cel-map">🏠 <span data-t="map"></span></button>
+        <button class="btn orange" id="cel-replay">↻ <span data-t="replay"></span></button>
+        <button class="btn green" id="cel-next">➜ <span data-t="next"></span></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modale parents -->
+<div class="modal" id="modal"><div class="modal-box" id="modal-box"></div></div>
+
+<canvas id="fw"></canvas>
+<div id="fx"></div>
+<div id="rotate-hint"><div class="rot-ic">📱</div><div>↻</div></div>
+
+<script src="js/i18n.js"></script>
+<script src="js/art.js"></script>
+<script src="js/fx.js"></script>
+<script src="js/engine.js"></script>
+<script src="js/games.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
