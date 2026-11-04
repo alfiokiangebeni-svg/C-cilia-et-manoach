@@ -1,6 +1,10 @@
 # Consignes pour Claude Code
 
-Application éducative pour enfants (4-12 ans), Android hors-ligne. V1 = « NumZoo » (jeux de calcul). Objectif V2 : tout reconstruire autour de l'histoire de **Cécilia et Manoach** (acteurs principaux) et de leurs amis **Francesca, Rokaya et Mathias**. Voir `docs/HISTOIRE.md` avant toute modification liée aux personnages : ne pas inventer de traits ou d'événements qui ne sont pas dans l'histoire fournie par l'auteur.
+Application éducative pour enfants (4-12 ans), Android hors-ligne. V1 = « NumZoo » (jeux de calcul). Objectif V2 : tout reconstruire autour du livre d'Alfio Kiangebeni *Cécilia, Manoach et la petite étoile du fleuve* (10 chapitres, 30 stages, 70 parties).
+
+- **Le cahier des charges V2 est `docs/INSTRUCTION-V2.md`** : le suivre phase par phase.
+- `docs/HISTOIRE.md` : histoire, personnages, style. Ne pas changer les noms, apparences ou répliques des personnages du livre.
+- Francesca, Rokaya et Mathias ne sont pas dans le livre : ne pas inventer leur apparence, utiliser des silhouettes tant que l'auteur ne les a pas décrits.
 
 ## Code
 - Tout le jeu est dans `app/www/` : HTML/CSS/JS **sans framework ni dépendance**. Garder ce principe (APK < 1 Mo, hors-ligne).

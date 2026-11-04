@@ -10,15 +10,16 @@
 - [ ] Ajouter swahili, kikongo et tshiluba
 - [ ] Faire passer l'intégration continue au vert sur GitHub
 
-## V2.0 — L'histoire de Cécilia et Manoach
-- [ ] Recevoir le texte de l'histoire et compléter [HISTOIRE.md](HISTOIRE.md)
-- [ ] Dessiner Cécilia, Manoach, Francesca, Rokaya et Mathias (SVG, même style que la V1)
-- [ ] Remplacer les 6 avatars génériques par les personnages de l'histoire
-- [ ] Nouvel écran d'accueil et nouveau nom de l'application
-- [ ] Carte des chapitres à la place de la grille de jeux
-- [ ] Scènes d'introduction avant chaque jeu (personnage + bulle)
-- [ ] Récompenses liées à l'histoire
-- [ ] Voix off pour les 4-6 ans (français et lingala d'abord)
+## V2.0 — Cécilia & Manoach et la petite étoile
+Cahier des charges complet : [INSTRUCTION-V2.md](INSTRUCTION-V2.md)
+- [x] Histoire reçue et résumée dans [HISTOIRE.md](HISTOIRE.md)
+- [ ] Phase 1 — Squelette : 10 chapitres, 30 stages, 70 parties navigables
+- [ ] Phase 2 — Univers visuel du livre (nuit, fleuve, lucioles, escalier de lumière)
+- [ ] Phase 3 — Nouvelles mécaniques (ranger, chercher, frotter la boue, laver, rythme, escalade…)
+- [ ] Phase 4 — Images pro des personnages (3D/2D)
+- [ ] Phase 5 — Dialogues FR/EN et voix
+- [ ] Phase 6 — Publication (targetSdk 34, AAB)
+- [ ] Description de Francesca, Rokaya et Mathias par l'auteur
 
 ## V3.0 — Au-delà du calcul
 - [ ] Nouveaux jeux : lecture, sciences, hygiène, missions (voir le catalogue des 24 projets)
