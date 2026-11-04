@@ -1,3 +1,6 @@
+// Robot : résout automatiquement les 70 parties × 3 âges = 210 manches dans le vrai jeu (Chromium).
+// Chaque partie doit se terminer par la célébration, donner au moins une luciole, sans aucune erreur JavaScript.
+// Usage : node test/toutes-les-parties.js [shots] [âge] [id1,id2…]
 const { chromium } = require('playwright');
 const fs = require('fs'); fs.mkdirSync(__dirname + '/out', { recursive: true });
 const SOLVER = `
@@ -28,32 +31,43 @@ window.__step = () => {
     pal.click(); z.dispatchEvent(new MouseEvent('click', { bubbles: true, clientX: 100, clientY: 100 })); return true;
   }
 }`;
-(async () => {
-  const b = await chromium.launch();
+async function age(b, age, ids, shots) {
   const pg = await b.newPage({ viewport: { width: 800, height: 380 }, deviceScaleFactor: 1, hasTouch: true });
   const errs = []; pg.on('pageerror', e => errs.push(e.message));
   await pg.goto('file://' + require('path').resolve(__dirname, '../www/index.html'));
-  await pg.evaluate(() => { Store.data.lang = 'fr'; Store.data.profiles = [{ id: 'x', name: 'Test', avatar: 'kito', shirt: '#2ec4b6', age: 0, stars: {}, zoo: [], pages: {} }]; Store.data.current = 'x'; Sound.on = false; });
+  await pg.evaluate(a => { localStorage.clear(); Store.data.lang = 'fr'; Store.data.profiles = [Store.complet({ id: 'x', name: 'Test', avatar: 'kito', shirt: '#2ec4b6', age: a })]; Store.data.current = 'x'; Sound.on = false; }, age);
   await pg.addScriptTag({ content: SOLVER });
-  const games = ['race','fish','feed','monster','link','sort','color'];
-  const shots = process.argv[2] === 'shots';
-  const ages = process.argv[3] ? [+process.argv[3]] : [0,1,2]; const gl = process.argv[4] ? process.argv[4].split(',') : games;
-  for (const age of ages) for (const g of gl) for (let l = 0; l < 3; l++) {
-    await pg.evaluate(([age,g,l]) => { Store.profile().age = age; state.game = g; Play.start(g, l); }, [age,g,l]);
+  const lignes = [];
+  for (const id of ids) {
+    await pg.evaluate(id => Play.start(id), id);
     let ok = false, last;
-    for (let s = 0; s < 80; s++) {
-      await pg.waitForTimeout(g === 'feed' ? 800 : 500);
+    for (let s = 0; s < 120; s++) {
+      await pg.waitForTimeout(350);
       if (await pg.evaluate(() => document.getElementById('celebrate').classList.contains('on'))) { ok = true; break; }
-      if (shots && s === 1 && (age===1 || l===2)) await pg.screenshot({ path: `${__dirname}/out/p_${age}_${g}_${l}.png` });
+      if (shots && s === 2) await pg.screenshot({ path: `${__dirname}/out/p_${age}_${id}.png` });
       last = await pg.evaluate(() => { try { return __step(); } catch (e) { return 'ERR ' + e.message; } });
       if (typeof last === 'string' && last.startsWith('ERR')) break;
     }
-    const st = await pg.evaluate(([g,age,l]) => Store.stars(g, age, l), [g,age,l]);
-    if (shots && age===0 && g==='race' && l===0) { await pg.waitForTimeout(2500); await pg.screenshot({ path: __dirname + '/out/cel.png' }); }
-    console.log(age, g, l, ok ? 'OK' : 'FAIL ' + last, 'stars', st);
+    const info = await pg.evaluate(id => ({ n: Store.lucioles(id), jeu: state.game, niv: state.lvl }), id);
+    lignes.push(`${age} ${id} ${info.jeu}/${info.niv} ${ok && info.n > 0 ? 'OK' : 'FAIL ' + last} lucioles ${info.n}`);
+    console.log(lignes[lignes.length - 1]);
     await pg.evaluate(() => { Celebrate.hide(); Play.stop(); });
   }
-  console.log('zoo', await pg.evaluate(() => Store.profile().zoo.join('')));
+  const fin = await pg.evaluate(() => ({ total: Store.totalLucioles(), pages: Object.keys(Store.profile().livre).length }));
+  await pg.close();
+  return { lignes, errs, fin };
+}
+(async () => {
+  const b = await chromium.launch();
+  const ids = await (async () => { const pg = await b.newPage(); await pg.goto('file://' + require('path').resolve(__dirname, '../www/index.html')); const r = await pg.evaluate(() => PARTIES.map(p => p.id)); await pg.close(); return r; })();
+  const shots = process.argv[2] === 'shots';
+  const ages = process.argv[3] ? [+process.argv[3]] : [0, 1, 2];
+  const liste = process.argv[4] ? process.argv[4].split(',') : ids;
+  const res = await Promise.all(ages.map(a => age(b, a, liste, shots)));
+  const toutes = res.flatMap(r => r.lignes), errs = res.flatMap(r => r.errs);
+  res.forEach((r, k) => console.log(`âge ${ages[k]} : ${r.fin.total} lucioles, ${r.fin.pages} pages du livre`));
+  console.log(`Manches réussies : ${toutes.filter(l => / OK /.test(l)).length} / ${toutes.length}`);
   console.log('ERR', JSON.stringify(errs));
   await b.close();
+  if (toutes.some(l => / FAIL /.test(l)) || errs.length) process.exit(1);
 })();

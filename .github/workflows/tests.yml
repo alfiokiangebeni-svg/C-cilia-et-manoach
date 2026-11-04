@@ -1,4 +1,4 @@
-name: Tests NumZoo
+name: Tests Cécilia & Manoach
 
 on:
   push:
@@ -8,7 +8,7 @@ on:
 jobs:
   jeux:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 60
     defaults:
       run:
         working-directory: app
@@ -19,11 +19,10 @@ jobs:
           node-version: 20
       - run: npm install
       - run: npx playwright install --with-deps chromium
-      - name: Les 63 niveaux (3 âges × 7 jeux × 3 niveaux)
-        run: |
-          npm test | tee resultat.txt
-          grep -q "FAIL" resultat.txt && exit 1 || true
-          grep -q 'ERR \[\]' resultat.txt
+      - name: Structure (10 chapitres, 30 stages, 70 parties) et images
+        run: node test/structure.js
+      - name: Les 210 manches (70 parties × 3 âges)
+        run: node test/toutes-les-parties.js
       - name: Écrans, langues, espace parents
         run: npm run test:ecrans
       - uses: actions/upload-artifact@v4

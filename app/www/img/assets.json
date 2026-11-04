@@ -1,0 +1,528 @@
+{
+ "_note": "Images attendues. Une image absente est remplacée par une silhouette (js/assets.js) : le jeu fonctionne toujours. Déposer les fichiers aux chemins indiqués, sans changer de code.",
+ "persos": [
+  {
+   "perso": "cecilia",
+   "pose": "debout",
+   "fichier": "img/persos/cecilia/debout.webp",
+   "taille": "512 px de haut, transparent, ≤ 80 Ko"
+  },
+  {
+   "perso": "cecilia",
+   "pose": "contente",
+   "fichier": "img/persos/cecilia/contente.webp",
+   "taille": "512 px de haut, transparent, ≤ 80 Ko"
+  },
+  {
+   "perso": "cecilia",
+   "pose": "pointe",
+   "fichier": "img/persos/cecilia/pointe.webp",
+   "taille": "512 px de haut, transparent, ≤ 80 Ko"
+  },
+  {
+   "perso": "cecilia",
+   "pose": "reflechit",
+   "fichier": "img/persos/cecilia/reflechit.webp",
+   "taille": "512 px de haut, transparent, ≤ 80 Ko"
+  },
+  {
+   "perso": "cecilia",
+   "pose": "applaudit",
+   "fichier": "img/persos/cecilia/applaudit.webp",
+   "taille": "512 px de haut, transparent, ≤ 80 Ko"
+  },
+  {
+   "perso": "cecilia",
+   "pose": "tient-etoile",
+   "fichier": "img/persos/cecilia/tient-etoile.webp",
+   "taille": "512 px de haut, transparent, ≤ 80 Ko"
+  },
+  {
+   "perso": "cecilia",
+   "pose": "grimpe",
+   "fichier": "img/persos/cecilia/grimpe.webp",
+   "taille": "512 px de haut, transparent, ≤ 80 Ko"
+  },
+  {
+   "perso": "cecilia",
+   "pose": "court",
+   "fichier": "img/persos/cecilia/court.webp",
+   "taille": "512 px de haut, transparent, ≤ 80 Ko"
+  },
+  {
+   "perso": "manoach",
+   "pose": "debout",
+   "fichier": "img/persos/manoach/debout.webp",
+   "taille": "512 px de haut, transparent, ≤ 80 Ko"
+  },
+  {
+   "perso": "manoach",
+   "pose": "content",
+   "fichier": "img/persos/manoach/content.webp",
+   "taille": "512 px de haut, transparent, ≤ 80 Ko"
+  },
+  {
+   "perso": "manoach",
+   "pose": "tambour",
+   "fichier": "img/persos/manoach/tambour.webp",
+   "taille": "512 px de haut, transparent, ≤ 80 Ko"
+  },
+  {
+   "perso": "manoach",
+   "pose": "reflechit",
+   "fichier": "img/persos/manoach/reflechit.webp",
+   "taille": "512 px de haut, transparent, ≤ 80 Ko"
+  },
+  {
+   "perso": "manoach",
+   "pose": "applaudit",
+   "fichier": "img/persos/manoach/applaudit.webp",
+   "taille": "512 px de haut, transparent, ≤ 80 Ko"
+  },
+  {
+   "perso": "manoach",
+   "pose": "grimpe",
+   "fichier": "img/persos/manoach/grimpe.webp",
+   "taille": "512 px de haut, transparent, ≤ 80 Ko"
+  },
+  {
+   "perso": "manoach",
+   "pose": "court",
+   "fichier": "img/persos/manoach/court.webp",
+   "taille": "512 px de haut, transparent, ≤ 80 Ko"
+  },
+  {
+   "perso": "etoile",
+   "pose": "triste",
+   "fichier": "img/persos/etoile/triste.webp",
+   "taille": "512 px de haut, transparent, ≤ 80 Ko"
+  },
+  {
+   "perso": "etoile",
+   "pose": "froide",
+   "fichier": "img/persos/etoile/froide.webp",
+   "taille": "512 px de haut, transparent, ≤ 80 Ko"
+  },
+  {
+   "perso": "etoile",
+   "pose": "sale",
+   "fichier": "img/persos/etoile/sale.webp",
+   "taille": "512 px de haut, transparent, ≤ 80 Ko"
+  },
+  {
+   "perso": "etoile",
+   "pose": "propre",
+   "fichier": "img/persos/etoile/propre.webp",
+   "taille": "512 px de haut, transparent, ≤ 80 Ko"
+  },
+  {
+   "perso": "etoile",
+   "pose": "contente",
+   "fichier": "img/persos/etoile/contente.webp",
+   "taille": "512 px de haut, transparent, ≤ 80 Ko"
+  },
+  {
+   "perso": "etoile",
+   "pose": "pale",
+   "fichier": "img/persos/etoile/pale.webp",
+   "taille": "512 px de haut, transparent, ≤ 80 Ko"
+  },
+  {
+   "perso": "etoile",
+   "pose": "clin-oeil",
+   "fichier": "img/persos/etoile/clin-oeil.webp",
+   "taille": "512 px de haut, transparent, ≤ 80 Ko"
+  },
+  {
+   "perso": "therese",
+   "pose": "nage",
+   "fichier": "img/persos/therese/nage.webp",
+   "taille": "512 px de haut, transparent, ≤ 80 Ko"
+  },
+  {
+   "perso": "therese",
+   "pose": "parle",
+   "fichier": "img/persos/therese/parle.webp",
+   "taille": "512 px de haut, transparent, ≤ 80 Ko"
+  },
+  {
+   "perso": "therese",
+   "pose": "sourit",
+   "fichier": "img/persos/therese/sourit.webp",
+   "taille": "512 px de haut, transparent, ≤ 80 Ko"
+  },
+  {
+   "perso": "axel",
+   "pose": "calme",
+   "fichier": "img/persos/axel/calme.webp",
+   "taille": "512 px de haut, transparent, ≤ 80 Ko"
+  },
+  {
+   "perso": "axel",
+   "pose": "parle",
+   "fichier": "img/persos/axel/parle.webp",
+   "taille": "512 px de haut, transparent, ≤ 80 Ko"
+  },
+  {
+   "perso": "axel",
+   "pose": "sourit",
+   "fichier": "img/persos/axel/sourit.webp",
+   "taille": "512 px de haut, transparent, ≤ 80 Ko"
+  },
+  {
+   "perso": "christian",
+   "pose": "debout",
+   "fichier": "img/persos/christian/debout.webp",
+   "taille": "512 px de haut, transparent, ≤ 80 Ko"
+  },
+  {
+   "perso": "christian",
+   "pose": "ailes-ouvertes",
+   "fichier": "img/persos/christian/ailes-ouvertes.webp",
+   "taille": "512 px de haut, transparent, ≤ 80 Ko"
+  },
+  {
+   "perso": "christian",
+   "pose": "vole-etoile",
+   "fichier": "img/persos/christian/vole-etoile.webp",
+   "taille": "512 px de haut, transparent, ≤ 80 Ko"
+  },
+  {
+   "perso": "christian",
+   "pose": "timide",
+   "fichier": "img/persos/christian/timide.webp",
+   "taille": "512 px de haut, transparent, ≤ 80 Ko"
+  },
+  {
+   "perso": "lune",
+   "pose": "sourit",
+   "fichier": "img/persos/lune/sourit.webp",
+   "taille": "512 px de haut, transparent, ≤ 80 Ko"
+  },
+  {
+   "perso": "lune",
+   "pose": "bras-ouverts",
+   "fichier": "img/persos/lune/bras-ouverts.webp",
+   "taille": "512 px de haut, transparent, ≤ 80 Ko"
+  },
+  {
+   "perso": "lune",
+   "pose": "calin",
+   "fichier": "img/persos/lune/calin.webp",
+   "taille": "512 px de haut, transparent, ≤ 80 Ko"
+  },
+  {
+   "perso": "luciole",
+   "pose": "ailes-ouvertes",
+   "fichier": "img/persos/luciole/ailes-ouvertes.webp",
+   "taille": "512 px de haut, transparent, ≤ 80 Ko"
+  },
+  {
+   "perso": "luciole",
+   "pose": "ailes-fermees",
+   "fichier": "img/persos/luciole/ailes-fermees.webp",
+   "taille": "512 px de haut, transparent, ≤ 80 Ko"
+  },
+  {
+   "perso": "francesca",
+   "pose": "debout",
+   "fichier": "img/persos/francesca/debout.webp",
+   "taille": "512 px de haut, transparent, ≤ 80 Ko"
+  },
+  {
+   "perso": "francesca",
+   "pose": "content",
+   "fichier": "img/persos/francesca/content.webp",
+   "taille": "512 px de haut, transparent, ≤ 80 Ko"
+  },
+  {
+   "perso": "francesca",
+   "pose": "aide",
+   "fichier": "img/persos/francesca/aide.webp",
+   "taille": "512 px de haut, transparent, ≤ 80 Ko"
+  },
+  {
+   "perso": "rokaya",
+   "pose": "debout",
+   "fichier": "img/persos/rokaya/debout.webp",
+   "taille": "512 px de haut, transparent, ≤ 80 Ko"
+  },
+  {
+   "perso": "rokaya",
+   "pose": "content",
+   "fichier": "img/persos/rokaya/content.webp",
+   "taille": "512 px de haut, transparent, ≤ 80 Ko"
+  },
+  {
+   "perso": "rokaya",
+   "pose": "aide",
+   "fichier": "img/persos/rokaya/aide.webp",
+   "taille": "512 px de haut, transparent, ≤ 80 Ko"
+  },
+  {
+   "perso": "mathias",
+   "pose": "debout",
+   "fichier": "img/persos/mathias/debout.webp",
+   "taille": "512 px de haut, transparent, ≤ 80 Ko"
+  },
+  {
+   "perso": "mathias",
+   "pose": "content",
+   "fichier": "img/persos/mathias/content.webp",
+   "taille": "512 px de haut, transparent, ≤ 80 Ko"
+  },
+  {
+   "perso": "mathias",
+   "pose": "aide",
+   "fichier": "img/persos/mathias/aide.webp",
+   "taille": "512 px de haut, transparent, ≤ 80 Ko"
+  }
+ ],
+ "scenes": [
+  {
+   "id": "stage-1.1",
+   "fichier": "img/scenes/stage-1.1.webp",
+   "decor": "maison",
+   "taille": "1280 px de large, ≤ 250 Ko"
+  },
+  {
+   "id": "stage-1.2",
+   "fichier": "img/scenes/stage-1.2.webp",
+   "decor": "maison",
+   "taille": "1280 px de large, ≤ 250 Ko"
+  },
+  {
+   "id": "stage-1.3",
+   "fichier": "img/scenes/stage-1.3.webp",
+   "decor": "nuit",
+   "taille": "1280 px de large, ≤ 250 Ko"
+  },
+  {
+   "id": "stage-2.1",
+   "fichier": "img/scenes/stage-2.1.webp",
+   "decor": "nuit",
+   "taille": "1280 px de large, ≤ 250 Ko"
+  },
+  {
+   "id": "stage-2.2",
+   "fichier": "img/scenes/stage-2.2.webp",
+   "decor": "berge",
+   "taille": "1280 px de large, ≤ 250 Ko"
+  },
+  {
+   "id": "stage-2.3",
+   "fichier": "img/scenes/stage-2.3.webp",
+   "decor": "fleuve",
+   "taille": "1280 px de large, ≤ 250 Ko"
+  },
+  {
+   "id": "stage-3.1",
+   "fichier": "img/scenes/stage-3.1.webp",
+   "decor": "foret",
+   "taille": "1280 px de large, ≤ 250 Ko"
+  },
+  {
+   "id": "stage-3.2",
+   "fichier": "img/scenes/stage-3.2.webp",
+   "decor": "foret",
+   "taille": "1280 px de large, ≤ 250 Ko"
+  },
+  {
+   "id": "stage-3.3",
+   "fichier": "img/scenes/stage-3.3.webp",
+   "decor": "marais",
+   "taille": "1280 px de large, ≤ 250 Ko"
+  },
+  {
+   "id": "stage-4.1",
+   "fichier": "img/scenes/stage-4.1.webp",
+   "decor": "marais",
+   "taille": "1280 px de large, ≤ 250 Ko"
+  },
+  {
+   "id": "stage-4.2",
+   "fichier": "img/scenes/stage-4.2.webp",
+   "decor": "marais",
+   "taille": "1280 px de large, ≤ 250 Ko"
+  },
+  {
+   "id": "stage-4.3",
+   "fichier": "img/scenes/stage-4.3.webp",
+   "decor": "marais",
+   "taille": "1280 px de large, ≤ 250 Ko"
+  },
+  {
+   "id": "stage-5.1",
+   "fichier": "img/scenes/stage-5.1.webp",
+   "decor": "berge",
+   "taille": "1280 px de large, ≤ 250 Ko"
+  },
+  {
+   "id": "stage-5.2",
+   "fichier": "img/scenes/stage-5.2.webp",
+   "decor": "maison",
+   "taille": "1280 px de large, ≤ 250 Ko"
+  },
+  {
+   "id": "stage-5.3",
+   "fichier": "img/scenes/stage-5.3.webp",
+   "decor": "maison",
+   "taille": "1280 px de large, ≤ 250 Ko"
+  },
+  {
+   "id": "stage-6.1",
+   "fichier": "img/scenes/stage-6.1.webp",
+   "decor": "fleuve",
+   "taille": "1280 px de large, ≤ 250 Ko"
+  },
+  {
+   "id": "stage-6.2",
+   "fichier": "img/scenes/stage-6.2.webp",
+   "decor": "fleuve",
+   "taille": "1280 px de large, ≤ 250 Ko"
+  },
+  {
+   "id": "stage-6.3",
+   "fichier": "img/scenes/stage-6.3.webp",
+   "decor": "fleuve",
+   "taille": "1280 px de large, ≤ 250 Ko"
+  },
+  {
+   "id": "stage-7.1",
+   "fichier": "img/scenes/stage-7.1.webp",
+   "decor": "baobab",
+   "taille": "1280 px de large, ≤ 250 Ko"
+  },
+  {
+   "id": "stage-7.2",
+   "fichier": "img/scenes/stage-7.2.webp",
+   "decor": "baobab",
+   "taille": "1280 px de large, ≤ 250 Ko"
+  },
+  {
+   "id": "stage-7.3",
+   "fichier": "img/scenes/stage-7.3.webp",
+   "decor": "baobab",
+   "taille": "1280 px de large, ≤ 250 Ko"
+  },
+  {
+   "id": "stage-8.1",
+   "fichier": "img/scenes/stage-8.1.webp",
+   "decor": "fleuve",
+   "taille": "1280 px de large, ≤ 250 Ko"
+  },
+  {
+   "id": "stage-8.2",
+   "fichier": "img/scenes/stage-8.2.webp",
+   "decor": "fleuve",
+   "taille": "1280 px de large, ≤ 250 Ko"
+  },
+  {
+   "id": "stage-8.3",
+   "fichier": "img/scenes/stage-8.3.webp",
+   "decor": "fleuve",
+   "taille": "1280 px de large, ≤ 250 Ko"
+  },
+  {
+   "id": "stage-9.1",
+   "fichier": "img/scenes/stage-9.1.webp",
+   "decor": "nuit",
+   "taille": "1280 px de large, ≤ 250 Ko"
+  },
+  {
+   "id": "stage-9.2",
+   "fichier": "img/scenes/stage-9.2.webp",
+   "decor": "nuit",
+   "taille": "1280 px de large, ≤ 250 Ko"
+  },
+  {
+   "id": "stage-9.3",
+   "fichier": "img/scenes/stage-9.3.webp",
+   "decor": "nuit",
+   "taille": "1280 px de large, ≤ 250 Ko"
+  },
+  {
+   "id": "stage-10.1",
+   "fichier": "img/scenes/stage-10.1.webp",
+   "decor": "ciel",
+   "taille": "1280 px de large, ≤ 250 Ko"
+  },
+  {
+   "id": "stage-10.2",
+   "fichier": "img/scenes/stage-10.2.webp",
+   "decor": "ciel",
+   "taille": "1280 px de large, ≤ 250 Ko"
+  },
+  {
+   "id": "stage-10.3",
+   "fichier": "img/scenes/stage-10.3.webp",
+   "decor": "lune",
+   "taille": "1280 px de large, ≤ 250 Ko"
+  },
+  {
+   "id": "page-dedicace",
+   "fichier": "img/scenes/page-dedicace.webp",
+   "taille": "1280 px de large, ≤ 250 Ko"
+  },
+  {
+   "id": "page-1",
+   "fichier": "img/scenes/page-1.webp",
+   "taille": "1280 px de large, ≤ 250 Ko"
+  },
+  {
+   "id": "page-2",
+   "fichier": "img/scenes/page-2.webp",
+   "taille": "1280 px de large, ≤ 250 Ko"
+  },
+  {
+   "id": "page-3",
+   "fichier": "img/scenes/page-3.webp",
+   "taille": "1280 px de large, ≤ 250 Ko"
+  },
+  {
+   "id": "page-4",
+   "fichier": "img/scenes/page-4.webp",
+   "taille": "1280 px de large, ≤ 250 Ko"
+  },
+  {
+   "id": "page-5",
+   "fichier": "img/scenes/page-5.webp",
+   "taille": "1280 px de large, ≤ 250 Ko"
+  },
+  {
+   "id": "page-6",
+   "fichier": "img/scenes/page-6.webp",
+   "taille": "1280 px de large, ≤ 250 Ko"
+  },
+  {
+   "id": "page-7",
+   "fichier": "img/scenes/page-7.webp",
+   "taille": "1280 px de large, ≤ 250 Ko"
+  },
+  {
+   "id": "page-8",
+   "fichier": "img/scenes/page-8.webp",
+   "taille": "1280 px de large, ≤ 250 Ko"
+  },
+  {
+   "id": "page-9",
+   "fichier": "img/scenes/page-9.webp",
+   "taille": "1280 px de large, ≤ 250 Ko"
+  },
+  {
+   "id": "page-10",
+   "fichier": "img/scenes/page-10.webp",
+   "taille": "1280 px de large, ≤ 250 Ko"
+  },
+  {
+   "id": "page-11",
+   "fichier": "img/scenes/page-11.webp",
+   "taille": "1280 px de large, ≤ 250 Ko"
+  },
+  {
+   "id": "page-12",
+   "fichier": "img/scenes/page-12.webp",
+   "taille": "1280 px de large, ≤ 250 Ko"
+  }
+ ]
+}

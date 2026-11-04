@@ -86,3 +86,48 @@ Protégé par une **porte parentale** (une multiplication à résoudre). Permet 
 - Pas de voix off : les 4-6 ans qui ne lisent pas dépendent des icônes.
 - Traductions lingala et chinoise à faire valider par des locuteurs natifs.
 - Personnages génériques (Amani, Kito, Lila, Mei, Malik, Nia) : à remplacer par ceux de l'histoire.
+
+---
+
+# V2 — Cécilia & Manoach (phase 1 : squelette)
+
+Le moteur V1 est conservé : mêmes écrans de profil, même API `G`, mêmes 7 jeux. La V2 ajoute une couche « histoire » par-dessus.
+
+```
+i18n.js ─► histoire.js ─► art.js ─► fx.js ─► engine.js ─► assets.js ─► scenes.js ─► games.js ─► app.js
+           données de                         sauvegarde   images +     scènes       7 jeux V1    carte, chapitre,
+           l'histoire                          cm.v2        silhouettes  d'ouverture  (rhabillés)  stage, partie, livre
+```
+
+| Fichier | Contenu |
+|---|---|
+| `histoire.js` | **Données seulement** : `MECANIQUES` (20 mécaniques, jeu V1 de repli, paramètres par âge), `PERSONNAGES` (poses, couleur de silhouette), `PAGES_LIVRE` (dédicace + 12 pages), `CHAPITRES` (10 → 30 stages → 70 parties) |
+| `assets.js` | `Assets.perso(perso, pose)` : image `img/persos/<perso>/<pose>.webp` ou, si elle manque, silhouette SVG. `Assets.fond(el, id)` : illustration `img/scenes/<id>.webp` si elle existe |
+| `scenes.js` | Scène d'ouverture d'un stage (décor + personnage guide + bulle), page du livre |
+| `img/assets.json` | Liste des 46 sprites et 43 illustrations attendus |
+
+## Parcours
+
+Carte (10 chapitres + « Mon livre ») → chapitre (3 stages) → stage (scène d'ouverture + 2 ou 3 parties) → partie (un jeu).
+
+- Une partie se déverrouille quand la précédente (dans l'ordre de l'histoire) a au moins 1 luciole.
+- Une partie donne 1 à 3 lucioles (0-1 erreur : 3 ; 2-4 : 2 ; sinon 1). Maximum 210.
+- Quand toutes les parties d'un chapitre ont une luciole, ses pages du livre (`chapitre.pages`) se débloquent et la célébration réunit les personnages rencontrés.
+- « Suivant » enchaîne dans le même stage, ou ouvre la scène du stage suivant.
+
+## Mécaniques et difficulté
+
+Chaque partie indique sa mécanique `meca` et `niv: [4-6 ans, 7-9 ans, 10-12 ans]` (0 à 2, indice dans les tables `SKILLS` etc. d'`engine.js`, qui sont déjà propres à chaque âge). `Play.start(id)` lance `GAME_FN[meca]` s'il existe, sinon le jeu V1 `MECANIQUES[meca].base`. Le jeu reçoit aussi `G.cfg = MECANIQUES[meca].ages[âge]` et `G.partie`.
+
+En phase 1, les 13 nouvelles mécaniques utilisent leur jeu V1 de repli ; la phase 3 leur donnera chacune un module `js/mecaniques/<id>.js`, sans changer `histoire.js`.
+
+## Sauvegarde V2
+
+```js
+localStorage['cm.v2'] = {
+  version: 2, lang: 'fr', sound: true, current: '<id profil>',
+  profiles: [{ id, name, avatar, shirt, age, lucioles: { '1.1.1': 3 }, livre: { 1: true, dedicace: true }, coloriages: { lion: true } }]
+}
+```
+
+Au premier lancement sans `cm.v2`, les profils `numzoo.v1` sont repris (nom, personnage, âge, langue, son). L'ancienne clé est laissée intacte.

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<title>NumZoo</title>
+<title>Cécilia &amp; Manoach</title>
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -73,30 +73,38 @@
   <div class="center-col"><div class="ages" id="age-list"></div></div>
 </section>
 
-<!-- Carte des jeux -->
-<section id="hub" class="screen bg-sky">
-  <div class="hills"></div>
+<!-- Carte des 10 chapitres -->
+<section id="hub" class="screen bg-nuit">
   <div class="topbar">
     <button class="round" data-back>⬅</button>
     <div class="chip" id="hub-player"></div>
     <div class="title" data-t="map"></div>
     <div class="chip" id="hub-age"></div>
-    <div class="chip">⭐ <span id="hub-stars">0</span></div>
+    <div class="chip">✨ <span id="hub-stars">0</span></div>
   </div>
-  <div class="games" id="game-grid"></div>
+  <div class="chapitres" id="chap-grid"></div>
 </section>
 
-<!-- Niveaux -->
-<section id="levels" class="screen bg-sky">
-  <div class="hills"></div>
+<!-- Un chapitre : ses 3 stages -->
+<section id="chapitre" class="screen bg-nuit">
   <div class="topbar">
     <button class="round" data-back>⬅</button>
-    <div class="title" id="levels-title"></div>
-    <div style="width:3.6rem"></div>
+    <div class="title" id="chap-title"></div>
+    <div class="chip">✨ <span id="chap-stars">0</span></div>
   </div>
-  <div class="center-col">
-    <div class="level-desc" id="levels-desc"></div>
-    <div class="levels" id="levels-list"></div>
+  <div class="stages" id="stage-list"></div>
+</section>
+
+<!-- Un stage : scène d'ouverture et ses 2 ou 3 parties -->
+<section id="stage" class="screen bg-nuit">
+  <div class="topbar">
+    <button class="round" data-back>⬅</button>
+    <div class="title" id="stage-title"></div>
+    <div class="chip">✨ <span id="stage-stars">0</span></div>
+  </div>
+  <div class="stage-body">
+    <div class="scene" id="stage-scene"></div>
+    <div class="parties" id="partie-list"></div>
   </div>
 </section>
 
@@ -110,15 +118,14 @@
   </div>
 </section>
 
-<!-- Zoo -->
-<section id="zoo" class="screen bg-sky">
-  <div class="hills"></div>
+<!-- Mon livre : pages débloquées à la fin de chaque chapitre -->
+<section id="livre" class="screen bg-nuit">
   <div class="topbar">
     <button class="round" data-back>⬅</button>
-    <div class="title">🏞️ <span data-t="myZoo"></span></div>
-    <div class="chip" id="zoo-count"></div>
+    <div class="title">📖 <span data-t="myBook"></span></div>
+    <div class="chip" id="livre-count"></div>
   </div>
-  <div class="zoo-grid" id="zoo-grid"></div>
+  <div class="livre-grid" id="livre-grid"></div>
   <div class="free-pages" id="free-pages"></div>
 </section>
 
@@ -145,6 +152,7 @@
       <div class="cel-stars" id="cel-stars"><span>⭐</span><span>⭐</span><span>⭐</span></div>
       <div id="cel-sub" style="font-size:1.4rem"></div>
       <div class="cel-animal" id="cel-animal"></div>
+      <div class="cel-amis" id="cel-amis"></div>
       <div class="cel-btns">
         <button class="btn blue" id="cel-map">🏠 <span data-t="map"></span></button>
         <button class="btn orange" id="cel-replay">↻ <span data-t="replay"></span></button>
@@ -162,9 +170,12 @@
 <div id="rotate-hint"><div class="rot-ic">📱</div><div>↻</div></div>
 
 <script src="js/i18n.js"></script>
+<script src="js/histoire.js"></script>
 <script src="js/art.js"></script>
 <script src="js/fx.js"></script>
 <script src="js/engine.js"></script>
+<script src="js/assets.js"></script>
+<script src="js/scenes.js"></script>
 <script src="js/games.js"></script>
 <script src="js/app.js"></script>
 </body>

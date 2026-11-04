@@ -98,20 +98,40 @@ function exprFor(v, sk, avoid) {
   return null;
 }
 
-// ---------- Sauvegarde (localStorage dans la WebView) ----------
+// ---------- Sauvegarde V2 (localStorage dans la WebView) ----------
+// localStorage['cm.v2'] = { version: 2, lang, sound, current, profiles: [{ id, name, avatar, shirt, age,
+//   lucioles: { '1.1.1': 1..3 }, livre: { 1: true, dedicace: true }, coloriages: { lion: true } }] }
+// Au premier lancement, les profils NumZoo (clé 'numzoo.v1') sont repris : nom, personnage, âge, langue, son.
+// L'ancienne clé n'est pas effacée (aucune perte possible).
 const Store = {
-  key: 'numzoo.v1',
-  data: { lang: null, sound: true, profiles: [], current: null },
-  load() { try { const d = JSON.parse(localStorage.getItem(this.key)); if (d) this.data = Object.assign(this.data, d); } catch (e) {} },
+  key: 'cm.v2', ancienne: 'numzoo.v1',
+  data: { version: 2, lang: null, sound: true, profiles: [], current: null },
+  load() {
+    let d = null;
+    try { d = JSON.parse(localStorage.getItem(this.key)); } catch (e) {}
+    if (d) this.data = Object.assign(this.data, d);
+    else this.migrer();
+    this.data.profiles.forEach(Store.complet);
+  },
+  migrer() {
+    let v1 = null;
+    try { v1 = JSON.parse(localStorage.getItem(this.ancienne)); } catch (e) {}
+    if (!v1 || !Array.isArray(v1.profiles)) return false;
+    this.data.lang = v1.lang || null;
+    this.data.sound = v1.sound !== false;
+    this.data.profiles = v1.profiles.map(p => ({ id: p.id, name: p.name, avatar: p.avatar, shirt: p.shirt, age: p.age || 0, lucioles: {}, livre: {}, coloriages: {} }));
+    this.data.current = v1.current || null;
+    this.save(); return true;
+  },
+  complet(p) { p.lucioles = p.lucioles || {}; p.livre = p.livre || {}; p.coloriages = p.coloriages || {}; if (!(p.age >= 0 && p.age <= 2)) p.age = 0; return p; },
   save() { try { localStorage.setItem(this.key, JSON.stringify(this.data)); } catch (e) {} },
   profile() { return this.data.profiles.find(p => p.id === this.data.current) || null; },
-  stars(game, age, lvl) { const p = this.profile(); return (p && p.stars[`${age}.${game}.${lvl}`]) || 0; },
-  setStars(game, age, lvl, s) {
-    const p = this.profile(), k = `${age}.${game}.${lvl}`, first = !p.stars[k];
-    if (!p.stars[k] || p.stars[k] < s) p.stars[k] = s;
-    let newAnimal = null;
-    if (first) { const idx = p.zoo.length; if (idx < ZOO_ANIMALS.length) { newAnimal = ZOO_ANIMALS[idx]; p.zoo.push(newAnimal); } }
-    this.save(); return newAnimal;
+  lucioles(id) { const p = this.profile(); return (p && p.lucioles[id]) || 0; },
+  // Renvoie true si la partie est réussie pour la première fois
+  setLucioles(id, n) {
+    const p = this.profile(), first = !p.lucioles[id];
+    if (!p.lucioles[id] || p.lucioles[id] < n) p.lucioles[id] = n;
+    this.save(); return first;
   },
-  totalStars() { const p = this.profile(); return p ? Object.values(p.stars).reduce((a, b) => a + b, 0) : 0; },
+  totalLucioles(p) { p = p || this.profile(); return p ? Object.values(p.lucioles).reduce((a, b) => a + b, 0) : 0; },
 };

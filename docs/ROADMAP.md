@@ -13,7 +13,7 @@
 ## V2.0 — Cécilia & Manoach et la petite étoile
 Cahier des charges complet : [INSTRUCTION-V2.md](INSTRUCTION-V2.md)
 - [x] Histoire reçue et résumée dans [HISTOIRE.md](HISTOIRE.md)
-- [ ] Phase 1 — Squelette : 10 chapitres, 30 stages, 70 parties navigables
+- [x] Phase 1 — Squelette : 10 chapitres, 30 stages, 70 parties navigables *(à valider par l'auteur)*
 - [ ] Phase 2 — Univers visuel du livre (nuit, fleuve, lucioles, escalier de lumière)
 - [ ] Phase 3 — Nouvelles mécaniques (ranger, chercher, frotter la boue, laver, rythme, escalade…)
 - [ ] Phase 4 — Images pro des personnages (3D/2D)

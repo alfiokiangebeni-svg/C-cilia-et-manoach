@@ -362,7 +362,7 @@ GAME_FN.color = G => {
         zEl.setAttribute('fill', page.colors[z.c]); zEl.dataset.ok = 1; document.getElementById('lbl' + k).style.opacity = 0;
         G.correct(ev.clientX, ev.clientY); filled++; G.progress(filled / zones.length); G.newQ();
         if (filled === zones.length) {
-          const p = Store.profile(); p.pages = p.pages || {}; p.pages[page.id] = true; Store.save();
+          const p = Store.profile(); p.coloriages = p.coloriages || {}; p.coloriages[page.id] = true; Store.save();
           G.later(() => G.done(), 900);
         }
       } else {

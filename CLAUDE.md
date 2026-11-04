@@ -8,16 +8,19 @@ Application éducative pour enfants (4-12 ans), Android hors-ligne. V1 = « NumZ
 
 ## Code
 - Tout le jeu est dans `app/www/` : HTML/CSS/JS **sans framework ni dépendance**. Garder ce principe (APK < 1 Mo, hors-ligne).
-- Ordre de chargement : `i18n.js → art.js → fx.js → engine.js → games.js → app.js` (variables globales).
-- Nouveau jeu = une fonction `GAME_FN.<id> = G => {…}` + une entrée dans `GAMES` + ses textes `g_<id>`/`d_<id>` dans les **7 langues** de `i18n.js`.
-- Dessins : SVG généré en JS dans `art.js`, jamais d'image bitmap.
-- Sauvegarde : clé `localStorage` `numzoo.v1`. Tout changement de format doit migrer les profils existants.
+- Ordre de chargement : `i18n.js → histoire.js → art.js → fx.js → engine.js → assets.js → scenes.js → games.js → app.js` (variables globales).
+- `histoire.js` = la structure en **données** (chapitres → stages → parties, mécaniques, personnages, pages du livre). Aucune logique.
+- Une partie lance `GAME_FN.<meca>` s'il existe, sinon le jeu V1 indiqué par `MECANIQUES.<meca>.base`. L'API `G` reçoit en plus `G.cfg` (paramètres de la mécanique pour l'âge) et `G.partie`.
+- Textes de l'histoire : `{ fr, en }` lus avec `tx()` ; textes d'interface avec `t()`. Repli : langue → anglais → français.
+- Nouvelle mécanique = un module `js/mecaniques/<id>.js` qui définit `GAME_FN.<id> = G => {…}` (même API `G`), chargé avant `app.js`, + son robot dans `test/toutes-les-parties.js`. Textes en français et anglais.
+- Dessins de jeu : SVG généré en JS dans `art.js`. Personnages et scènes de l'histoire : images WebP de `www/img/` (listées dans `img/assets.json`), avec repli automatique sur une silhouette (`assets.js`).
+- Sauvegarde : clé `localStorage` `cm.v2` (lucioles par partie `'1.1.1'`, pages du livre). Les profils `numzoo.v1` sont migrés au premier lancement. Tout changement de format doit migrer les profils existants.
 - Interface en français ; commentaires de code en français.
 
 ## Vérifier
-- `cd app && npm test` doit afficher 63 lignes `OK` et `ERR []`.
-- Pour une modification visuelle : `node test/parcours-ecrans.js 0` puis regarder `app/test/out/`.
-- Ajouter le robot de résolution du nouveau jeu dans `test/tous-les-niveaux.js`.
+- `cd app && npm test` : `STRUCTURE OK`, puis 210 lignes `OK` (70 parties × 3 âges), `Manches réussies : 210 / 210` et `ERR []`.
+- Pour une modification visuelle : `node test/parcours-ecrans.js 0` puis regarder `app/test/out/` ; `npm run captures` pour `docs/captures/v2/`.
+- Ajouter le robot de résolution de la nouvelle mécanique dans `test/toutes-les-parties.js`.
 
 ## Ne jamais
 - Committer un `*.keystore` ou un mot de passe.
