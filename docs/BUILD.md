@@ -20,7 +20,7 @@ sudo apt install android-sdk aapt zipalign apksigner dalvik-exchange openjdk-17-
 6. `zipalign` aligne l'archive sur 4 octets.
 7. `apksigner` signe avec le keystore, puis vérifie la signature.
 
-Résultat : `app/android/build/NumZoo.apk`.
+Résultat : `app/android/build/CeciliaManoach.apk` (V2 : paquet `com.ceciliamanoach.app`, versionCode 2, `targetSdkVersion 34`, icône de la petite étoile).
 
 ## Signature : règles de sécurité
 
@@ -49,3 +49,14 @@ apksigner verify --print-certs releases/NumZoo-V1.0.apk
 - Passer à `targetSdkVersion` 34+ (exigence Google Play), avec un build Gradle ou Capacitor.
 - Produire un **AAB** (Android App Bundle) pour le Play Store.
 - Cible iOS via WKWebView (même dossier `www/`).
+
+## V2.0 — APK de test
+
+`releases/CeciliaManoach-V2.0-test.apk` (1,5 Mo) : version de **test** de la phase 1 + personnages toon.
+
+- Signé avec une **clé de test** temporaire (certificat `CN=Cecilia et Manoach`), qui n'est pas dans le dépôt. Elle ne doit pas servir pour le Play Store : la version publiée sera signée avec une vraie clé de téléversement (*Play App Signing*).
+- Installation sur une tablette ou un téléphone : copier le fichier, l'ouvrir et autoriser « Installer des applications inconnues ». Il s'installe à côté de NumZoo V1 (identifiant différent) sans l'écraser.
+- Les profils NumZoo ne sont pas repris d'une application à l'autre (stockage séparé par application Android) ; la migration `numzoo.v1` → `cm.v2` joue pour une mise à jour dans la même application.
+- Empreinte : voir `releases/SHA256SUMS`.
+
+Outils utilisés (Ubuntu) : `apt install android-sdk aapt zipalign apksigner dalvik-exchange` (android.jar API 23 pour la compilation, cible 34 dans le manifeste).

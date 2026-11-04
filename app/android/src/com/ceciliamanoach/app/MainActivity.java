@@ -1,4 +1,4 @@
-package com.numzoo.app;
+package com.ceciliamanoach.app;
 
 import android.app.Activity;
 import android.os.Build;
