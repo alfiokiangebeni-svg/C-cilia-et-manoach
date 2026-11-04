@@ -379,3 +379,15 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; }
 .cel-amis { display: flex; justify-content: center; gap: .3rem; margin: 0 0 .6rem; }
 .cel-amis:empty { display: none; }
 .cel-amis > * { width: 3.4rem; }
+
+/* Sprites des personnages (images toon détourées) : toujours contenus dans leur cadre */
+img.sprite { width: auto; max-width: 100%; max-height: 100%; object-fit: contain; margin: 0 auto; }
+.stage-card .perso { flex: 1 1 0; min-height: 0; width: 100%; display: flex; justify-content: center; align-items: flex-end; }
+.stage-card .perso > * { max-height: 100%; width: auto; max-width: 100%; }
+.stage-card .perso > svg { width: 6.5rem; }
+.scene-perso { align-self: stretch; display: flex; align-items: flex-end; justify-content: center; }
+.scene-perso > img { height: 92%; }
+.home-row img.avatar { width: auto; height: 12rem; }
+.cel-amis > * { width: auto; height: 4.6rem; }
+.cel-amis > svg { width: 3.4rem; }
+.cel-box img.avatar { width: auto; height: 15rem; }

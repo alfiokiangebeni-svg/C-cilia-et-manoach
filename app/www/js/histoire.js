@@ -31,16 +31,16 @@ const MECANIQUES = {
 };
 
 // ---------- Les personnages ----------
-// couleur : teinte de la silhouette de remplacement tant que l'image n'est pas fournie.
+// couleur : teinte de la silhouette de remplacement tant que l'image n'est pas fournie. fete : pose utilisée pour la fête de fin de chapitre.
 const PERSONNAGES = {
-  cecilia:   { nom: 'Cécilia',   couleur: '#F28C28', poses: ['debout', 'contente', 'pointe', 'reflechit', 'applaudit', 'tient-etoile', 'grimpe', 'court'] },
-  manoach:   { nom: 'Manoach',   couleur: '#2EC4B6', poses: ['debout', 'content', 'tambour', 'reflechit', 'applaudit', 'grimpe', 'court'] },
-  etoile:    { nom: { fr: 'La petite étoile', en: 'The little star' }, couleur: '#FFD84A', poses: ['triste', 'froide', 'sale', 'propre', 'contente', 'pale', 'clin-oeil'] },
-  therese:   { nom: 'Thérèse',   couleur: '#5DA35A', poses: ['nage', 'parle', 'sourit'] },
-  axel:      { nom: 'Axel',      couleur: '#8B6B4A', poses: ['calme', 'parle', 'sourit'] },
-  christian: { nom: 'Christian', couleur: '#F4F1EA', poses: ['debout', 'ailes-ouvertes', 'vole-etoile', 'timide'] },
-  lune:      { nom: { fr: 'Maman la Lune', en: 'Mama Moon' }, couleur: '#FFF4D6', poses: ['sourit', 'bras-ouverts', 'calin'] },
-  luciole:   { nom: { fr: 'Luciole', en: 'Firefly' }, couleur: '#E8F56B', poses: ['ailes-ouvertes', 'ailes-fermees'] },
+  cecilia:   { nom: 'Cécilia',   couleur: '#F28C28', fete: 'applaudit', poses: ['debout', 'contente', 'pointe', 'reflechit', 'applaudit', 'tient-etoile', 'grimpe', 'court'] },
+  manoach:   { nom: 'Manoach',   couleur: '#2EC4B6', fete: 'applaudit', poses: ['debout', 'content', 'tambour', 'reflechit', 'applaudit', 'grimpe', 'court'] },
+  etoile:    { nom: { fr: 'La petite étoile', en: 'The little star' }, couleur: '#FFD84A', fete: 'contente', poses: ['triste', 'froide', 'sale', 'propre', 'contente', 'pale', 'clin-oeil'] },
+  therese:   { nom: 'Thérèse',   couleur: '#5DA35A', fete: 'sourit', poses: ['nage', 'parle', 'sourit'] },
+  axel:      { nom: 'Axel',      couleur: '#8B6B4A', fete: 'sourit', poses: ['calme', 'parle', 'sourit'] },
+  christian: { nom: 'Christian', couleur: '#F4F1EA', fete: 'ailes-ouvertes', poses: ['debout', 'ailes-ouvertes', 'vole-etoile', 'timide'] },
+  lune:      { nom: { fr: 'Maman la Lune', en: 'Mama Moon' }, couleur: '#FFF4D6', fete: 'bras-ouverts', poses: ['sourit', 'bras-ouverts', 'calin'] },
+  luciole:   { nom: { fr: 'Luciole', en: 'Firefly' }, couleur: '#E8F56B', fete: 'ailes-ouvertes', poses: ['ailes-ouvertes', 'ailes-fermees'] },
   // Pas dans le livre : silhouettes neutres tant que l'auteur ne les a pas décrits.
   francesca: { nom: 'Francesca', couleur: '#9AA0B5', neutre: true, poses: ['debout', 'content', 'aide'] },
   rokaya:    { nom: 'Rokaya',    couleur: '#9AA0B5', neutre: true, poses: ['debout', 'content', 'aide'] },

@@ -231,7 +231,7 @@ const Celebrate = {
     const p = Store.profile(), c = $('#celebrate');
     $('#cel-garland-top').innerHTML = garlandHTML(20);
     $('#cel-garland-bottom').innerHTML = garlandHTML(20).replace('class="garland"', 'class="garland bottom"');
-    $('#cel-avatar').innerHTML = avatarSVG(avOf(p), '', 'wink');
+    $('#cel-avatar').innerHTML = Assets.perso(finChap ? 'manoach' : 'cecilia', finChap ? 'tambour' : 'contente', 'avatar');
     $('#cel-title').textContent = finChap ? t('allTogether') : `${t('bravo')} ${p.name} !`;
     $('#cel-sub').textContent = extra && extra.race !== undefined ? (extra.race ? '🏆 ' + t('youWon') : '🎉 ' + t('wellDone')) : '';
     const sp = $$('#cel-stars span'); sp.forEach(s => s.classList.remove('on'));
@@ -239,7 +239,7 @@ const Celebrate = {
     const ca = $('#cel-animal');
     if (pages && pages.length) { ca.style.display = 'flex'; ca.innerHTML = `<span class="em">📖</span> ${t('pageUnlocked')}`; } else ca.style.display = 'none';
     // Fin de chapitre : Cécilia, Manoach et les personnages rencontrés fêtent ensemble
-    $('#cel-amis').innerHTML = finChap ? amisJusqua(finChap).map(a => Assets.perso(a, null, 'danse')).join('') : '';
+    $('#cel-amis').innerHTML = finChap ? amisJusqua(finChap).map(a => Assets.perso(a, (PERSONNAGES[a] || {}).fete, 'danse')).join('') : '';
     $('#cel-next').style.display = this.suivante() ? '' : 'none';
     c.classList.add('on'); Sound.fanfare(); Fireworks.start(5000);
   },
