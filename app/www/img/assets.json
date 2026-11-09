@@ -524,5 +524,199 @@
    "fichier": "img/scenes/page-12.webp",
    "taille": "1280 px de large, ≤ 250 Ko"
   }
+ ],
+ "jeux": [
+  {
+   "fichier": "img/avatars/amani.webp",
+   "taille": "≤ 80 Ko"
+  },
+  {
+   "fichier": "img/avatars/kito.webp",
+   "taille": "≤ 80 Ko"
+  },
+  {
+   "fichier": "img/avatars/lila.webp",
+   "taille": "≤ 80 Ko"
+  },
+  {
+   "fichier": "img/avatars/malik.webp",
+   "taille": "≤ 80 Ko"
+  },
+  {
+   "fichier": "img/avatars/mei.webp",
+   "taille": "≤ 80 Ko"
+  },
+  {
+   "fichier": "img/avatars/nia.webp",
+   "taille": "≤ 80 Ko"
+  },
+  {
+   "fichier": "img/jeux/algue.webp",
+   "taille": "≤ 80 Ko"
+  },
+  {
+   "fichier": "img/jeux/avion.webp",
+   "taille": "≤ 80 Ko"
+  },
+  {
+   "fichier": "img/jeux/bateau.webp",
+   "taille": "≤ 80 Ko"
+  },
+  {
+   "fichier": "img/jeux/caisse.webp",
+   "taille": "≤ 80 Ko"
+  },
+  {
+   "fichier": "img/jeux/corail.webp",
+   "taille": "≤ 80 Ko"
+  },
+  {
+   "fichier": "img/jeux/glouton-faim.webp",
+   "taille": "≤ 80 Ko"
+  },
+  {
+   "fichier": "img/jeux/glouton-mache.webp",
+   "taille": "≤ 80 Ko"
+  },
+  {
+   "fichier": "img/jeux/glouton-triste.webp",
+   "taille": "≤ 80 Ko"
+  },
+  {
+   "fichier": "img/jeux/glouton.webp",
+   "taille": "≤ 80 Ko"
+  },
+  {
+   "fichier": "img/jeux/nuage.webp",
+   "taille": "≤ 80 Ko"
+  },
+  {
+   "fichier": "img/jeux/panier-bleu.webp",
+   "taille": "≤ 80 Ko"
+  },
+  {
+   "fichier": "img/jeux/panier-rouge.webp",
+   "taille": "≤ 80 Ko"
+  },
+  {
+   "fichier": "img/jeux/perroquet.webp",
+   "taille": "≤ 80 Ko"
+  },
+  {
+   "fichier": "img/jeux/poisson-jaune.webp",
+   "taille": "≤ 80 Ko"
+  },
+  {
+   "fichier": "img/jeux/poisson-orange.webp",
+   "taille": "≤ 80 Ko"
+  },
+  {
+   "fichier": "img/jeux/poisson-rouge.webp",
+   "taille": "≤ 80 Ko"
+  },
+  {
+   "fichier": "img/jeux/poisson-vert.webp",
+   "taille": "≤ 80 Ko"
+  },
+  {
+   "fichier": "img/jeux/poisson-violet.webp",
+   "taille": "≤ 80 Ko"
+  },
+  {
+   "fichier": "img/jeux/seau.webp",
+   "taille": "≤ 80 Ko"
+  },
+  {
+   "fichier": "img/fruits/banane.webp",
+   "taille": "≤ 80 Ko"
+  },
+  {
+   "fichier": "img/fruits/carotte.webp",
+   "taille": "≤ 80 Ko"
+  },
+  {
+   "fichier": "img/fruits/coco.webp",
+   "taille": "≤ 80 Ko"
+  },
+  {
+   "fichier": "img/fruits/fraise.webp",
+   "taille": "≤ 80 Ko"
+  },
+  {
+   "fichier": "img/fruits/mangue.webp",
+   "taille": "≤ 80 Ko"
+  },
+  {
+   "fichier": "img/fruits/orange.webp",
+   "taille": "≤ 80 Ko"
+  },
+  {
+   "fichier": "img/fruits/pomme.webp",
+   "taille": "≤ 80 Ko"
+  },
+  {
+   "fichier": "img/fruits/raisin.webp",
+   "taille": "≤ 80 Ko"
+  },
+  {
+   "fichier": "img/animaux/elephant.webp",
+   "taille": "≤ 80 Ko"
+  },
+  {
+   "fichier": "img/animaux/girafe.webp",
+   "taille": "≤ 80 Ko"
+  },
+  {
+   "fichier": "img/animaux/hippo.webp",
+   "taille": "≤ 80 Ko"
+  },
+  {
+   "fichier": "img/animaux/koala.webp",
+   "taille": "≤ 80 Ko"
+  },
+  {
+   "fichier": "img/animaux/lapin.webp",
+   "taille": "≤ 80 Ko"
+  },
+  {
+   "fichier": "img/animaux/panda.webp",
+   "taille": "≤ 80 Ko"
+  },
+  {
+   "fichier": "img/animaux/perroquet.webp",
+   "taille": "≤ 80 Ko"
+  },
+  {
+   "fichier": "img/animaux/singe.webp",
+   "taille": "≤ 80 Ko"
+  },
+  {
+   "fichier": "img/decors/accueil.webp",
+   "taille": "1280 px, ≤ 250 Ko"
+  },
+  {
+   "fichier": "img/decors/course.webp",
+   "taille": "1280 px, ≤ 250 Ko"
+  },
+  {
+   "fichier": "img/decors/glouton.webp",
+   "taille": "1280 px, ≤ 250 Ko"
+  },
+  {
+   "fichier": "img/decors/nuit.webp",
+   "taille": "1280 px, ≤ 250 Ko"
+  },
+  {
+   "fichier": "img/decors/partage.webp",
+   "taille": "1280 px, ≤ 250 Ko"
+  },
+  {
+   "fichier": "img/decors/peche.webp",
+   "taille": "1280 px, ≤ 250 Ko"
+  },
+  {
+   "fichier": "img/decors/tri.webp",
+   "taille": "1280 px, ≤ 250 Ko"
+  }
  ]
 }

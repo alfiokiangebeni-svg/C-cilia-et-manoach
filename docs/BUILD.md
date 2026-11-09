@@ -60,3 +60,7 @@ apksigner verify --print-certs releases/NumZoo-V1.0.apk
 - Empreinte : voir `releases/SHA256SUMS`.
 
 Outils utilisés (Ubuntu) : `apt install android-sdk aapt zipalign apksigner dalvik-exchange` (android.jar API 23 pour la compilation, cible 34 dans le manifeste).
+
+## V2.1 — APK de test
+
+`releases/CeciliaManoach-V2.1-test.apk` (≈ 3 Mo, versionCode 3) : programme CE2 / CM1 / génie, tables 1 → 13, jeux en 3D. Même clé de test que la 2.0 : il s'installe **par-dessus** la 2.0 en gardant les profils.

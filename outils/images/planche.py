@@ -29,6 +29,18 @@ for k in range(1, n):
     cuts.append(lo + int(np.argmin(lisse[lo:hi])))
 bornes = [0] + cuts + [W]
 fus = [[bornes[i], bornes[i + 1]] for i in range(n)]
+# Si les personnages sont bien séparés par des bandes vides, on coupe dans ces bandes (objets de largeurs différentes)
+occ = mass > 2; grp = []; x = 0
+while x < W:
+    if occ[x]:
+        x0 = x
+        while x < W and occ[x]: x += 1
+        if grp and x0 - grp[-1][1] < 12: grp[-1][1] = x
+        else: grp.append([x0, x])
+    else: x += 1
+grp = [g for g in grp if g[1] - g[0] > 25]
+if len(grp) == n:
+    fus = [[(grp[i - 1][1] + grp[i][0]) // 2 if i else 0, (grp[i][1] + grp[i + 1][0]) // 2 if i < n - 1 else W] for i in range(n)]
 from collections import deque
 def nettoie(seg):
     # Retire les petits morceaux d'un voisin qui touchent le bord gauche/droit de la part
@@ -58,7 +70,7 @@ for (x0, x1), pose in zip(fus, poses):
     s = nettoie(rgba.crop((x0, 0, x1, rgba.height)))
     bb = s.getchannel('A').point(lambda v: 255 if v > 24 else 0).getbbox()
     s = s.crop(bb)
-    h = 512; w = max(1, round(s.width * h / s.height)); s = s.resize((w, h), Image.LANCZOS)
+    h = int(os.environ.get('HAUTEUR', 512)); w = max(1, round(s.width * h / s.height)); s = s.resize((w, h), Image.LANCZOS)
     dst = f'{out_dir}/{pose}.webp'
     for q in (86, 80, 72, 64, 56, 48):
         s.save(dst, 'WEBP', quality=q, method=6)

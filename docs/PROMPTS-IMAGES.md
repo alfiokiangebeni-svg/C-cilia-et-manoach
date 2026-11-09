@@ -31,3 +31,15 @@ Style commun : *Stylized 3D animated feature film cartoon style for a children's
 
 - **Francesca, Rokaya, Mathias** : silhouettes neutres tant que l'auteur ne les a pas décrits.
 - **Scènes et pages du livre** (`img/scenes/`) : à extraire des PDF du livre (voir `INSTRUCTION-V2.md`, section 7).
+
+## Images des jeux (V2.1)
+
+Même style, même méthode (planches sur fond magenta, `HAUTEUR=<px> python3 outils/images/planche.py …`).
+
+| Fichiers | Contenu |
+|---|---|
+| `img/avatars/` | Amani, Kito, Lila, Mei, Malik, Nia (enfants de 8 ans, pleine silhouette) — le joueur pilote l'avion et pêche dans la pirogue |
+| `img/jeux/` | avion (cockpit vide), perroquet, nuage ; pirogue (vide), seau, algue, corail ; 5 poissons ; paniers bleu et rouge, caisse ; Glouton (content, faim, mâche, triste) |
+| `img/fruits/` | banane, pomme, fraise, carotte, orange, mangue, raisin, noix de coco |
+| `img/animaux/` | singe, éléphant, lapin, girafe, panda, perroquet, koala, hippopotame |
+| `img/decors/` | accueil (fleuve au crépuscule), nuit étoilée, course (ciel au-dessus du fleuve), pêche (fleuve en coupe), partage (natte devant la maison), Glouton (clairière), tri (cour du village) — 1280 × 720, ≤ 250 Ko |

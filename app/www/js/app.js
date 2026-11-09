@@ -2,7 +2,11 @@
 const $ = s => document.querySelector(s);
 const $$ = s => [...document.querySelectorAll(s)];
 let current = 'home';
-const state = { chap: null, stage: null, partie: null, game: null, lvl: 0, draft: null };
+const state = { mode: 'histoire', chap: null, stage: null, partie: null, table: null, game: null, lvl: 0, tri: null, draft: null };
+// Avatars du joueur en images 3D (img/avatars/<id>.webp)
+const avSrc = id => `img/avatars/${id}.webp`;
+const avHTML = (id, cls = '') => `<img class="avatar ${cls}" src="${avSrc(id)}" alt="" draggable="false">`;
+const teteHTML = id => `<span class="tete" style="background-image:url(${avSrc(id)})"></span>`;
 
 // ---------------- Parcours de l'histoire (dérivé des données de histoire.js) ----------------
 const PARTIES = []; // les 70 parties, dans l'ordre de l'histoire
@@ -61,7 +65,7 @@ const RENDER = {
   profiles() {
     const box = $('#profile-list'); box.innerHTML = '';
     Store.data.profiles.forEach(p => {
-      const c = h('button', 'profile-card', `${avatarSVG(avOf(p))}<div class="nm">${esc(p.name)}</div><div class="st">✨ ${Store.totalLucioles(p)} · ${AGES[p.age].range} ${t('years')}</div>`);
+      const c = h('button', 'profile-card', `${avHTML(avOf(p).id)}<div class="nm">${esc(p.name)}</div><div class="st">✨ ${Store.totalLucioles(p)} · ${esc(tx(NIVEAUX[p.age].nom))}</div>`);
       c.onclick = () => { Sound.tap(); Store.data.current = p.id; Store.save(); show('hub'); };
       box.append(c);
     });
@@ -73,17 +77,16 @@ const RENDER = {
   create() {
     const d = state.draft, ap = $('#avatar-pick'), sp = $('#shirt-pick'); ap.innerHTML = ''; sp.innerHTML = '';
     AVATARS.forEach(a => {
-      const b = h('button', a.id === d.avatar ? 'sel' : '', avatarSVG(Object.assign({}, a, { shirt: a.id === d.avatar ? d.shirt : a.shirt })));
+      const b = h('button', a.id === d.avatar ? 'sel' : '', avHTML(a.id));
       b.onclick = () => { Sound.tap(); d.avatar = a.id; d.shirt = a.shirt; if (!$('#name-input').value || AVATARS.some(x => x.name === $('#name-input').value)) $('#name-input').value = a.name; RENDER.create(); };
       ap.append(b);
     });
-    SHIRTS.forEach(c => { const b = h('button', c === d.shirt ? 'sel' : ''); b.style.background = c; b.onclick = () => { Sound.tap(); d.shirt = c; RENDER.create(); }; sp.append(b); });
     if (!$('#name-input').value) $('#name-input').value = AVATARS.find(a => a.id === d.avatar).name;
   },
   age() {
     const box = $('#age-list'); box.innerHTML = '';
     AGES.forEach(a => {
-      const c = h('button', 'age-card', `<div class="ic">${a.icon}</div><div class="rg">${a.range}</div><div class="nm">${t(a.key)}</div>`);
+      const N = NIVEAUX[a.id], c = h('button', 'age-card', `<div class="ic">${a.icon}</div><div class="rg">${esc(tx(N.nom))}</div><div class="nm">${N.classe === '★' ? esc(tx(N.ages)) : N.classe + ' · ' + esc(tx(N.ages))}</div>`);
       c.style.background = a.color;
       c.onclick = () => {
         Sound.tap();
@@ -98,8 +101,8 @@ const RENDER = {
   // Carte des 10 chapitres
   hub() {
     const p = Store.profile(); if (!p) return show('profiles');
-    $('#hub-player').innerHTML = `<span style="width:2.4rem;height:2.4rem;display:inline-block">${avatarHeadSVG(avOf(p))}</span> ${esc(p.name)}`;
-    $('#hub-age').innerHTML = `${AGES[p.age].icon} ${AGES[p.age].range}`;
+    $('#hub-player').innerHTML = `${teteHTML(avOf(p).id)} ${esc(p.name)}`;
+    $('#hub-age').innerHTML = `${AGES[p.age].icon} ${esc(tx(NIVEAUX[p.age].nom))}`;
     $('#hub-stars').textContent = `${Store.totalLucioles()} / ${PARTIES.length * 3}`;
     const g = $('#chap-grid'); g.innerHTML = '';
     CHAPITRES.forEach(ch => {
@@ -113,6 +116,24 @@ const RENDER = {
     const nb = Object.keys(p.livre).length;
     const z = h('button', 'chap-card livre-card', `<div class="num">📖</div><div class="nm">${t('myBook')}</div><div class="stars">${nb}/${PAGES_LIVRE.length}</div>`);
     z.onclick = () => { Sound.tap(); show('livre'); }; g.append(z);
+    const tb = h('button', 'chap-card tables-card', `<div class="num">×÷</div><div class="nm">${t('tables')}</div><div class="stars">1 → 13</div>`);
+    tb.onclick = () => { Sound.tap(); show('tables'); }; g.append(tb);
+  },
+  // Entraînement : tables de multiplication et de division de 1 à 13
+  tables() {
+    const p = Store.profile(); if (!p) return show('profiles');
+    [['×', '#tables-mult'], ['÷', '#tables-div']].forEach(([op, sel]) => {
+      const box = $(sel); box.innerHTML = '';
+      for (let n = 1; n <= 13; n++) {
+        const st = p.tables[op + n] || 0;
+        const b = h('button', 'table-btn' + (st ? ' faite' : ''), `<b>${op} ${n}</b><i>${starStr(st)}</i>`);
+        b.onclick = () => { Sound.init(); Sound.tap(); Play.table(op, n); };
+        box.append(b);
+      }
+      const m = h('button', 'table-btn melange', `<b>${op} ${t('mix')}</b><i>${starStr(p.tables[op + 'tout'] || 0)}</i>`);
+      m.onclick = () => { Sound.init(); Sound.tap(); Play.table(op, 0); };
+      box.append(m);
+    });
   },
   // Un chapitre : ses 3 stages
   chapitre() {
@@ -142,6 +163,7 @@ const RENDER = {
         `<div class="ic">${M.icon}</div><div class="nm">${esc(tx(pa.titre))}</div><div class="s">${starStr(n)}</div>`);
       b.dataset.partie = pa.id;
       b.onclick = () => { if (locked) return lockShake(b); Sound.init(); Sound.tap(); Play.start(pa.id); };
+      b.insertAdjacentHTML('beforeend', `<div class="notion">${esc(tx(NOTIONS[pa.notion].titre))}</div>`);
       box.append(b);
     });
   },
@@ -170,25 +192,45 @@ function esc(s) { return String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<':
 // ---------------- Contrôleur de partie ----------------
 const Play = {
   sid: 0, timers: [], rafs: [], errors: 0, qErr: 0, streak: 0,
-  // Lance une partie de l'histoire ('chapitre.stage.partie'). La mécanique utilise son module GAME_FN.<meca>
-  // s'il existe, sinon le jeu V1 rhabillé indiqué dans MECANIQUES (phase 1).
+  // Une partie de l'histoire : la mécanique (jeu) + la notion du programme scolaire au niveau de l'enfant.
+  // La mécanique utilise son module GAME_FN.<meca> s'il existe, sinon le jeu V1 rhabillé (MECANIQUES.<meca>.base).
   start(id) {
+    const pa = partie(id), p = Store.profile(), M = MECANIQUES[pa.meca], niv = p.age, N = NOTIONS[pa.notion];
+    state.mode = 'histoire'; state.partie = id; state.stage = pa.st.id; state.chap = pa.ch.id;
+    this.lancer({
+      game: GAME_FN[pa.meca] ? pa.meca : M.base, lvl: pa.niv[niv],
+      sk: Object.assign({ notion: pa.notion, niv }, N.p[niv]),
+      glouton: (N.glouton || [])[niv] || MONSTER_MODES[Math.min(niv, 2)][pa.niv[niv]],
+      tri: (N.tri || [])[niv] || { type: 'parity' },
+      cfg: M.ages[niv], partie: pa, chip: `${M.icon} ${tx(N.titre)}`,
+    });
+  },
+  // Entraînement d'une table (n = 1 à 13, ou 0 pour toutes les tables mélangées)
+  table(op, n) {
+    const tables = n ? [n] : Array.from({ length: 13 }, (_, k) => k + 1);
+    state.mode = 'tables'; state.table = { op, n };
+    this.lancer({
+      game: op === '×' ? 'race' : 'fish', lvl: 0,
+      sk: op === '×' ? { ops: ['×'], tables, kmin: 1, kmax: 13 } : { ops: ['÷'], tables, qmax: 13 },
+      glouton: MONSTER_MODES[0][0], tri: { type: 'parity' }, cfg: {}, partie: null, chip: `${op} ${n || '1 → 13'}`,
+    });
+  },
+  lancer(c) {
     this.stop(); this.sid++;
-    const pa = partie(id), p = Store.profile(), sid = this.sid, self = this, M = MECANIQUES[pa.meca];
-    const game = GAME_FN[pa.meca] ? pa.meca : M.base, lvl = pa.niv[p.age];
-    state.partie = id; state.stage = pa.st.id; state.chap = pa.ch.id; state.game = game; state.lvl = lvl;
+    const p = Store.profile(), sid = this.sid, self = this, game = c.game, lvl = c.lvl;
+    state.game = game; state.lvl = lvl; state.tri = c.tri;
     this.errors = 0; this.qErr = 0; this.streak = 0;
     show('play');
     const area = $('#area'); area.innerHTML = ''; area.className = 'game-area';
     $('#prog').style.width = '0';
-    $('#play-level').textContent = `${M.icon} ${pa.id}`;
+    $('#play-level').textContent = c.chip;
     const qEl = h('div', 'question'); area.append(qEl);
     const G = {
-      area, age: p.age, lvl, av: avOf(p), cfg: M.ages[p.age], partie: pa,
+      area, age: p.age, lvl, av: avOf(p), sk: c.sk, glouton: c.glouton, tri: c.tri, cfg: c.cfg, partie: c.partie,
       alive: () => sid === self.sid,
       later(fn, ms) { const id = setTimeout(() => { if (sid === self.sid) fn(); }, ms); self.timers.push(id); return id; },
       raf(fn) { const loop = () => { if (sid !== self.sid) return; fn(); self.rafs.push(requestAnimationFrame(loop)); }; loop(); },
-      setQuestion(txt) { qEl.textContent = txt; qEl.classList.remove('pop'); void qEl.offsetWidth; qEl.classList.add('pop'); if (!qEl.isConnected) area.append(qEl); },
+      setQuestion(txt) { qEl.textContent = txt; qEl.classList.toggle('long', txt.length > 24); qEl.classList.remove('pop'); void qEl.offsetWidth; qEl.classList.add('pop'); if (!qEl.isConnected) area.append(qEl); },
       newQ() { self.qErr = 0; },
       progress(f) { $('#prog').style.width = Math.round(f * 100) + '%'; },
       correct(x, y) { self.onGood(x, y); },
@@ -214,7 +256,13 @@ const Play = {
   },
   finish(extra) {
     const p = Store.profile(), e = this.errors;
-    const n = e <= 1 ? 3 : e <= 4 ? 2 : 1;
+    // Enfant génie : plus exigeant (3 lucioles seulement sans aucune erreur)
+    const n = p.age === 2 ? (e === 0 ? 3 : e <= 2 ? 2 : 1) : (e <= 1 ? 3 : e <= 4 ? 2 : 1);
+    if (state.mode === 'tables') {
+      const k = state.table.op + (state.table.n || 'tout');
+      p.tables[k] = Math.max(p.tables[k] || 0, n); Store.save();
+      Celebrate.show(n, [], extra, null); return;
+    }
     Store.setLucioles(state.partie, n);
     // Chapitre terminé : ses pages du livre se débloquent
     const ch = partie(state.partie).ch, nouvelles = [];
@@ -244,14 +292,19 @@ const Celebrate = {
     c.classList.add('on'); Sound.fanfare(); Fireworks.start(5000);
   },
   hide() { $('#celebrate').classList.remove('on'); Fireworks.stop(); },
-  suivante() { const k = PARTIES.findIndex(p => p.id === state.partie); return PARTIES[k + 1] || null; },
+  suivante() {
+    if (state.mode === 'tables') return state.table.n && state.table.n < 13 ? { table: state.table.n + 1 } : null;
+    const k = PARTIES.findIndex(p => p.id === state.partie); return PARTIES[k + 1] || null;
+  },
 };
-$('#cel-map').onclick = () => { Sound.tap(); Celebrate.hide(); Play.stop(); show('hub'); };
-$('#cel-replay').onclick = () => { Sound.tap(); Celebrate.hide(); Play.start(state.partie); };
+$('#cel-map').onclick = () => { Sound.tap(); Celebrate.hide(); Play.stop(); show(state.mode === 'tables' ? 'tables' : 'hub'); };
+$('#cel-replay').onclick = () => { Sound.tap(); Celebrate.hide(); if (state.mode === 'tables') Play.table(state.table.op, state.table.n); else Play.start(state.partie); };
 // Partie suivante : dans le même stage on enchaîne ; sinon on passe par la scène d'ouverture du stage suivant
 $('#cel-next').onclick = () => {
-  Sound.tap(); const nx = Celebrate.suivante(), cur = partie(state.partie); Celebrate.hide();
-  if (!nx) { Play.stop(); show('hub'); return; }
+  Sound.tap(); const nx = Celebrate.suivante(); Celebrate.hide();
+  if (!nx) { Play.stop(); show(state.mode === 'tables' ? 'tables' : 'hub'); return; }
+  if (state.mode === 'tables') { Play.table(state.table.op, nx.table); return; }
+  const cur = partie(state.partie);
   if (nx.st === cur.st) Play.start(nx.id); else { Play.stop(); state.chap = nx.ch.id; state.stage = nx.st.id; show('stage'); }
 };
 
@@ -292,13 +345,13 @@ function parentPanel() {
     <div class="row"><b>${t('sound')} :</b> <button class="btn ${Store.data.sound ? 'green' : 'red'}" id="pp-sound">${Store.data.sound ? '🔊' : '🔇'}</button></div>
     ${p ? `<div class="row"><b>${esc(p.name)} — ${t('changeAge')} :</b> ${AGES.map(a => `<button class="btn" data-age="${a.id}" style="--c:${a.color};font-size:1.2rem;${p.age === a.id ? 'outline:.25rem solid #2b2d42' : ''}">${a.range}</button>`).join('')}</div>
     <div class="row"><button class="btn orange" id="pp-reset">↺ ${t('reset')}</button><button class="btn red" id="pp-del">🗑 ${t('del')}</button></div>` : ''}
-    <div class="small-note">Cécilia &amp; Manoach V2.0 · ${CHAPITRES.length} chapitres · ${PARTIES.length} parties · 3 âges · hors ligne, sans publicité, aucune donnée collectée.</div>
+    <div class="small-note">Cécilia &amp; Manoach V2.0 · ${CHAPITRES.length} chapitres · ${PARTIES.length} parties · CE2, CM1, génie · tables 1 → 13 · hors ligne, sans publicité, aucune donnée collectée.</div>
     <button class="btn blue" id="pp-close">${t('close')}</button>`);
   $$('#modal-box [data-l]').forEach(b => b.onclick = () => { LANG = b.dataset.l; Store.data.lang = LANG; Store.save(); applyLang(); parentPanel(); if (RENDER[current]) RENDER[current](); });
   $('#pp-sound').onclick = () => { Store.data.sound = !Store.data.sound; Sound.on = Store.data.sound; Store.save(); parentPanel(); RENDER.home(); };
   $$('#modal-box [data-age]').forEach(b => b.onclick = () => { p.age = +b.dataset.age; Store.save(); parentPanel(); if (RENDER[current]) RENDER[current](); });
   const confirm2 = (btn, fn) => { if (btn.dataset.armed) fn(); else { btn.dataset.armed = 1; btn.textContent = '⚠ ' + t('confirm'); } };
-  const rs = $('#pp-reset'); if (rs) rs.onclick = () => confirm2(rs, () => { p.lucioles = {}; p.livre = {}; p.coloriages = {}; Store.save(); Modal.close(); if (RENDER[current]) RENDER[current](); });
+  const rs = $('#pp-reset'); if (rs) rs.onclick = () => confirm2(rs, () => { p.lucioles = {}; p.livre = {}; p.coloriages = {}; p.tables = {}; Store.save(); Modal.close(); if (RENDER[current]) RENDER[current](); });
   const dl = $('#pp-del'); if (dl) dl.onclick = () => confirm2(dl, () => { Store.data.profiles = Store.data.profiles.filter(x => x.id !== p.id); Store.data.current = null; Store.save(); Modal.close(); show('profiles'); });
   $('#pp-close').onclick = Modal.close;
 }
@@ -306,11 +359,11 @@ function parentPanel() {
 // ---------------- Boutons et retour ----------------
 function goBack() {
   if ($('#modal').classList.contains('on')) { Modal.close(); return true; }
-  if ($('#celebrate').classList.contains('on')) { Celebrate.hide(); Play.stop(); show('stage'); return true; }
+  if ($('#celebrate').classList.contains('on')) { Celebrate.hide(); Play.stop(); show(state.mode === 'tables' ? 'tables' : 'stage'); return true; }
   switch (current) {
-    case 'play': Play.stop(); show('stage'); return true;
+    case 'play': Play.stop(); show(state.mode === 'tables' ? 'tables' : 'stage'); return true;
     case 'stage': show('chapitre'); return true;
-    case 'chapitre': case 'livre': show('hub'); return true;
+    case 'chapitre': case 'livre': case 'tables': show('hub'); return true;
     case 'free': show('livre'); return true;
     case 'hub': show('profiles'); return true;
     case 'age': show(state.draft && state.draft.editing ? 'hub' : 'create'); return true;

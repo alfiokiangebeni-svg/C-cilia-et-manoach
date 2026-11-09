@@ -21,6 +21,14 @@ Cahier des charges complet : [INSTRUCTION-V2.md](INSTRUCTION-V2.md)
 - [ ] Phase 6 — Publication (targetSdk 34, AAB)
 - [ ] Description de Francesca, Rokaya et Mathias par l'auteur
 
+## V2.1 — Programme scolaire et jeux en 3D
+- [x] Niveaux 3e primaire (CE2), 4e primaire (CM1) et Enfant génie
+- [x] 22 notions du programme de mathématiques français, une par partie (voir [PROGRAMME.md](PROGRAMME.md))
+- [x] Tables de multiplication et de division de 1 à 13 (28 entraînements)
+- [x] Jeux en images 3D : avatars, avion piloté, pirogue avec l'enfant, poissons, paniers, Glouton, fruits, animaux, 7 décors
+- [ ] Validation par l'auteur et par un enseignant
+- [ ] Français (grammaire, conjugaison, orthographe) et sciences du programme, si souhaité
+
 ## V3.0 — Au-delà du calcul
 - [ ] Nouveaux jeux : lecture, sciences, hygiène, missions (voir le catalogue des 24 projets)
 - [ ] Tableau de bord parent / enseignant

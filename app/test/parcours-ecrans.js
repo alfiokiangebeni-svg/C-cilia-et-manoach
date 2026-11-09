@@ -12,13 +12,14 @@ const out = path.resolve(process.argv[4] || __dirname + '/out'); fs.mkdirSync(ou
   pg.on('console', m => { if (m.type() === 'error' && !/Failed to load resource/.test(m.text())) errs.push(m.text()); });
   await pg.goto('file://' + path.resolve(__dirname, '../www/index.html'));
   await pg.evaluate(() => localStorage.clear()); await pg.reload();
-  const S = n => pg.screenshot({ path: `${out}/${n}.png` });
+  const jpg = !!process.argv[4]; // captures de la doc : JPEG (décors photographiques lourds en PNG)
+  const S = n => pg.screenshot(jpg ? { path: `${out}/${n}.jpg`, type: 'jpeg', quality: 80 } : { path: `${out}/${n}.png` });
   const go = async (sel, n, ms = 500) => { await pg.click(sel, { force: true }); await pg.waitForTimeout(ms); if (n) await S(n); };
   await pg.waitForTimeout(600); await S('01_accueil');
   await go('#home-play', '02_langue');
   await go('.lang-btn >> nth=0', '03_profils');
   await go('.profile-card.add', '04_personnage');
-  await go('#create-next', '05_age');
+  await go('#create-next', '05_niveau');
   await go('.age-card >> nth=' + (process.argv[2] || 0), '06_carte', 700);
   await go('.chap-card >> nth=0', '07_chapitre');
   await go('.stage-card >> nth=0', '08_stage');
@@ -32,6 +33,12 @@ const out = path.resolve(process.argv[4] || __dirname + '/out'); fs.mkdirSync(ou
   await pg.evaluate(() => { Celebrate.hide(); Play.stop(); show('hub'); }); await pg.waitForTimeout(600); await S('11_carte_progres');
   await pg.evaluate(() => show('livre')); await pg.waitForTimeout(500); await S('12_livre');
   await go('.livre-cell >> nth=1', '13_page_livre');
+  await pg.evaluate(() => Modal.close());
+  await pg.evaluate(() => { Store.profile().tables = { '×2': 3, '×7': 2, '÷5': 1 }; show('tables'); }); await pg.waitForTimeout(500); await S('14_tables');
+  await pg.evaluate(() => Play.table('×', 13)); await pg.waitForTimeout(1300); await S('15_table_x13');
+  await pg.evaluate(() => Play.table('÷', 12)); await pg.waitForTimeout(1300); await S('16_table_div12');
+  await pg.evaluate(() => { Play.stop(); Store.profile().age = 2; Play.start('7.3.3'); }); await pg.waitForTimeout(1300); await S('17_genie_probleme');
+  await pg.evaluate(() => { Play.stop(); show('home'); });
   console.log('ERR', JSON.stringify(errs));
   await b.close();
   if (errs.length) process.exit(1);

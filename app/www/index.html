@@ -9,7 +9,7 @@
 <body>
 
 <!-- Accueil -->
-<section id="home" class="screen bg-sky">
+<section id="home" class="screen bg-accueil">
   <div class="hills"></div>
   <div class="home-corner">
     <button class="round" id="home-lang" aria-label="Langue">🌍</button>
@@ -108,6 +108,21 @@
   </div>
 </section>
 
+<!-- Entraînement : tables de 1 à 13 -->
+<section id="tables" class="screen bg-nuit">
+  <div class="topbar">
+    <button class="round" data-back>⬅</button>
+    <div class="title">×÷ <span data-t="tables"></span></div>
+    <div style="width:3.6rem"></div>
+  </div>
+  <div class="tables-body">
+    <div class="tables-titre" data-t="tablesMult"></div>
+    <div class="tables-row" id="tables-mult"></div>
+    <div class="tables-titre" data-t="tablesDiv"></div>
+    <div class="tables-row" id="tables-div"></div>
+  </div>
+</section>
+
 <!-- Jeu -->
 <section id="play" class="screen">
   <div class="game-area" id="area"></div>
@@ -170,6 +185,7 @@
 <div id="rotate-hint"><div class="rot-ic">📱</div><div>↻</div></div>
 
 <script src="js/i18n.js"></script>
+<script src="js/programme.js"></script>
 <script src="js/histoire.js"></script>
 <script src="js/art.js"></script>
 <script src="js/fx.js"></script>

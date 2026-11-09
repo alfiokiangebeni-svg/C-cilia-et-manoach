@@ -391,3 +391,115 @@ img.sprite { width: auto; max-width: 100%; max-height: 100%; object-fit: contain
 .cel-amis > * { width: auto; height: 4.6rem; }
 .cel-amis > svg { width: 3.4rem; }
 .cel-box img.avatar { width: auto; height: 15rem; }
+
+/* =====================================================================
+   V2 — jeux en images 3D, décors peints, niveaux scolaires, tables 1 → 13
+   ===================================================================== */
+.game-area.decor { background-size: cover; background-position: center; }
+.bg-accueil { background: #2a2560 url(../img/decors/accueil.webp) center / cover; }
+.bg-accueil::before, .bg-accueil::after { display: none; }
+.bg-accueil .hills { display: none; }
+.bg-nuit { background: #1B1F4B url(../img/decors/nuit.webp) center / cover; }
+.bg-nuit::before { content: ''; position: absolute; inset: 0; background: rgba(20, 16, 50, .35); pointer-events: none; }
+#profiles, #create, #age, #lang { background: #2a2560 url(../img/decors/accueil.webp) center / cover; }
+#profiles::before, #create::before, #age::before, #lang::before, #profiles::after, #create::after, #age::after, #lang::after { display: none; }
+#profiles .hills, #create .hills, #age .hills, #lang .hills { display: none; }
+
+/* Question : les problèmes s'affichent sur plusieurs lignes */
+.question.long { white-space: normal; font-size: 1.7rem; line-height: 1.2; max-width: 74%; width: max-content; text-align: center; padding: .4rem 1.4rem; }
+
+/* Avatars 3D */
+img.avatar { display: block; height: 100%; width: auto; max-width: 100%; margin: 0 auto; object-fit: contain; }
+.profile-card img.avatar { height: 7.6rem; width: auto; }
+.avatar-pick button { height: 10rem; display: flex; align-items: flex-end; justify-content: center; }
+.avatar-pick img.avatar { height: 100%; width: auto; }
+#shirt-pick { display: none; }
+.tete { display: inline-block; width: 2.4rem; height: 2.4rem; border-radius: 50%; background-color: #ffe8c2; background-size: 220% auto; background-position: 50% 4%; border: .15rem solid #fff; vertical-align: middle; }
+.age-card .rg { font-size: 2rem; }
+
+/* Course : avion 3D piloté par l'avatar */
+.race .layer { display: none; }
+.plane-wrap { width: 17rem; }
+.plane-wrap .avion { width: 100%; display: block; position: relative; z-index: 2; animation: floaty 1.4s ease-in-out infinite; filter: drop-shadow(0 .6rem .5rem rgba(0,0,0,.25)); }
+.plane-wrap .pilote { position: absolute; z-index: 1; left: 30%; top: -18%; width: 18%; height: 52%; background-size: 230% auto; background-position: 50% 3%; background-repeat: no-repeat; animation: floaty 1.4s ease-in-out infinite; }
+.lane-cloud { width: 12rem; height: 6.4rem; background: url(../img/jeux/nuage.webp) center / contain no-repeat; font-size: 2.6rem; color: #1d3557; }
+.lane-cloud::before, .lane-cloud::after { display: none; }
+.lane-cloud span { position: relative; top: .3rem; }
+.lane-cloud.good { filter: drop-shadow(0 0 1rem #06d6a0) brightness(1.05); color: #06a77d; }
+.lane-cloud.bad { filter: drop-shadow(0 0 1rem #ef476f); color: #ef476f; }
+.racebar .tok img { width: 100%; height: 100%; object-fit: contain; }
+.racebar .tok.tete { border-radius: 50%; background-size: 220% auto; background-position: 50% 4%; background-color: #ffe8c2; border: .15rem solid #fff; }
+
+/* Pêche : pirogue 3D avec l'enfant, poissons 3D */
+.sea .waves { display: none; }
+.boat-wrap { top: 12%; left: 22%; width: 17rem; }
+.boat-wrap .bateau { width: 100%; display: block; position: relative; z-index: 2; }
+.boat-wrap .pecheur { position: absolute; z-index: 1; left: 34%; top: -78%; width: 26%; height: 120%; background-size: 100% auto; background-position: 50% 0; background-repeat: no-repeat; }
+.fish { width: 8.6rem; }
+.fish img.corps { width: 100%; display: block; filter: drop-shadow(0 .3rem .3rem rgba(0,0,0,.2)); }
+.fish.flip img.corps { transform: scaleX(-1); }
+.fish .num { position: absolute; left: 50%; top: 56%; transform: translate(-50%, -50%); font-size: 2.1rem; font-weight: 700; color: #fff; -webkit-text-stroke: .32rem rgba(30, 30, 60, .75); paint-order: stroke fill; white-space: nowrap; }
+.seaweed { font-size: 0; bottom: 0; }
+.seaweed img { height: 6rem; display: block; }
+.bucket { background: rgba(255,255,255,.85); display: flex; align-items: center; gap: .3rem; padding: .1rem .7rem; }
+.bucket img { height: 2.6rem; }
+
+/* Goûter : fruits et animaux 3D */
+.basket { top: 9.6rem; max-width: 66%; gap: .15rem; }
+.basket img.fruit { height: 2.4rem; display: block; }
+.basket.few img.fruit { height: 3.2rem; }
+.basket .lot { display: flex; align-items: center; gap: .4rem; font-size: 2.4rem; font-weight: 700; color: #fff; -webkit-text-stroke: .2rem #6a3d1a; paint-order: stroke fill; }
+.basket .lot img.fruit { height: 4rem; }
+.feed-table { top: 13.4rem; }
+.feed-animal .em { display: flex; align-items: flex-end; gap: .3rem; }
+.feed-animal img.animal { height: 5.4rem; display: block; filter: drop-shadow(0 .3rem .3rem rgba(0,0,0,.25)); }
+.feed-animal .fois { font-size: 2rem; font-weight: 700; color: #fff; -webkit-text-stroke: .2rem #6a3d1a; paint-order: stroke fill; }
+.feed-animal .plate { gap: .1rem; }
+.feed-animal .plate img.fruit { height: 1.6rem; }
+
+/* Glouton 3D */
+.monster-wrap img.monster { width: 100%; display: block; filter: drop-shadow(0 .6rem .5rem rgba(0,0,0,.3)); }
+.monster-wrap.chew img { animation: chew .25s 3; }
+.monster-wrap.sad img { animation: shake .4s; }
+.tile { box-shadow: 0 .45rem 0 #2b7a6f; color: #11695f; }
+
+/* Relier : nuit étoilée */
+.night .star-bg { display: none; }
+.node { font-size: 1.9rem; }
+
+/* Grand tri : caisse et paniers 3D */
+.sort-bg .belt { display: none; }
+.crate { top: 34%; width: 15rem; height: auto; background: none; border: 0; display: block; }
+.crate img { width: 100%; display: block; filter: drop-shadow(0 .5rem .4rem rgba(0,0,0,.3)); }
+.crate span { position: absolute; left: 6%; right: 6%; top: 38%; text-align: center; font-size: 2.4rem; font-weight: 700; color: #5a3517; text-shadow: 0 .1rem 0 rgba(255,255,255,.5); line-height: 1.05; }
+.bins { bottom: 2%; gap: 10%; }
+.bin { width: 15rem; height: auto; background: none !important; box-shadow: none; display: block; }
+.bin::before { display: none; }
+.bin img { width: 100%; display: block; filter: drop-shadow(0 .5rem .4rem rgba(0,0,0,.3)); }
+.bin .lb { position: absolute; left: 0; right: 0; top: 48%; text-align: center; font-size: 1.8rem; font-weight: 700; color: #fff; -webkit-text-stroke: .25rem rgba(0,0,0,.55); paint-order: stroke fill; line-height: 1.05; }
+.bin .cnt { position: absolute; top: 0; right: 8%; bottom: auto; background: #fff; color: var(--ink); border-radius: 1rem; padding: 0 .6rem; font-size: 1.3rem; opacity: 1; }
+.bin .cnt:empty { display: none; }
+
+/* Notion du programme sur les boutons de partie */
+.partie-btn { flex-wrap: wrap; }
+.partie-btn .notion { flex-basis: 100%; font-size: .95rem; color: #6a5a8a; margin: -.2rem 0 0 2.8rem; }
+
+/* Tables de 1 à 13 */
+.tables-card { background: linear-gradient(160deg, #ff9f1c, #e85d04); }
+.tables-card .num { color: #fff; }
+.tables-body { position: relative; z-index: 2; flex: 1; display: flex; flex-direction: column; justify-content: center; gap: .5rem; padding: 0 1.4rem 1rem; }
+.tables-titre { color: #fff; font-size: 1.4rem; text-shadow: 0 .1rem .3rem rgba(0,0,0,.5); }
+.tables-row { display: grid; grid-template-columns: repeat(7, 1fr); gap: .5rem; }
+.table-btn { min-height: 48px; border-radius: 1.1rem; background: var(--creme); color: var(--encre); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: .25rem; box-shadow: 0 .3rem 0 rgba(0,0,0,.3); }
+.table-btn b { font-size: 1.6rem; line-height: 1.1; }
+.table-btn i { font-style: normal; font-size: .95rem; color: var(--or); }
+.table-btn.faite { background: linear-gradient(160deg, #fff6cf, #ffe08a); }
+.table-btn.melange { background: linear-gradient(160deg, #c77dff, #7b2cbf); color: #fff; }
+.table-btn.melange i { color: #ffe08a; }
+.table-btn:active { transform: translateY(.2rem); }
+/* Pirogue posée sur la ligne d'eau, l'enfant assis dedans (le bas du corps est caché par la coque) */
+.boat-wrap { top: calc(31% - 5.6rem); left: 13%; width: 13rem; }
+.boat-wrap .pecheur { left: 37%; top: -30%; width: 24%; height: 80%; background-size: 100% auto; background-position: 50% 0; }
+.boat-wrap { top: calc(33% - 6.6rem); }
+.boat-wrap .pecheur { left: 36%; top: 12%; width: 24%; height: 70%; }
+.boat-wrap .pecheur { top: 3%; }

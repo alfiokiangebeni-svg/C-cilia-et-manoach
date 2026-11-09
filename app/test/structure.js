@@ -4,14 +4,15 @@
 const fs = require('fs'), path = require('path'), vm = require('vm');
 const www = path.resolve(__dirname, '../www');
 const ctx = {}; vm.createContext(ctx);
-vm.runInContext(fs.readFileSync(www + '/js/histoire.js', 'utf8') + ';Object.assign(this,{CHAPITRES,MECANIQUES,PERSONNAGES,PAGES_LIVRE});', ctx);
-const { CHAPITRES, MECANIQUES, PERSONNAGES, PAGES_LIVRE } = ctx;
+vm.runInContext(fs.readFileSync(www + '/js/programme.js', 'utf8') + fs.readFileSync(www + '/js/histoire.js', 'utf8') + ';Object.assign(this,{CHAPITRES,MECANIQUES,PERSONNAGES,PAGES_LIVRE,NIVEAUX,NOTIONS,NOTIONS_PAR_JEU});', ctx);
+const { CHAPITRES, MECANIQUES, PERSONNAGES, PAGES_LIVRE, NIVEAUX, NOTIONS, NOTIONS_PAR_JEU } = ctx;
 const jeux = fs.readFileSync(www + '/js/games.js', 'utf8');
 const existe = id => new RegExp(`GAME_FN\\.${id}\\s*=`).test(jeux) || fs.existsSync(`${www}/js/mecaniques/${id}.js`);
 const erreurs = [], ok = (c, m) => { if (!c) erreurs.push(m); };
 
 ok(CHAPITRES.length === 10, `10 chapitres attendus, ${CHAPITRES.length} trouvés`);
-let stages = 0, parties = 0; const ids = new Set();
+let stages = 0, parties = 0; const ids = new Set(), notionsVues = new Set();
+ok(NIVEAUX.length === 3, '3 niveaux attendus (CE2, CM1, génie)');
 CHAPITRES.forEach((ch, ci) => {
   ok(ch.id === ci + 1, `chapitre ${ci + 1} : id ${ch.id}`);
   ok(ch.titre && ch.titre.fr && ch.titre.en, `chapitre ${ch.id} : titre fr/en`);
@@ -37,11 +38,21 @@ CHAPITRES.forEach((ch, ci) => {
       }
       ok(Array.isArray(pa.niv) && pa.niv.length === 3 && pa.niv.every(v => v >= 0 && v <= 2), `partie ${pa.id} : niv pour les 3 âges (0-2)`);
       ok(pa.titre && pa.titre.fr && pa.titre.en, `partie ${pa.id} : titre fr/en`);
+      // Programme scolaire : notion existante, paramètres pour CE2, CM1, génie, compatible avec le jeu lancé
+      const N = NOTIONS[pa.notion];
+      ok(N, `partie ${pa.id} : notion inconnue ${pa.notion}`);
+      if (N && M) {
+        ok(N.p.length === 3 && N.titre.fr && N.ref.fr, `notion ${pa.notion} : 3 niveaux, titre et référence au programme`);
+        const jeu = existe(pa.meca) ? pa.meca : M.base, compat = NOTIONS_PAR_JEU[jeu];
+        ok(!compat || compat.includes(pa.notion), `partie ${pa.id} : notion ${pa.notion} incompatible avec le jeu ${jeu}`);
+        notionsVues.add(pa.notion);
+      }
     });
   });
 });
 ok(stages === 30, `30 stages attendus, ${stages}`);
 ok(parties === 70, `70 parties attendues, ${parties}`);
+Object.keys(NOTIONS).forEach(n => ok(notionsVues.has(n), `notion ${n} jamais utilisée dans l'histoire`));
 // Les 12 pages du livre (+ dédicace) sont toutes débloquables
 const debloq = new Set(CHAPITRES.flatMap(c => c.pages).map(String));
 PAGES_LIVRE.forEach(p => ok(debloq.has(String(p.id)), `page du livre ${p.id} jamais débloquée`));
@@ -55,9 +66,10 @@ A.persos.forEach(e => {
   else { ok(PERSONNAGES[e.perso], `${e.fichier} : ni image ni silhouette`); silhouettes++; }
 });
 Object.entries(PERSONNAGES).forEach(([id, P]) => P.poses.forEach(pose => ok(A.persos.some(e => e.perso === id && e.pose === pose), `assets.json : pose manquante ${id}/${pose}`)));
+(A.jeux || []).forEach(e => { const f = `${www}/${e.fichier}`; ok(fs.existsSync(f), `${e.fichier} manquant`); if (fs.existsSync(f)) ok(fs.statSync(f).size <= (e.fichier.includes('decors') ? 250 : 80) * 1024, `${e.fichier} trop lourd`); });
 A.scenes.forEach(e => { if (fs.existsSync(`${www}/${e.fichier}`)) ok(fs.statSync(`${www}/${e.fichier}`).size <= 250 * 1024, `${e.fichier} > 250 Ko`); });
 
-console.log(`Structure : ${CHAPITRES.length} chapitres, ${stages} stages, ${parties} parties`);
-console.log(`Images : ${presentes} sprites présents, ${silhouettes} remplacés par une silhouette, ${A.scenes.length} scènes attendues`);
+console.log(`Structure : ${CHAPITRES.length} chapitres, ${stages} stages, ${parties} parties, ${notionsVues.size} notions du programme, ${NIVEAUX.length} niveaux`);
+console.log(`Images : ${(A.jeux || []).length} images de jeu 3D, ${presentes} sprites présents, ${silhouettes} remplacés par une silhouette, ${A.scenes.length} scènes attendues`);
 if (erreurs.length) { erreurs.forEach(e => console.log('FAIL', e)); process.exit(1); }
 console.log('STRUCTURE OK');
