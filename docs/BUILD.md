@@ -64,3 +64,7 @@ Outils utilisés (Ubuntu) : `apt install android-sdk aapt zipalign apksigner dal
 ## V2.1 — APK de test
 
 `releases/CeciliaManoach-V2.1-test.apk` (≈ 3 Mo, versionCode 3) : programme CE2 / CM1 / génie, tables 1 → 13, jeux en 3D. Même clé de test que la 2.0 : il s'installe **par-dessus** la 2.0 en gardant les profils.
+
+## V2.2 — APK de test
+
+`releases/CeciliaManoach-V2.2-test.apk` (≈ 3 Mo, versionCode 4) : matières complètes (français, sciences, histoire-géographie, EMC, anglais), tout débloqué. Même clé de test : s'installe par-dessus la 2.1 en gardant les profils.
