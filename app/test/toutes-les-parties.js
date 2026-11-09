@@ -80,7 +80,7 @@ async function age(b, age, ids, shots) {
   const res = await Promise.all(ages.map(a => age(b, a, liste, shots)));
   const toutes = res.flatMap(r => r.lignes), errs = res.flatMap(r => r.errs);
   res.forEach((r, k) => console.log(`âge ${ages[k]} : ${r.fin.total} lucioles, ${r.fin.pages} pages du livre`));
-  console.log(`Manches réussies : ${toutes.filter(l => / OK /.test(l)).length} / ${toutes.length}`);
+  console.log(`Manches réussies : ${toutes.filter(l => / OK( |$)/.test(l)).length} / ${toutes.length}`);
   console.log('ERR', JSON.stringify(errs));
   await b.close();
   if (toutes.some(l => / FAIL /.test(l)) || errs.length) process.exit(1);
