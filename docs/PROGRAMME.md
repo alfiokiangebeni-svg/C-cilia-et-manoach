@@ -128,3 +128,84 @@ Depuis la carte, la carte « Tables de 1 à 13 » ouvre 28 entraînements libres
 Chaque table donne 1 à 3 lucioles, gardées dans le profil (champ `tables` de la sauvegarde), sans toucher à la progression de l’histoire.
 
 > Le programme français demande la maîtrise des tables jusqu’à 9 (fin CE2, consolidées en CM1). Les tables 10 à 13 sont un entraînement en plus, demandé par l’auteur.
+
+## Les autres matières (écran « Matières »)
+
+Depuis la carte, la case **Matières** ouvre 9 matières et 53 notions, chacune jouable aux trois niveaux (3e primaire, 4e primaire, génie). Chaque notion se joue avec l’avion, la pêche, les étoiles à relier ou le grand tri, et garde ses étoiles (champ `matieres` de la sauvegarde).
+
+Les contenus (listes de mots, phrases, questions) sont dans `app/www/js/contenus.js` : chaque élément porte son niveau (0 = CE2, 1 = CM1, 2 = génie). Un enseignant peut les relire et les compléter sans toucher au code.
+
+### ✏️ Grammaire
+
+| Notion | Programme | Exemple 3e primaire | Exemple 4e primaire | Exemple génie |
+|---|---|---|---|---|
+| Nature des mots | Identifier les classes de mots : nom, verbe, adjectif, déterminant, pronom (CE2) ; adverbe, préposition (CM1) ; conjonction | « magnifique » est un… → adjectif | « attrapera » est un… → verbe | « elle » est un… → pronom |
+| Pluriel et féminin | Accord en genre et en nombre : pluriels en -s, -x, -aux ; féminins particuliers | Au pluriel : un cheveu → ? → des cheveux | Au pluriel : une étoile → ? → des étoiles | Au pluriel : un travail → ? → des travaux |
+| Sujet, verbe, compléments | Identifier le verbe et le sujet (CE2), le complément d’objet (CM1), les compléments circonstanciels | « Manoach joue du tambour. » Quel est le sujet ? → Manoach | « Le héron transporte l’étoile. » Quel est le COD ? → l’étoile | « Au bord du fleuve, Thérèse se repose. » Quel est le complément de lieu ? → Au bord du fleuve |
+| Types et formes de phrases | Phrases déclaratives, interrogatives, exclamatives, impératives ; forme affirmative et négative | « Grimpez sur mon dos. » Type de phrase ? → impérative | « Ne pleure pas. » Type de phrase ? → impérative | « Les enfants n’ont pas peur. » Forme de la phrase ? → négative |
+
+### ⏰ Conjugaison
+
+| Notion | Programme | Exemple 3e primaire | Exemple 4e primaire | Exemple génie |
+|---|---|---|---|---|
+| Le présent | Présent des verbes du 1er groupe, être, avoir, aller, faire, dire, venir, pouvoir, voir, vouloir, prendre ; 2e groupe (CM1) | Présent : elle (compter) → ? → elle compte | Présent : vous (briller) → ? → vous brillez | Présent : elles (être) → ? → elles sont |
+| Le futur | Futur simple des verbes étudiés | Futur : vous (danser) → ? → vous danserez | Futur : ils (finir) → ? → ils finiront | Futur : ils (trouver) → ? → ils trouveront |
+| L’imparfait | Imparfait des verbes étudiés | Imparfait : il (venir) → ? → il venait | Imparfait : nous (faire) → ? → nous faisions | Imparfait : nous (dire) → ? → nous disions |
+| Le passé composé | Passé composé avec être et avoir | Passé composé : elle (avoir) → ? → elle a eu | Passé composé : il (faire) → ? → il a fait | Passé composé : il (briller) → ? → il a brillé |
+| Le passé simple | Passé simple aux 3es personnes (CM1) ; toutes les personnes (génie) | Passé simple : ils (danser) → ? → ils dansèrent | Passé simple : elle (grimper) → ? → elle grimpa | Passé simple : vous (chercher) → ? → vous cherchâtes |
+| L’impératif | Impératif présent (CM1) | Impératif présent : (nous) grimper → ? → grimpons | Impératif présent : (tu) réussir → ? → réussis | Impératif présent : (tu) obéir → ? → obéis |
+| Reconnaître le temps | Identifier le temps d’un verbe conjugué | « j’ai compté » : quel temps ? → passé composé | « il remplit » : quel temps ? → passé simple | « nous écouterions » : quel temps ? → conditionnel présent |
+
+### 🔤 Orthographe
+
+| Notion | Programme | Exemple 3e primaire | Exemple 4e primaire | Exemple génie |
+|---|---|---|---|---|
+| Homophones | a/à, et/est, on/ont, son/sont (CE2) ; ces/ses, ce/se, ou/où (CM1) ; c’est/s’est, leur/leurs, peu/peut/peux… | Ce soir, ___ compte les étoiles. → on | La maison ___ ils habitent est au bord du fleuve. → où | Les enfants appellent ___ amis. → leurs |
+| Accords dans le groupe nominal | Accord de l’adjectif avec le nom (genre et nombre), féminins irréguliers | Accorde : des étoiles (brillant) → brillantes | Accorde : des mangues (sucré) → sucrées | Accorde : une fête (public) → publique |
+| Écrire les mots | Orthographe lexicale : mots invariables et mots fréquents, m devant m, b, p, lettres muettes | Lequel est bien écrit : pompié, ponpier, pompier ? → pompier | Lequel est bien écrit : énemi, ennemi, ennemit ? → ennemi | Lequel est bien écrit : immence, imense, immense ? → immense |
+
+### 📖 Vocabulaire
+
+| Notion | Programme | Exemple 3e primaire | Exemple 4e primaire | Exemple génie |
+|---|---|---|---|---|
+| Contraires et synonymes | Contraires (CE2), synonymes et préfixes (CM1) | Contraire de « allumer » ? → éteindre | Synonyme de « beau » ? → joli | Synonyme de « peur » ? → frayeur |
+| Ordre alphabétique | Utiliser le dictionnaire : ordre alphabétique (1re, 2e, 3e lettre…) | Lequel vient en premier dans le dictionnaire : étoile, lune, nuit, rivière ? → étoile | Lequel vient en premier dans le dictionnaire : maison, miel, mangue, moustique ? → maison | Lequel vient en premier dans le dictionnaire : lumière, lumignon, lumineux, lumbago ? → lumbago |
+| Les mots lingala du livre | Ouverture aux langues : le lexique du livre | « Mbote » (lingala) veut dire… → Bonjour | « Monzoto » (lingala) veut dire… → Étoile | « Ebale » (lingala) veut dire… → Le fleuve |
+
+### 🔬 Sciences
+
+| Notion | Programme | Exemple 3e primaire | Exemple 4e primaire | Exemple génie |
+|---|---|---|---|---|
+| Vivant ou non vivant | Le vivant : distinguer le vivant du non-vivant | Montre : vivant ou non vivant ? → non vivant | Mousse : vivant ou non vivant ? → vivant | Fossile : vivant ou non vivant ? → non vivant |
+| Les animaux | Classer les animaux, cycles de vie (métamorphoses) | Les mammifères nourrissent leurs petits avec… → du lait | Le têtard devient… → une grenouille | Un animal sans squelette intérieur est… → un invertébré |
+| Se nourrir | Régimes alimentaires des animaux, groupes d’aliments, chaînes alimentaires | La girafe mange des feuilles : elle est… → herbivore | L’être humain mange de tout : il est… → omnivore | Les végétaux qui fabriquent leur matière grâce à la lumière sont des… → producteurs |
+| Le corps humain | Organes, squelette, muscles, sens, santé | Quel organe commande le corps ? → le cerveau | Quel organe commande le corps ? → le cerveau | Le cœur est… → un muscle |
+| Les plantes | Besoins des végétaux, germination, de la fleur au fruit | La partie qui porte les feuilles est… → la tige | Les feuilles ont besoin de… pour fabriquer la matière de la plante → lumière | Les feuilles ont besoin de… pour fabriquer la matière de la plante → lumière |
+| L’eau et la matière | États de l’eau (solide, liquide, gaz) et changements d’état | La buée sur une vitre froide, c’est… → la condensation | La buée sur une vitre froide, c’est… → la condensation | Les nuages se forment par… → condensation |
+| La Terre, le Soleil, la Lune | La Terre dans le système solaire, jour et nuit, saisons | La Lune brille car elle renvoie la lumière… → du Soleil | Le jour et la nuit viennent de… → la rotation de la Terre sur elle-même | Combien de temps met la Terre pour faire le tour du Soleil ? → 365 jours |
+| Électricité et énergie | Circuits électriques, sécurité, énergies renouvelables | Une pile fournit… → de l’électricité | Pour qu’une ampoule s’allume, le circuit doit être… → fermé | Une pile fournit… → de l’électricité |
+| Conducteur ou isolant | Matériaux conducteurs et isolants | Fil de cuivre : conducteur ou isolant ? → conducteur | Verre : conducteur ou isolant ? → isolant | Ballon en caoutchouc : conducteur ou isolant ? → isolant |
+
+### 🗺️ Histoire et géographie
+
+| Notion | Programme | Exemple 3e primaire | Exemple 4e primaire | Exemple génie |
+|---|---|---|---|---|
+| Le temps qui passe | Calendrier, siècles, chiffres romains, repères chronologiques | En chiffres romains, XII = ? → 12 | En chiffres romains, LIV = ? → 54 | Combien de semaines environ dans une année ? → 52 |
+| Repères d’histoire | CM1 : la Gaule et les Romains, le temps des rois, la Révolution et l’Empire | Le roi des Francs baptisé vers 496 est… → Clovis | Christophe Colomb arrive en Amérique en… → 1492 | Napoléon est vaincu à Waterloo en… → 1815 |
+| Le monde | Se repérer : points cardinaux, continents, océans, fleuves, capitales | La capitale de la République démocratique du Congo est… → Kinshasa | Sur une carte, le nord est en général… → en haut | La capitale du Sénégal est… → Dakar |
+
+### 🤝 Vivre ensemble
+
+| Notion | Programme | Exemple 3e primaire | Exemple 4e primaire | Exemple génie |
+|---|---|---|---|---|
+| Vivre ensemble | Enseignement moral et civique : respect, règles, symboles de la République, droits de l’enfant | Un enfant est embêté tous les jours dans la cour. Je… → préviens un adulte | Qui dirige la commune ? → le maire | En France, les lois sont votées par… → le Parlement |
+
+### 🇬🇧 Anglais
+
+| Notion | Programme | Exemple 3e primaire | Exemple 4e primaire | Exemple génie |
+|---|---|---|---|---|
+| Mots anglais | Langues vivantes : couleurs, nombres, animaux, famille, politesse, jours, corps, nourriture | « rouge » en anglais ? → red | « oiseau » en anglais ? → bird | « les enfants » en anglais ? → the children |
+
+## Tout est débloqué
+
+À la demande de l’auteur, toutes les fonctions sont ouvertes dès le départ : les 10 chapitres, les 70 parties, les pages du livre, les coloriages, les tables et les matières. Pour revenir au déblocage progressif (une partie s’ouvre quand la précédente a une luciole), mettre `TOUT_OUVERT = false` dans `app.js`.

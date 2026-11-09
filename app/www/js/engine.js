@@ -38,8 +38,8 @@ const SORT_RULES = [
 ];
 
 // Toutes les réponses générées sont mémorisées (texte → réponse) : sert aux robots de test.
-const Q_REPONSES = new Map();
-function retenir(q) { if (Q_REPONSES.size > 3000) Q_REPONSES.clear(); Q_REPONSES.set(q.text, q.ans); if (q.q) Q_REPONSES.set(q.q, q.ans); return q; }
+const Q_REPONSES = new Map(), Q_OBJ = new Map();
+function retenir(q) { if (Q_REPONSES.size > 3000) { Q_REPONSES.clear(); Q_OBJ.clear(); } Q_REPONSES.set(q.text, q.ans); Q_OBJ.set(q.text, q); if (q.q) Q_REPONSES.set(q.q, q.ans); return q; }
 function genQ(sk) {
   if (sk.notion) return retenir(GEN[sk.notion](sk));
   return retenir(genCalc(sk));
@@ -253,7 +253,7 @@ const Store = {
     this.data.current = v1.current || null;
     this.save(); return true;
   },
-  complet(p) { p.lucioles = p.lucioles || {}; p.livre = p.livre || {}; p.coloriages = p.coloriages || {}; p.tables = p.tables || {}; if (!(p.age >= 0 && p.age <= 2)) p.age = 0; return p; },
+  complet(p) { p.lucioles = p.lucioles || {}; p.livre = p.livre || {}; p.coloriages = p.coloriages || {}; p.tables = p.tables || {}; p.matieres = p.matieres || {}; if (!(p.age >= 0 && p.age <= 2)) p.age = 0; return p; },
   save() { try { localStorage.setItem(this.key, JSON.stringify(this.data)); } catch (e) {} },
   profile() { return this.data.profiles.find(p => p.id === this.data.current) || null; },
   lucioles(id) { const p = this.profile(); return (p && p.lucioles[id]) || 0; },

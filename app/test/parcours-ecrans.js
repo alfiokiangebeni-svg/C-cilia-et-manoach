@@ -38,6 +38,10 @@ const out = path.resolve(process.argv[4] || __dirname + '/out'); fs.mkdirSync(ou
   await pg.evaluate(() => Play.table('×', 13)); await pg.waitForTimeout(1300); await S('15_table_x13');
   await pg.evaluate(() => Play.table('÷', 12)); await pg.waitForTimeout(1300); await S('16_table_div12');
   await pg.evaluate(() => { Play.stop(); Store.profile().age = 2; Play.start('7.3.3'); }); await pg.waitForTimeout(1300); await S('17_genie_probleme');
+  await pg.evaluate(() => { Play.stop(); Store.profile().age = 0; show('matieres'); }); await pg.waitForTimeout(500); await S('18_matieres');
+  await pg.evaluate(() => { state.sujet = 'conjugaison'; show('matiere'); }); await pg.waitForTimeout(500); await S('19_conjugaison');
+  await pg.evaluate(() => Play.matiere('homophones')); await pg.waitForTimeout(1300); await S('20_homophones');
+  await pg.evaluate(() => Play.matiere('vivant')); await pg.waitForTimeout(1300); await S('21_vivant');
   await pg.evaluate(() => { Play.stop(); show('home'); });
   console.log('ERR', JSON.stringify(errs));
   await b.close();

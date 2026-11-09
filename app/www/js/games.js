@@ -11,6 +11,10 @@ const IMG = (src, cls = '') => `<img class="${cls}" src="img/${src}.webp" alt=""
 const avImg = av => `img/avatars/${(av && av.id) || 'amani'}.webp`;
 const qTxt = q => q.q || `${q.text} = ?`;
 const egal = (a, b) => Math.abs(a - b) < 1e-6;
+// Réponses en nombres ou en mots (français, sciences…) : comparaison et propositions communes à tous les jeux
+const same = (a, b) => (typeof b === 'number' ? egal(+a, b) : String(a) === String(b));
+const choixDe = (q, n, sk) => (q.choix ? shuffle([q.ans, ...shuffle(q.choix).slice(0, n - 1)]) : choices(q.ans, n, sk));
+const motCls = v => (typeof v === 'string' ? (v.length > 12 ? ' mot long' : v.length > 4 ? ' mot' : '') : '');
 const decor = (A, nom, cls) => { A.className = 'game-area decor ' + cls; A.style.backgroundImage = `url(img/decors/${nom}.webp)`; };
 // Les questions longues (problèmes) laissent plus de temps
 const lente = sk => sk && ['probleme', 'proportion', 'melange'].includes(sk.notion);
@@ -49,10 +53,10 @@ GAME_FN.race = G => {
   function ask() {
     G.newQ(); busy = false;
     const q = qs[i]; G.setQuestion(qTxt(q));
-    const opts = choices(q.ans, 3, sk);
+    const opts = choixDe(q, 3, sk);
     clouds.forEach(c => c.remove()); clouds = [];
     opts.forEach((v, k) => {
-      const c = h('button', 'lane-cloud', `<span>${fmt(v)}</span>`); c.dataset.v = v;
+      const c = h('button', 'lane-cloud' + motCls(v), `<span>${fmt(v)}</span>`); c.dataset.v = v;
       c.style.top = `calc(${lanes[k]}% - 2.6rem)`; c.style.right = '-30%'; c.style.transition = 'right .5s ease ' + (k * .08) + 's, transform .2s';
       c.onclick = () => pickCloud(c, v, k, q);
       A.append(c); clouds.push(c);
@@ -63,7 +67,7 @@ GAME_FN.race = G => {
     if (busy) return;
     pw.style.top = `calc(${lanes[k]}% - 4rem)`;
     const p = centerOf(c, A);
-    if (egal(v, q.ans)) {
+    if (same(v, q.ans)) {
       busy = true; c.classList.add('good'); G.correct(p.ax, p.ay); Sound.whoosh();
       A.classList.add('boost'); pw.style.left = '50%';
       done++; setTok(); G.progress(done / n);
@@ -72,7 +76,7 @@ GAME_FN.race = G => {
       c.classList.add('bad', 'shake');
       const e = G.wrong(p.ax, p.ay);
       G.later(() => { c.classList.remove('shake'); pw.style.top = `calc(${lanes[1]}% - 4rem)`; }, 450);
-      if (e >= 2) clouds.find(x => egal(+x.dataset.v, q.ans)).classList.add('hint-glow');
+      if (e >= 2) clouds.find(x => same(x.dataset.v, q.ans)).classList.add('hint-glow');
     }
   }
   ask();
@@ -95,10 +99,10 @@ GAME_FN.fish = G => {
     G.newQ(); busy = false;
     const q = qs[i]; G.setQuestion(qTxt(q));
     fish.forEach(f => f.el.remove()); fish = [];
-    const opts = choices(q.ans, [3, 4, 5][G.age], sk);
+    const opts = choixDe(q, [3, 4, 5][G.age], sk);
     const W = A.clientWidth, H = A.clientHeight;
     opts.forEach((v, k) => {
-      const el = h('button', 'fish', `${IMG('jeux/poisson-' + COLS[(k + i) % COLS.length], 'corps')}<span class="num">${fmt(v)}</span>`); el.dataset.v = v;
+      const el = h('button', 'fish', `${IMG('jeux/poisson-' + COLS[(k + i) % COLS.length], 'corps')}<span class="num${motCls(v)}">${fmt(v)}</span>`); el.dataset.v = v;
       const dir = Math.random() < .5 ? 1 : -1;
       const f = { el, v, x: rnd(0, W * .7), y: H * (.4 + k * (.46 / opts.length)), dir, sp: (0.6 + Math.random() * .6) * [0.8, 1, 1.3][G.age], ph: Math.random() * 6, stop: false };
       if (dir < 0) el.classList.add('flip');
@@ -120,7 +124,7 @@ GAME_FN.fish = G => {
   function tapFish(f, q) {
     if (busy || f.stop) return;
     const p = centerOf(f.el, A);
-    if (egal(f.v, q.ans)) {
+    if (same(f.v, q.ans)) {
       busy = true; f.stop = true; G.correct(p.ax, p.ay);
       const b = centerOf(boat, A); const tx = b.x + boat.offsetWidth * .2, ty = b.y - boat.offsetHeight * .45;
       svgL.innerHTML = `<line x1="${tx}" y1="${ty}" x2="${p.x}" y2="${p.y}" style="stroke:#333;stroke-width:3;filter:none;animation-duration:.35s"/>`;
@@ -132,7 +136,7 @@ GAME_FN.fish = G => {
     } else {
       f.el.classList.add('shake'); f.sp *= 2.2; G.later(() => { f.el.classList.remove('shake'); f.sp /= 2.2; }, 900);
       const e = G.wrong(p.ax, p.ay);
-      if (e >= 2) { const g = fish.find(x => egal(x.v, q.ans)); g.el.classList.add('hint-glow'); g.sp = .25; }
+      if (e >= 2) { const g = fish.find(x => same(x.v, q.ans)); g.el.classList.add('hint-glow'); g.sp = .25; }
     }
   }
   ask();
@@ -294,19 +298,21 @@ GAME_FN.link = G => {
 };
 
 // ======================= 6. Le grand tri : deux paniers =======================
+// Catégorie d'une question : règle sur la réponse (nombres) ou catégorie donnée par la question (mots)
+const catQ = (rule, q) => (rule.type === 'cat' ? q.cat : catTri(rule, q.ans));
 const catTri = (rule, v) => (rule.type === 'lt' ? (v < rule.n ? 0 : 1) : rule.type === 'mult' ? (Math.round(v) % rule.k === 0 ? 0 : 1) : (Math.round(v) % 2 === 0 ? 0 : 1));
 GAME_FN.sort = G => {
   const A = G.area; decor(A, 'tri', 'sort-bg');
   const rule = G.tri, sk = G.sk, n = NQ(G.age);
   const crate = h('div', 'crate', `${IMG('jeux/caisse')}<span></span>`), bins = h('div', 'bins');
   A.append(crate, bins);
-  const cat = v => catTri(rule, v);
-  const labels = rule.type === 'lt' ? [`< ${fmt(rule.n)}`, `≥ ${fmt(rule.n)}`] : rule.type === 'mult' ? [`${t('multOf')} ${rule.k}`, `${t('notMultOf')} ${rule.k}`] : [t('even'), t('odd')];
+  const cat = q => catQ(rule, q);
+  const labels = rule.type === 'cat' ? rule.labels.map(tx) : rule.type === 'lt' ? [`< ${fmt(rule.n)}`, `≥ ${fmt(rule.n)}`] : rule.type === 'mult' ? [`${t('multOf')} ${rule.k}`, `${t('notMultOf')} ${rule.k}`] : [t('even'), t('odd')];
   const binEls = labels.map((lb, k) => { const b = h('button', 'bin', `${IMG(k ? 'jeux/panier-rouge' : 'jeux/panier-bleu')}<span class="lb">${lb}</span><span class="cnt"></span>`); b.onclick = () => drop(k, b); bins.append(b); return b; });
   // Série équilibrée entre les deux paniers
   const pool = genSet(sk, 80), want = shuffle(Array.from({ length: n }, (_, k) => k % 2));
   const qs = []; const used = new Set();
-  want.forEach(c => { const q = pool.find(x => cat(x.ans) === c && !used.has(x.text)) || pool.find(x => !used.has(x.text)); used.add(q.text); qs.push(q); });
+  want.forEach(c => { const q = pool.find(x => cat(x) === c && !used.has(x.text)) || pool.find(x => !used.has(x.text)); used.add(q.text); qs.push(q); });
   let i = 0, busy = false; const counts = [0, 0];
   const txt = crate.querySelector('span');
   G.setQuestion('');
@@ -319,16 +325,16 @@ GAME_FN.sort = G => {
   function drop(k, b) {
     if (busy) return;
     const q = qs[i], p = centerOf(b, A);
-    if (cat(q.ans) === k) {
+    if (cat(q) === k) {
       busy = true;
       const c = centerOf(crate, A);
       crate.style.transform = `translate(calc(-50% + ${p.x - c.x}px), ${p.y - c.y}px) scale(.35)`; crate.style.opacity = .2;
-      G.correct(p.ax, p.ay); if (q.text !== fmt(q.ans)) floatText(p.ax, p.ay - 60, `${q.text} = ${fmt(q.ans)}`);
+      G.correct(p.ax, p.ay); if (rule.type !== 'cat' && q.text !== fmt(q.ans)) floatText(p.ax, p.ay - 60, `${q.text} = ${fmt(q.ans)}`);
       counts[k]++; b.querySelector('.cnt').textContent = counts[k];
       G.later(() => { G.progress((i + 1) / n); i++; if (i >= n) G.done(); else ask(); }, 900);
     } else {
       crate.classList.add('shake'); G.later(() => crate.classList.remove('shake'), 400);
-      if (G.wrong(p.ax, p.ay) >= 2) { binEls[cat(q.ans)].classList.add('hint-glow'); G.later(() => binEls.forEach(x => x.classList.remove('hint-glow')), 2500); if (q.text !== fmt(q.ans)) txt.textContent = `${q.text} = ${fmt(q.ans)}`; }
+      if (G.wrong(p.ax, p.ay) >= 2) { binEls[cat(q)].classList.add('hint-glow'); G.later(() => binEls.forEach(x => x.classList.remove('hint-glow')), 2500); if (rule.type !== 'cat' && q.text !== fmt(q.ans)) txt.textContent = `${q.text} = ${fmt(q.ans)}`; }
     }
   }
   ask();

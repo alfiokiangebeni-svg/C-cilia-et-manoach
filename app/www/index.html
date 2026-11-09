@@ -123,6 +123,26 @@
   </div>
 </section>
 
+<!-- Matières : maths, français, sciences, histoire-géographie, EMC, anglais -->
+<section id="matieres" class="screen bg-nuit">
+  <div class="topbar">
+    <button class="round" data-back>⬅</button>
+    <div class="title">📚 <span data-t="subjects"></span></div>
+    <div style="width:3.6rem"></div>
+  </div>
+  <div class="sujets" id="sujet-grid"></div>
+</section>
+
+<!-- Une matière : ses notions du programme -->
+<section id="matiere" class="screen bg-nuit">
+  <div class="topbar">
+    <button class="round" data-back>⬅</button>
+    <div class="title" id="matiere-title"></div>
+    <div class="chip">⭐ <span id="matiere-stars">0</span></div>
+  </div>
+  <div class="notions" id="notion-grid"></div>
+</section>
+
 <!-- Jeu -->
 <section id="play" class="screen">
   <div class="game-area" id="area"></div>
@@ -187,9 +207,11 @@
 <script src="js/i18n.js"></script>
 <script src="js/programme.js"></script>
 <script src="js/histoire.js"></script>
+<script src="js/contenus.js"></script>
 <script src="js/art.js"></script>
 <script src="js/fx.js"></script>
 <script src="js/engine.js"></script>
+<script src="js/matieres.js"></script>
 <script src="js/assets.js"></script>
 <script src="js/scenes.js"></script>
 <script src="js/games.js"></script>

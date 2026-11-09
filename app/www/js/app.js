@@ -14,8 +14,10 @@ CHAPITRES.forEach(ch => ch.stages.forEach(st => st.parties.forEach(pa => PARTIES
 const partie = id => PARTIES.find(p => p.id === id);
 const chapitre = id => CHAPITRES.find(c => c.id === id);
 const stageDe = id => { for (const c of CHAPITRES) { const s = c.stages.find(x => x.id === id); if (s) return s; } return null; };
-// Une partie s'ouvre quand la précédente a au moins une luciole
-const ouverte = id => { const k = PARTIES.findIndex(p => p.id === id); return k <= 0 || Store.lucioles(PARTIES[k - 1].id) > 0; };
+// Toutes les fonctions sont débloquées (choix de l'auteur). Mettre false pour revenir au déblocage progressif :
+// une partie s'ouvre alors quand la précédente a au moins une luciole.
+const TOUT_OUVERT = true;
+const ouverte = id => TOUT_OUVERT || (() => { const k = PARTIES.findIndex(p => p.id === id); return k <= 0 || Store.lucioles(PARTIES[k - 1].id) > 0; })();
 const lucStage = st => st.parties.reduce((a, p) => a + Store.lucioles(p.id), 0);
 const lucChap = ch => ch.stages.reduce((a, s) => a + lucStage(s), 0);
 const nbParties = ch => ch.stages.reduce((a, s) => a + s.parties.length, 0);
@@ -116,8 +118,35 @@ const RENDER = {
     const nb = Object.keys(p.livre).length;
     const z = h('button', 'chap-card livre-card', `<div class="num">📖</div><div class="nm">${t('myBook')}</div><div class="stars">${nb}/${PAGES_LIVRE.length}</div>`);
     z.onclick = () => { Sound.tap(); show('livre'); }; g.append(z);
+    const mt = h('button', 'chap-card matieres-card', `<div class="num">📚</div><div class="nm">${t('subjects')}</div><div class="stars">${SUJETS.length}</div>`);
+    mt.onclick = () => { Sound.tap(); show('matieres'); }; g.append(mt);
     const tb = h('button', 'chap-card tables-card', `<div class="num">×÷</div><div class="nm">${t('tables')}</div><div class="stars">1 → 13</div>`);
     tb.onclick = () => { Sound.tap(); show('tables'); }; g.append(tb);
+  },
+  // Matières : maths, grammaire, conjugaison, orthographe, vocabulaire, sciences, histoire-géographie, EMC, anglais
+  matieres() {
+    const p = Store.profile(); if (!p) return show('profiles');
+    const g = $('#sujet-grid'); g.innerHTML = '';
+    SUJETS.forEach(S => {
+      const st = S.notions.reduce((a, n) => a + (p.matieres[n] || 0), 0);
+      const c = h('button', 'sujet-card', `<div class="ic">${S.icon}</div><div class="nm">${esc(tx(S.titre))}</div><div class="stars">⭐ ${st}/${S.notions.length * 3}</div>`);
+      c.style.background = S.color; c.dataset.sujet = S.id;
+      c.onclick = () => { Sound.tap(); state.sujet = S.id; show('matiere'); };
+      g.append(c);
+    });
+  },
+  matiere() {
+    const p = Store.profile(), S = SUJETS.find(x => x.id === state.sujet);
+    $('#matiere-title').textContent = `${S.icon} ${tx(S.titre)}`;
+    $('#matiere-stars').textContent = `${S.notions.reduce((a, n) => a + (p.matieres[n] || 0), 0)} / ${S.notions.length * 3}`;
+    const g = $('#notion-grid'); g.innerHTML = '';
+    S.notions.forEach(id => {
+      const N = NOTIONS[id], st = p.matieres[id] || 0;
+      const b = h('button', 'notion-btn' + (st ? ' faite' : ''), `<b>${esc(tx(N.titre))}</b><i>${starStr(st)}</i>`);
+      b.title = tx(N.ref); b.dataset.notion = id;
+      b.onclick = () => { Sound.init(); Sound.tap(); Play.matiere(id); };
+      g.append(b);
+    });
   },
   // Entraînement : tables de multiplication et de division de 1 à 13
   tables() {
@@ -171,7 +200,7 @@ const RENDER = {
   livre() {
     const p = Store.profile(), g = $('#livre-grid'); g.innerHTML = '';
     PAGES_LIVRE.forEach(pg => {
-      const open = p.livre[pg.id];
+      const open = TOUT_OUVERT || p.livre[pg.id];
       const c = h('button', 'livre-cell' + (open ? '' : ' locked'), open ? (pg.id === 'dedicace' ? '💛' : pg.id) : '🔒');
       c.onclick = () => { if (!open) { Sound.bad(); return; } Sound.tap(); Modal.open(Scenes.page(pg) + `<button class="btn blue" id="pg-close">${t('close')}</button>`); Assets.fond($('#livre-ill'), 'page-' + pg.id); $('#pg-close').onclick = Modal.close; };
       g.append(c);
@@ -179,7 +208,7 @@ const RENDER = {
     $('#livre-count').textContent = `${Object.keys(p.livre).length} / ${PAGES_LIVRE.length}`;
     const fp = $('#free-pages'); fp.innerHTML = '';
     COLOR_PAGES.forEach(pg => {
-      const open = p.coloriages[pg.id];
+      const open = TOUT_OUVERT || p.coloriages[pg.id];
       const b = h('button', 'btn ' + (open ? 'pink' : ''), `🎨 ${open ? pg.emoji : '🔒'}`);
       if (!open) b.style.setProperty('--c', '#adb5bd');
       b.onclick = () => { if (!open) { Sound.bad(); return; } Sound.tap(); Free.open(pg); };
@@ -203,6 +232,18 @@ const Play = {
       glouton: (N.glouton || [])[niv] || MONSTER_MODES[Math.min(niv, 2)][pa.niv[niv]],
       tri: (N.tri || [])[niv] || { type: 'parity' },
       cfg: M.ages[niv], partie: pa, chip: `${M.icon} ${tx(N.titre)}`,
+    });
+  },
+  // Entraînement d'une notion d'une matière (hors histoire)
+  matiere(id) {
+    const p = Store.profile(), niv = p.age, N = NOTIONS[id], S = SUJETS.find(x => x.notions.includes(id));
+    const MATHS_JEU = { comparer: 'sort', multiples: 'sort', partage: 'feed', complements: 'monster' };
+    state.mode = 'matiere'; state.matiere = id; state.sujet = S.id;
+    this.lancer({
+      game: N.jeux ? pick(N.jeux) : MATHS_JEU[id] || pick(['race', 'fish']), lvl: 0,
+      sk: Object.assign({ notion: id, niv }, N.p[niv]),
+      glouton: (N.glouton || [])[niv] || MONSTER_MODES[Math.min(niv, 2)][0], tri: (N.tri || [])[niv] || { type: 'parity' },
+      cfg: {}, partie: null, chip: `${S.icon} ${tx(N.titre)}`,
     });
   },
   // Entraînement d'une table (n = 1 à 13, ou 0 pour toutes les tables mélangées)
@@ -258,6 +299,10 @@ const Play = {
     const p = Store.profile(), e = this.errors;
     // Enfant génie : plus exigeant (3 lucioles seulement sans aucune erreur)
     const n = p.age === 2 ? (e === 0 ? 3 : e <= 2 ? 2 : 1) : (e <= 1 ? 3 : e <= 4 ? 2 : 1);
+    if (state.mode === 'matiere') {
+      p.matieres[state.matiere] = Math.max(p.matieres[state.matiere] || 0, n); Store.save();
+      Celebrate.show(n, [], extra, null); return;
+    }
     if (state.mode === 'tables') {
       const k = state.table.op + (state.table.n || 'tout');
       p.tables[k] = Math.max(p.tables[k] || 0, n); Store.save();
@@ -294,16 +339,18 @@ const Celebrate = {
   hide() { $('#celebrate').classList.remove('on'); Fireworks.stop(); },
   suivante() {
     if (state.mode === 'tables') return state.table.n && state.table.n < 13 ? { table: state.table.n + 1 } : null;
+    if (state.mode === 'matiere') { const L = SUJETS.find(x => x.id === state.sujet).notions, k = L.indexOf(state.matiere); return L[k + 1] ? { notion: L[k + 1] } : null; }
     const k = PARTIES.findIndex(p => p.id === state.partie); return PARTIES[k + 1] || null;
   },
 };
-$('#cel-map').onclick = () => { Sound.tap(); Celebrate.hide(); Play.stop(); show(state.mode === 'tables' ? 'tables' : 'hub'); };
-$('#cel-replay').onclick = () => { Sound.tap(); Celebrate.hide(); if (state.mode === 'tables') Play.table(state.table.op, state.table.n); else Play.start(state.partie); };
+$('#cel-map').onclick = () => { Sound.tap(); Celebrate.hide(); Play.stop(); show(ecranRetour('hub')); };
+$('#cel-replay').onclick = () => { Sound.tap(); Celebrate.hide(); if (state.mode === 'tables') Play.table(state.table.op, state.table.n); else if (state.mode === 'matiere') Play.matiere(state.matiere); else Play.start(state.partie); };
 // Partie suivante : dans le même stage on enchaîne ; sinon on passe par la scène d'ouverture du stage suivant
 $('#cel-next').onclick = () => {
   Sound.tap(); const nx = Celebrate.suivante(); Celebrate.hide();
-  if (!nx) { Play.stop(); show(state.mode === 'tables' ? 'tables' : 'hub'); return; }
+  if (!nx) { Play.stop(); show(ecranRetour('hub')); return; }
   if (state.mode === 'tables') { Play.table(state.table.op, nx.table); return; }
+  if (state.mode === 'matiere') { Play.matiere(nx.notion); return; }
   const cur = partie(state.partie);
   if (nx.st === cur.st) Play.start(nx.id); else { Play.stop(); state.chap = nx.ch.id; state.stage = nx.st.id; show('stage'); }
 };
@@ -345,25 +392,27 @@ function parentPanel() {
     <div class="row"><b>${t('sound')} :</b> <button class="btn ${Store.data.sound ? 'green' : 'red'}" id="pp-sound">${Store.data.sound ? '🔊' : '🔇'}</button></div>
     ${p ? `<div class="row"><b>${esc(p.name)} — ${t('changeAge')} :</b> ${AGES.map(a => `<button class="btn" data-age="${a.id}" style="--c:${a.color};font-size:1.2rem;${p.age === a.id ? 'outline:.25rem solid #2b2d42' : ''}">${a.range}</button>`).join('')}</div>
     <div class="row"><button class="btn orange" id="pp-reset">↺ ${t('reset')}</button><button class="btn red" id="pp-del">🗑 ${t('del')}</button></div>` : ''}
-    <div class="small-note">Cécilia &amp; Manoach V2.0 · ${CHAPITRES.length} chapitres · ${PARTIES.length} parties · CE2, CM1, génie · tables 1 → 13 · hors ligne, sans publicité, aucune donnée collectée.</div>
+    <div class="small-note">Cécilia &amp; Manoach V2.0 · ${CHAPITRES.length} chapitres · ${PARTIES.length} parties · CE2, CM1, génie · tables 1 → 13 · ${SUJETS.length} matières · hors ligne, sans publicité, aucune donnée collectée.</div>
     <button class="btn blue" id="pp-close">${t('close')}</button>`);
   $$('#modal-box [data-l]').forEach(b => b.onclick = () => { LANG = b.dataset.l; Store.data.lang = LANG; Store.save(); applyLang(); parentPanel(); if (RENDER[current]) RENDER[current](); });
   $('#pp-sound').onclick = () => { Store.data.sound = !Store.data.sound; Sound.on = Store.data.sound; Store.save(); parentPanel(); RENDER.home(); };
   $$('#modal-box [data-age]').forEach(b => b.onclick = () => { p.age = +b.dataset.age; Store.save(); parentPanel(); if (RENDER[current]) RENDER[current](); });
   const confirm2 = (btn, fn) => { if (btn.dataset.armed) fn(); else { btn.dataset.armed = 1; btn.textContent = '⚠ ' + t('confirm'); } };
-  const rs = $('#pp-reset'); if (rs) rs.onclick = () => confirm2(rs, () => { p.lucioles = {}; p.livre = {}; p.coloriages = {}; p.tables = {}; Store.save(); Modal.close(); if (RENDER[current]) RENDER[current](); });
+  const rs = $('#pp-reset'); if (rs) rs.onclick = () => confirm2(rs, () => { p.lucioles = {}; p.livre = {}; p.coloriages = {}; p.tables = {}; p.matieres = {}; Store.save(); Modal.close(); if (RENDER[current]) RENDER[current](); });
   const dl = $('#pp-del'); if (dl) dl.onclick = () => confirm2(dl, () => { Store.data.profiles = Store.data.profiles.filter(x => x.id !== p.id); Store.data.current = null; Store.save(); Modal.close(); show('profiles'); });
   $('#pp-close').onclick = Modal.close;
 }
 
 // ---------------- Boutons et retour ----------------
+const ecranRetour = defaut => (state.mode === 'tables' ? 'tables' : state.mode === 'matiere' ? 'matiere' : defaut);
 function goBack() {
   if ($('#modal').classList.contains('on')) { Modal.close(); return true; }
-  if ($('#celebrate').classList.contains('on')) { Celebrate.hide(); Play.stop(); show(state.mode === 'tables' ? 'tables' : 'stage'); return true; }
+  if ($('#celebrate').classList.contains('on')) { Celebrate.hide(); Play.stop(); show(ecranRetour('stage')); return true; }
   switch (current) {
-    case 'play': Play.stop(); show(state.mode === 'tables' ? 'tables' : 'stage'); return true;
+    case 'play': Play.stop(); show(ecranRetour('stage')); return true;
     case 'stage': show('chapitre'); return true;
-    case 'chapitre': case 'livre': case 'tables': show('hub'); return true;
+    case 'chapitre': case 'livre': case 'tables': case 'matieres': show('hub'); return true;
+    case 'matiere': show('matieres'); return true;
     case 'free': show('livre'); return true;
     case 'hub': show('profiles'); return true;
     case 'age': show(state.draft && state.draft.editing ? 'hub' : 'create'); return true;

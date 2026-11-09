@@ -21,7 +21,7 @@ jobs:
       - run: npx playwright install --with-deps chromium
       - name: Structure (10 chapitres, 30 stages, 70 parties) et images
         run: node test/structure.js
-      - name: Les 210 manches (70 parties × 3 niveaux) et les 28 tables
+      - name: 210 manches de l histoire, 90 de matières et 28 tables
         run: node test/toutes-les-parties.js
       - name: Écrans, langues, espace parents
         run: npm run test:ecrans

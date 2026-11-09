@@ -136,3 +136,97 @@ const NOTIONS_PAR_JEU = {
   race: null, fish: null, link: ['numeration', 'add', 'sous', 'complements', 'doubles', 'x10', 'tables', 'divtables', 'multpose', 'divreste', 'fractions', 'decimaux', 'mesures', 'durees', 'perimetre', 'suites'],
   sort: ['comparer', 'multiples', 'add', 'sous', 'tables'], feed: ['partage'], monster: ['complements', 'tables'], color: ['tables'],
 };
+
+// =====================================================================
+// Les autres matières (générateurs dans matieres.js, contenus dans contenus.js)
+// jeux : jeux possibles (QCM : avion ou pêche ; paires : relier ; deux catégories : grand tri).
+// =====================================================================
+const N3 = (a, b, c) => [Object.assign({}, a), Object.assign({}, b || a), Object.assign({}, c || b || a)];
+Object.assign(NOTIONS, {
+  // ---- Grammaire ----
+  nature: { titre: { fr: 'Nature des mots', en: 'Word classes' }, domaine: 'grammaire', jeux: ['fish', 'race', 'link'],
+    ref: { fr: 'Identifier les classes de mots : nom, verbe, adjectif, déterminant, pronom (CE2) ; adverbe, préposition (CM1) ; conjonction', en: 'Word classes' }, p: N3({}) },
+  pluriel: { titre: { fr: 'Pluriel et féminin', en: 'Plurals and feminine' }, domaine: 'grammaire', jeux: ['race', 'fish', 'link'],
+    ref: { fr: 'Accord en genre et en nombre : pluriels en -s, -x, -aux ; féminins particuliers', en: 'Plurals and feminine' }, p: N3({}) },
+  fonction: { titre: { fr: 'Sujet, verbe, compléments', en: 'Subject, verb, objects' }, domaine: 'grammaire', jeux: ['race', 'fish'],
+    ref: { fr: 'Identifier le verbe et le sujet (CE2), le complément d’objet (CM1), les compléments circonstanciels', en: 'Sentence functions' }, p: N3({}) },
+  phrases: { titre: { fr: 'Types et formes de phrases', en: 'Sentence types' }, domaine: 'grammaire', jeux: ['race', 'fish'],
+    ref: { fr: 'Phrases déclaratives, interrogatives, exclamatives, impératives ; forme affirmative et négative', en: 'Sentence types' }, p: N3({}) },
+  // ---- Conjugaison ----
+  conjPresent: { titre: { fr: 'Le présent', en: 'Present tense' }, domaine: 'conjugaison', jeux: ['race', 'fish'],
+    ref: { fr: 'Présent des verbes du 1er groupe, être, avoir, aller, faire, dire, venir, pouvoir, voir, vouloir, prendre ; 2e groupe (CM1)', en: 'Present tense' }, p: N3({}) },
+  conjFutur: { titre: { fr: 'Le futur', en: 'Future tense' }, domaine: 'conjugaison', jeux: ['race', 'fish'],
+    ref: { fr: 'Futur simple des verbes étudiés', en: 'Future tense' }, p: N3({}) },
+  conjImparfait: { titre: { fr: 'L’imparfait', en: 'Imperfect' }, domaine: 'conjugaison', jeux: ['race', 'fish'],
+    ref: { fr: 'Imparfait des verbes étudiés', en: 'Imperfect tense' }, p: N3({}) },
+  conjPasseCompose: { titre: { fr: 'Le passé composé', en: 'Perfect tense' }, domaine: 'conjugaison', jeux: ['race', 'fish'],
+    ref: { fr: 'Passé composé avec être et avoir', en: 'Perfect tense' }, p: N3({}) },
+  conjPasseSimple: { titre: { fr: 'Le passé simple', en: 'Past historic' }, domaine: 'conjugaison', jeux: ['race', 'fish'],
+    ref: { fr: 'Passé simple aux 3es personnes (CM1) ; toutes les personnes (génie)', en: 'Past historic' }, p: N3({ pers: [2, 5] }, { pers: [2, 5] }, { pers: [0, 1, 2, 3, 4, 5] }) },
+  conjImperatif: { titre: { fr: 'L’impératif', en: 'Imperative' }, domaine: 'conjugaison', jeux: ['race', 'fish'],
+    ref: { fr: 'Impératif présent (CM1)', en: 'Imperative' }, p: N3({}) },
+  conjTemps: { titre: { fr: 'Reconnaître le temps', en: 'Which tense?' }, domaine: 'conjugaison', jeux: ['race', 'fish'],
+    ref: { fr: 'Identifier le temps d’un verbe conjugué', en: 'Identify the tense' },
+    p: N3({ temps: ['pres', 'imp', 'fut', 'pc'] }, { temps: ['pres', 'imp', 'fut', 'pc', 'ps'] }, { temps: ['pres', 'imp', 'fut', 'pc', 'ps', 'cond'] }) },
+  // ---- Orthographe ----
+  homophones: { titre: { fr: 'Homophones', en: 'Homophones' }, domaine: 'orthographe', jeux: ['race', 'fish'],
+    ref: { fr: 'a/à, et/est, on/ont, son/sont (CE2) ; ces/ses, ce/se, ou/où (CM1) ; c’est/s’est, leur/leurs, peu/peut/peux…', en: 'Homophones' }, p: N3({}) },
+  accord: { titre: { fr: 'Accords dans le groupe nominal', en: 'Agreement' }, domaine: 'orthographe', jeux: ['race', 'fish'],
+    ref: { fr: 'Accord de l’adjectif avec le nom (genre et nombre), féminins irréguliers', en: 'Adjective agreement' }, p: N3({}) },
+  motsJustes: { titre: { fr: 'Écrire les mots', en: 'Spelling' }, domaine: 'orthographe', jeux: ['race', 'fish'],
+    ref: { fr: 'Orthographe lexicale : mots invariables et mots fréquents, m devant m, b, p, lettres muettes', en: 'Spelling' }, p: N3({}) },
+  // ---- Vocabulaire ----
+  vocabulaire: { titre: { fr: 'Contraires et synonymes', en: 'Opposites and synonyms' }, domaine: 'vocabulaire', jeux: ['link', 'race', 'fish'],
+    ref: { fr: 'Contraires (CE2), synonymes et préfixes (CM1)', en: 'Opposites and synonyms' }, p: N3({}) },
+  dictionnaire: { titre: { fr: 'Ordre alphabétique', en: 'Alphabetical order' }, domaine: 'vocabulaire', jeux: ['race', 'fish'],
+    ref: { fr: 'Utiliser le dictionnaire : ordre alphabétique (1re, 2e, 3e lettre…)', en: 'Alphabetical order' }, p: N3({}) },
+  lingala: { titre: { fr: 'Les mots lingala du livre', en: 'Lingala words from the book' }, domaine: 'vocabulaire', jeux: ['link', 'race'],
+    ref: { fr: 'Ouverture aux langues : le lexique du livre', en: 'Lingala words' }, p: N3({}) },
+  // ---- Sciences ----
+  vivant: { titre: { fr: 'Vivant ou non vivant', en: 'Living or not' }, domaine: 'sciences', jeux: ['sort'],
+    ref: { fr: 'Le vivant : distinguer le vivant du non-vivant', en: 'Living things' }, p: N3({}),
+    tri: N3({ type: 'cat', labels: [{ fr: 'Vivant', en: 'Living' }, { fr: 'Non vivant', en: 'Not living' }] }) },
+  animaux: { titre: { fr: 'Les animaux', en: 'Animals' }, domaine: 'sciences', jeux: ['race', 'fish'],
+    ref: { fr: 'Classer les animaux, cycles de vie (métamorphoses)', en: 'Animals' }, p: N3({}) },
+  alimentation: { titre: { fr: 'Se nourrir', en: 'Food' }, domaine: 'sciences', jeux: ['race', 'fish'],
+    ref: { fr: 'Régimes alimentaires des animaux, groupes d’aliments, chaînes alimentaires', en: 'Food and diets' }, p: N3({}) },
+  corps: { titre: { fr: 'Le corps humain', en: 'The human body' }, domaine: 'sciences', jeux: ['race', 'fish'],
+    ref: { fr: 'Organes, squelette, muscles, sens, santé', en: 'Human body' }, p: N3({}) },
+  matiere: { titre: { fr: 'L’eau et la matière', en: 'Water and matter' }, domaine: 'sciences', jeux: ['race', 'fish'],
+    ref: { fr: 'États de l’eau (solide, liquide, gaz) et changements d’état', en: 'States of matter' }, p: N3({}) },
+  ciel: { titre: { fr: 'La Terre, le Soleil, la Lune', en: 'Earth, Sun and Moon' }, domaine: 'sciences', jeux: ['race', 'fish'],
+    ref: { fr: 'La Terre dans le système solaire, jour et nuit, saisons', en: 'Solar system' }, p: N3({}) },
+  plantes: { titre: { fr: 'Les plantes', en: 'Plants' }, domaine: 'sciences', jeux: ['race', 'fish'],
+    ref: { fr: 'Besoins des végétaux, germination, de la fleur au fruit', en: 'Plants' }, p: N3({}) },
+  energie: { titre: { fr: 'Électricité et énergie', en: 'Electricity and energy' }, domaine: 'sciences', jeux: ['race', 'fish'],
+    ref: { fr: 'Circuits électriques, sécurité, énergies renouvelables', en: 'Electricity and energy' }, p: N3({}) },
+  conducteurs: { titre: { fr: 'Conducteur ou isolant', en: 'Conductor or insulator' }, domaine: 'sciences', jeux: ['sort'],
+    ref: { fr: 'Matériaux conducteurs et isolants', en: 'Conductors and insulators' }, p: N3({}),
+    tri: N3({ type: 'cat', labels: [{ fr: 'Conducteur', en: 'Conductor' }, { fr: 'Isolant', en: 'Insulator' }] }) },
+  // ---- Histoire, géographie, EMC ----
+  temps: { titre: { fr: 'Le temps qui passe', en: 'Time and calendar' }, domaine: 'histoire-geographie', jeux: ['race', 'fish'],
+    ref: { fr: 'Calendrier, siècles, chiffres romains, repères chronologiques', en: 'Calendar, centuries' }, p: N3({}) },
+  histoire: { titre: { fr: 'Repères d’histoire', en: 'History' }, domaine: 'histoire-geographie', jeux: ['race', 'fish'],
+    ref: { fr: 'CM1 : la Gaule et les Romains, le temps des rois, la Révolution et l’Empire', en: 'History' }, p: N3({}) },
+  geographie: { titre: { fr: 'Le monde', en: 'Geography' }, domaine: 'histoire-geographie', jeux: ['race', 'fish'],
+    ref: { fr: 'Se repérer : points cardinaux, continents, océans, fleuves, capitales', en: 'Geography' }, p: N3({}) },
+  emc: { titre: { fr: 'Vivre ensemble', en: 'Citizenship' }, domaine: 'emc', jeux: ['race', 'fish'],
+    ref: { fr: 'Enseignement moral et civique : respect, règles, symboles de la République, droits de l’enfant', en: 'Citizenship' }, p: N3({}) },
+  // ---- Anglais ----
+  anglais: { titre: { fr: 'Mots anglais', en: 'English words' }, domaine: 'anglais', jeux: ['link', 'race', 'fish'],
+    ref: { fr: 'Langues vivantes : couleurs, nombres, animaux, famille, politesse, jours, corps, nourriture', en: 'English vocabulary' }, p: N3({}) },
+});
+
+// Les matières (écran « Matières »)
+const SUJETS = [
+  { id: 'maths', icon: '🔢', color: '#3a86ff', titre: { fr: 'Mathématiques', en: 'Maths' },
+    notions: ['numeration', 'comparer', 'add', 'sous', 'complements', 'doubles', 'x10', 'tables', 'divtables', 'multpose', 'divreste', 'partage', 'multiples', 'fractions', 'decimaux', 'mesures', 'durees', 'perimetre', 'suites', 'probleme', 'proportion', 'melange'] },
+  { id: 'grammaire', icon: '✏️', color: '#e85d04', titre: { fr: 'Grammaire', en: 'Grammar' }, notions: ['nature', 'pluriel', 'fonction', 'phrases'] },
+  { id: 'conjugaison', icon: '⏰', color: '#d62828', titre: { fr: 'Conjugaison', en: 'Verbs' }, notions: ['conjPresent', 'conjFutur', 'conjImparfait', 'conjPasseCompose', 'conjPasseSimple', 'conjImperatif', 'conjTemps'] },
+  { id: 'orthographe', icon: '🔤', color: '#f15bb5', titre: { fr: 'Orthographe', en: 'Spelling' }, notions: ['homophones', 'accord', 'motsJustes'] },
+  { id: 'vocabulaire', icon: '📖', color: '#9b5de5', titre: { fr: 'Vocabulaire', en: 'Vocabulary' }, notions: ['vocabulaire', 'dictionnaire', 'lingala'] },
+  { id: 'sciences', icon: '🔬', color: '#06a77d', titre: { fr: 'Sciences', en: 'Science' }, notions: ['vivant', 'animaux', 'alimentation', 'corps', 'plantes', 'matiere', 'ciel', 'energie', 'conducteurs'] },
+  { id: 'histoire-geographie', icon: '🗺️', color: '#b5838d', titre: { fr: 'Histoire et géographie', en: 'History and geography' }, notions: ['temps', 'histoire', 'geographie'] },
+  { id: 'emc', icon: '🤝', color: '#2a9d8f', titre: { fr: 'Vivre ensemble', en: 'Citizenship' }, notions: ['emc'] },
+  { id: 'anglais', icon: '🇬🇧', color: '#457b9d', titre: { fr: 'Anglais', en: 'English' }, notions: ['anglais'] },
+];

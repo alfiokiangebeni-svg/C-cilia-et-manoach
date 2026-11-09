@@ -27,7 +27,8 @@ Cahier des charges complet : [INSTRUCTION-V2.md](INSTRUCTION-V2.md)
 - [x] Tables de multiplication et de division de 1 à 13 (28 entraînements)
 - [x] Jeux en images 3D : avatars, avion piloté, pirogue avec l'enfant, poissons, paniers, Glouton, fruits, animaux, 7 décors
 - [ ] Validation par l'auteur et par un enseignant
-- [ ] Français (grammaire, conjugaison, orthographe) et sciences du programme, si souhaité
+- [x] Matières : grammaire, conjugaison, orthographe, vocabulaire, sciences, histoire-géographie, EMC, anglais (V2.2)
+- [x] Toutes les fonctions débloquées (V2.2)
 
 ## V3.0 — Au-delà du calcul
 - [ ] Nouveaux jeux : lecture, sciences, hygiène, missions (voir le catalogue des 24 projets)

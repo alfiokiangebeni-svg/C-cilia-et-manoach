@@ -8,7 +8,9 @@ Application éducative pour enfants de **3e primaire (CE2)** et **4e primaire (C
 
 ## Code
 - Tout le jeu est dans `app/www/` : HTML/CSS/JS **sans framework ni dépendance**. Garder ce principe (APK < 1 Mo, hors-ligne).
-- Ordre de chargement : `i18n.js → programme.js → histoire.js → art.js → fx.js → engine.js → assets.js → scenes.js → games.js → app.js` (variables globales).
+- Ordre de chargement : `i18n.js → programme.js → histoire.js → contenus.js → art.js → fx.js → engine.js → matieres.js → assets.js → scenes.js → games.js → app.js` (variables globales).
+- **Matières** (écran « Matières », `SUJETS` dans `programme.js`) : maths, grammaire, conjugaison, orthographe, vocabulaire, sciences, histoire-géographie, EMC, anglais. Contenus en données dans `contenus.js` (niveau 0/1/2 par élément), générateurs dans `matieres.js`. Réponses en mots : la question porte `choix` (mauvaises réponses) et `cat` (grand tri) ; les jeux comparent avec `same()` et proposent avec `choixDe()`. `Play.matiere(id)` ; étoiles dans `profil.matieres`.
+- Tout est débloqué (`TOUT_OUVERT = true` dans `app.js`), à la demande de l'auteur.
 - **Programme scolaire français** : `programme.js` (données : NIVEAUX CE2 / CM1 / génie, NOTIONS avec paramètres par niveau et référence au programme) ; générateurs `GEN.<notion>` dans `engine.js`. Chaque partie de `histoire.js` a une `notion`. Voir `docs/PROGRAMME.md`.
 - Le champ de profil `age` garde l'indice du niveau : 0 = CE2, 1 = CM1, 2 = génie.
 - Les jeux lisent leurs questions dans `G.sk` (jamais directement dans `SKILLS`), et `G.glouton` / `G.tri` pour Glouton et le Grand tri. Nombres affichés avec `fmt()` (espaces fines, virgule décimale) ; comparer avec `egal()`.
@@ -22,7 +24,7 @@ Application éducative pour enfants de **3e primaire (CE2)** et **4e primaire (C
 - Interface en français ; commentaires de code en français.
 
 ## Vérifier
-- `cd app && npm test` : `STRUCTURE OK`, puis 210 manches (70 parties × 3 niveaux) et 28 tables `OK`, `Manches réussies : 238 / 238` et `ERR []`.
+- `cd app && npm test` : `STRUCTURE OK`, puis 210 manches (70 parties × 3 niveaux), 90 manches de matières (30 notions × 3 niveaux) et 28 tables `OK`, `Manches réussies : 328 / 328` et `ERR []`.
 - Pour une modification visuelle : `node test/parcours-ecrans.js 0` puis regarder `app/test/out/` ; `npm run captures` pour `docs/captures/v2/`.
 - Ajouter le robot de résolution de la nouvelle mécanique dans `test/toutes-les-parties.js`.
 
