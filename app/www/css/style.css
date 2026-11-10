@@ -658,3 +658,24 @@ img.avatar { display: block; height: 100%; width: auto; max-width: 100%; margin:
 .robot-bg .programmes { top: 10.5rem; }
 .grille { top: 4.6rem; }
 .robot { display: flex; align-items: center; justify-content: center; } .robot img { width: 88%; height: 88%; object-fit: contain; }
+
+/* Jeu de mémoire : cartes à retourner */
+.memoire { --cols: 4; position: absolute; left: 3%; right: 3%; top: 8.4rem; bottom: .8rem; display: grid; grid-template-columns: repeat(var(--cols), 1fr); grid-auto-rows: 1fr; gap: .6rem; z-index: 6; perspective: 60rem; }
+.carte-mem { position: relative; background: none; padding: 0; min-height: 48px; transform-style: preserve-3d; transition: transform .4s ease; }
+.carte-mem.ouverte, .carte-mem.trouvee { transform: rotateY(180deg); }
+.carte-mem .face { position: absolute; inset: 0; border-radius: 1rem; backface-visibility: hidden; -webkit-backface-visibility: hidden; display: grid; place-items: center; box-shadow: 0 .35rem 0 rgba(0,0,0,.3); }
+.carte-mem .dos { background: radial-gradient(circle at 50% 40%, #6a54b5, #2a2560); border: .2rem solid #e0a42e; }
+.carte-mem .dos img { height: 62%; filter: drop-shadow(0 0 .6rem rgba(255,216,74,.8)); }
+.carte-mem .recto { transform: rotateY(180deg); background: var(--creme); color: var(--encre); font-size: 1.6rem; font-weight: 700; padding: .2rem; text-align: center; line-height: 1.1; }
+.carte-mem .recto.res { background: linear-gradient(160deg, #fff6cf, #ffe08a); }
+.carte-mem .recto.mot { font-size: 1.05rem; }
+.carte-mem .recto.long { font-size: .85rem; }
+.carte-mem.trouvee .recto { background: #b9fbc0; animation: pose .4s ease; }
+.memoire-bg .question { font-size: 1.6rem; }
+.carte-mem .dos img { width: 58%; height: 58%; object-fit: contain; }
+.carte-mem .recto.l1 { font-size: 2rem; } .carte-mem .recto.l2 { font-size: 1.35rem; } .carte-mem .recto.l3 { font-size: 1.05rem; }
+.village-grid { grid-template-columns: repeat(8, 1fr); gap: .5rem; padding: .2rem .8rem .8rem; }
+.village-card-btn .portrait { height: 4.4rem; }
+.village-card-btn .portrait .ic { font-size: 2.6rem; }
+.village-card-btn b { font-size: .85rem; }
+.carte-mem .recto.l1 { font-size: min(2rem, 3.3vw); } .carte-mem .recto.l2 { font-size: min(1.35rem, 2.3vw); } .carte-mem .recto.l3 { font-size: min(1.05rem, 1.9vw); }

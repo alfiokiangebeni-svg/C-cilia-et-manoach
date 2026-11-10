@@ -42,6 +42,11 @@ window.__step = () => {
     if (q.carte.mode === 'toucher') { const pth = zone.querySelector('path[data-id="' + q.ans + '"]'); if (pth.classList.contains('bon')) return 'busy'; pth.dispatchEvent(new MouseEvent('click', { bubbles: true })); return true; }
     return clickEl([...zone.querySelectorAll('.rep-carte')].find(b => b.dataset.v === q.ans && !b.classList.contains('good')));
   }
+  if (g === 'memoire') {
+    if (zone.querySelectorAll('.carte-mem.ouverte:not(.trouvee)').length) return 'busy';
+    const libres = [...zone.querySelectorAll('.carte-mem:not(.trouvee)')]; if (!libres.length) return 'busy';
+    const a = libres[0], b = libres.find(c => c !== a && c.dataset.k === a.dataset.k); a.click(); b.click(); return true;
+  }
   if (g === 'dames') {
     const reps = [...zone.querySelectorAll('.rep-dames')];
     if (reps.length) { const a = __rep(qt); return clickEl(reps.find(b => __eq(a, b.dataset.v))); }

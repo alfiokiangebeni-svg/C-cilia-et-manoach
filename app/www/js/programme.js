@@ -165,6 +165,9 @@ Object.assign(NOTIONS, {
     ref: { fr: 'Passé simple aux 3es personnes (CM1) ; toutes les personnes (génie)', en: 'Past historic' }, p: N3({ pers: [2, 5] }, { pers: [2, 5] }, { pers: [0, 1, 2, 3, 4, 5] }) },
   conjImperatif: { titre: { fr: 'L’impératif', en: 'Imperative' }, domaine: 'conjugaison', jeux: ['race', 'fish'],
     ref: { fr: 'Impératif présent (CM1)', en: 'Imperative' }, p: N3({}) },
+  conjMelange: { titre: { fr: 'Tous les temps', en: 'All tenses' }, domaine: 'conjugaison', jeux: ['memoire', 'race', 'fish'],
+    ref: { fr: 'Conjuguer les verbes étudiés à tous les temps du niveau (présent, futur, imparfait, passé composé ; passé simple au CM1 ; conditionnel pour le génie)', en: 'All tenses' },
+    p: N3({ temps: ['pres', 'fut', 'imp', 'pc'] }, { temps: ['pres', 'fut', 'imp', 'pc', 'ps'], pers: [0, 1, 2, 3, 4, 5] }, { temps: ['pres', 'fut', 'imp', 'pc', 'ps', 'cond'] }) },
   conjTemps: { titre: { fr: 'Reconnaître le temps', en: 'Which tense?' }, domaine: 'conjugaison', jeux: ['race', 'fish'],
     ref: { fr: 'Identifier le temps d’un verbe conjugué', en: 'Identify the tense' },
     p: N3({ temps: ['pres', 'imp', 'fut', 'pc'] }, { temps: ['pres', 'imp', 'fut', 'pc', 'ps'] }, { temps: ['pres', 'imp', 'fut', 'pc', 'ps', 'cond'] }) },
@@ -264,6 +267,9 @@ const VILLAGE = [
   { id: 'wewa', nom: { fr: 'La course de wewa', en: 'The moto-taxi race' }, img: 'wewa', jeu: 'race', notion: 'trajets', theme: { id: 'wewa', decor: 'avenue', vehicule: 'village/wewa' } },
   { id: 'route', nom: { fr: 'Construire la route', en: 'Build the road' }, img: 'camion', jeu: 'route', notion: 'chantier' },
   { id: 'afrique', nom: { fr: 'La carte de l’Afrique', en: 'Map of Africa' }, img: null, icon: '🌍', jeu: 'afrique', notion: 'carteAfrique' },
+  { id: 'memoire-x', nom: { fr: 'Mémoire des multiplications', en: 'Times tables memory' }, img: null, icon: '🃏✖️', jeu: 'memoire', notion: 'tables', theme: { decor: 'arbre' } },
+  { id: 'memoire-add', nom: { fr: 'Mémoire des additions', en: 'Addition memory' }, img: null, icon: '🃏➕', jeu: 'memoire', notion: 'add', theme: { decor: 'marche' } },
+  { id: 'memoire-verbes', nom: { fr: 'Mémoire des verbes', en: 'Verb memory' }, img: null, icon: '🃏✏️', jeu: 'memoire', notion: 'conjMelange', theme: { decor: 'bureau' } },
 ];
 
 // Les matières (écran « Matières »)
@@ -272,7 +278,7 @@ const SUJETS = [
     notions: ['numeration', 'comparer', 'add', 'sous', 'complements', 'doubles', 'x10', 'tables', 'divtables', 'multpose', 'divreste', 'partage', 'multiples', 'ppcm', 'pgcd', 'fractions', 'decimaux', 'mesures', 'durees', 'perimetre', 'suites', 'probleme', 'proportion', 'commerce', 'melange'] },
   { id: 'vie', icon: '🏘️', color: '#e07a5f', titre: { fr: 'Problèmes de la vie', en: 'Everyday problems' }, notions: ['cuisine', 'menuiserie', 'agronomie', 'peche', 'trajets', 'chantier'] },
   { id: 'grammaire', icon: '✏️', color: '#e85d04', titre: { fr: 'Grammaire', en: 'Grammar' }, notions: ['nature', 'pluriel', 'fonction', 'phrases'] },
-  { id: 'conjugaison', icon: '⏰', color: '#d62828', titre: { fr: 'Conjugaison', en: 'Verbs' }, notions: ['conjPresent', 'conjFutur', 'conjImparfait', 'conjPasseCompose', 'conjPasseSimple', 'conjImperatif', 'conjTemps'] },
+  { id: 'conjugaison', icon: '⏰', color: '#d62828', titre: { fr: 'Conjugaison', en: 'Verbs' }, notions: ['conjPresent', 'conjFutur', 'conjImparfait', 'conjPasseCompose', 'conjPasseSimple', 'conjImperatif', 'conjMelange', 'conjTemps'] },
   { id: 'orthographe', icon: '🔤', color: '#f15bb5', titre: { fr: 'Orthographe', en: 'Spelling' }, notions: ['homophones', 'accord', 'motsJustes'] },
   { id: 'vocabulaire', icon: '📖', color: '#9b5de5', titre: { fr: 'Vocabulaire', en: 'Vocabulary' }, notions: ['vocabulaire', 'dictionnaire', 'lingala'] },
   { id: 'sciences', icon: '🔬', color: '#06a77d', titre: { fr: 'Sciences', en: 'Science' }, notions: ['vivant', 'animaux', 'alimentation', 'corps', 'plantes', 'matiere', 'ciel', 'energie', 'conducteurs', 'programmation'] },

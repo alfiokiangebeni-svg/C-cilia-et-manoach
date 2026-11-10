@@ -35,6 +35,7 @@ Cahier des charges complet : [INSTRUCTION-V2.md](INSTRUCTION-V2.md)
 - [x] Problèmes d'achat, de vente et de bénéfice (Suzanne et Albertine au marché)
 - [x] PPCM et PGCD
 - [x] 12 jeux du village : marché, Tarzan, oncle Robert, oncle Caleb (robot), Axel l'agronome, cuisine, chasseur d'images, Max et son flair, jeu de dames, course de wewa, construire la route, carte de l'Afrique
+- [x] Jeux de mémoire : multiplications, additions, verbes (V2.4)
 - [ ] Validation des apparences des nouveaux personnages par l'auteur
 
 ## V3.0 — Au-delà du calcul

@@ -255,3 +255,40 @@ GAME_FN.dames = G => {
   }
   dessiner(); question();
 };
+
+// ======================= Jeu de mémoire : retrouver les paires (calcul ↔ résultat, verbe ↔ forme conjuguée) =======================
+// Une erreur n'est comptée que si l'enfant avait déjà vu les deux cartes (vraie erreur de mémoire).
+GAME_FN.memoire = G => {
+  const A = G.area, T = G.theme || {}; decor(A, T.decor || 'nuit', 'memoire-bg');
+  const paires = [4, 6, 8][G.age], qs = genSet(G.sk, paires, true);
+  const cartes = shuffle(qs.flatMap((q, k) => [{ k, txt: q.text, cls: 'calc' }, { k, txt: fmt(q.ans), cls: 'res' }]));
+  const jeu = h('div', 'memoire'); jeu.style.setProperty('--cols', paires); A.append(jeu);
+  G.setQuestion(t('memoryGo'));
+  const vues = new Set(); let ouvertes = [], trouvees = 0, busy = false;
+  cartes.forEach((c, i) => {
+    const el = h('button', 'carte-mem', `<div class="face dos">${IMG('persos/etoile/contente')}</div><div class="face recto ${c.cls} ${c.txt.length > 14 ? 'l3' : c.txt.length > 8 ? 'l2' : 'l1'}"><span>${esc(c.txt)}</span></div>`);
+    el.dataset.k = c.k; el.dataset.i = i;
+    el.onclick = () => retourner(el, c, i);
+    jeu.append(el);
+  });
+  function retourner(el, c, i) {
+    if (busy || el.classList.contains('ouverte') || el.classList.contains('trouvee')) return;
+    Sound.tap(); el.classList.add('ouverte'); ouvertes.push({ el, c, i });
+    if (ouvertes.length < 2) return;
+    busy = true;
+    const [a, b] = ouvertes; ouvertes = [];
+    const p = centerOf(b.el, A);
+    if (a.c.k === b.c.k) {
+      G.later(() => {
+        a.el.classList.add('trouvee'); b.el.classList.add('trouvee'); G.correct(p.ax, p.ay); G.newQ();
+        trouvees++; G.progress(trouvees / paires); busy = false;
+        if (trouvees === paires) G.later(() => G.done(), 700);
+      }, 350);
+    } else {
+      const dejaVues = vues.has(a.i) && vues.has(b.i);
+      if (dejaVues) G.wrong(p.ax, p.ay); else Sound.tap();
+      G.later(() => { a.el.classList.remove('ouverte'); b.el.classList.remove('ouverte'); busy = false; }, 900);
+    }
+    vues.add(a.i); vues.add(b.i);
+  }
+};

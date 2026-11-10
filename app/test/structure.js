@@ -61,7 +61,7 @@ SUJETS.forEach(S => S.notions.forEach(id => {
   ok(N, `matière ${S.id} : notion inconnue ${id}`); if (!N) return;
   ok(new RegExp(`\\b${id}\\s*\\(`).test(matieresJs), `notion ${id} : pas de générateur GEN.${id}`);
   ok(N.p.length === 3 && N.titre.fr && N.ref.fr, `notion ${id} : 3 niveaux, titre et référence`);
-  (N.jeux || []).forEach(j => ok(['race', 'fish', 'link', 'sort', 'robot', 'afrique'].includes(j), `notion ${id} : jeu ${j} inconnu`));
+  (N.jeux || []).forEach(j => ok(['race', 'fish', 'link', 'sort', 'robot', 'afrique', 'memoire'].includes(j), `notion ${id} : jeu ${j} inconnu`));
   if ((N.jeux || []).includes('sort')) ok(N.tri && N.tri.length === 3, `notion ${id} : règle de tri pour 3 niveaux`);
 }));
 Object.keys(NOTIONS).forEach(id => ok(SUJETS.some(S => S.notions.includes(id)), `notion ${id} hors des matières`));

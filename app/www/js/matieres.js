@@ -85,6 +85,10 @@ Object.assign(GEN, {
   conjPasseCompose(p) { return questionConj(p, 'pc'); },
   conjPasseSimple(p) { return questionConj(p, 'ps'); },
   conjImperatif(p) { return questionConj(p, 'impe'); },
+  conjMelange(p) {
+    const t = pick(p.temps);
+    return questionConj(t === 'ps' && (p.niv || 0) < 2 ? Object.assign({}, p, { pers: [2, 5] }) : p, t);
+  },
   conjTemps(p) {
     const temps = p.temps, t = pick(temps), v = pick(verbesNiv(p.niv || 0, p)), i = t === 'ps' ? pick([2, 5]) : rnd(0, 5);
     const forme = avecPronom(i, conjuguer(v, t, i), v);
