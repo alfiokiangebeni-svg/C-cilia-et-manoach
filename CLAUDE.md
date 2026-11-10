@@ -26,7 +26,7 @@ Application éducative pour enfants de **3e primaire (CE2)** et **4e primaire (C
 - Interface en français ; commentaires de code en français.
 
 ## Vérifier
-- `cd app && npm test` : `STRUCTURE OK`, puis 210 manches de l'histoire, les manches de matières (notions hors maths × 3 niveaux), 36 manches du village (12 jeux × 3 niveaux) et 28 tables, toutes `OK`, `Manches réussies : N / N` et `ERR []`.
+- `cd app && npm test` : `STRUCTURE OK`, puis 210 manches de l'histoire, les manches de matières (notions hors maths × 3 niveaux), 36 manches du village (12 jeux × 3 niveaux) et 28 tables, toutes `OK`, `Manches réussies : 391 / 391` et `ERR []`.
 - Pour une modification visuelle : `node test/parcours-ecrans.js 0` puis regarder `app/test/out/` ; `npm run captures` pour `docs/captures/v2/`.
 - Ajouter le robot de résolution de la nouvelle mécanique dans `test/toutes-les-parties.js`.
 

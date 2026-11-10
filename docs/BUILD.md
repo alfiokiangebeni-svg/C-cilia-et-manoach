@@ -68,3 +68,7 @@ Outils utilisés (Ubuntu) : `apt install android-sdk aapt zipalign apksigner dal
 ## V2.2 — APK de test
 
 `releases/CeciliaManoach-V2.2-test.apk` (≈ 3 Mo, versionCode 4) : matières complètes (français, sciences, histoire-géographie, EMC, anglais), tout débloqué. Même clé de test : s'installe par-dessus la 2.1 en gardant les profils.
+
+## V2.3 — APK de test
+
+`releases/CeciliaManoach-V2.3-test.apk` (≈ 4,7 Mo, versionCode 5) : le village (12 jeux), histoire-géographie RDC et Afrique, bénéfice, PPCM et PGCD. Même clé de test : s'installe par-dessus la 2.2 en gardant les profils.
