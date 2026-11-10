@@ -170,7 +170,7 @@ const CHAPITRES = [
     { id: '6.2', titre: { fr: 'Sur le dos de Thérèse', en: 'On Thérèse’s back' }, decor: 'fleuve', guide: 'therese',
       intro: { fr: 'Montez sur mon dos !', en: 'Climb on my back!' }, parties: [
       { id: '6.2.1', meca: 'peche', notion: 'divtables', niv: [1, 1, 1], titre: { fr: 'Les bons passages', en: 'The right passages' } },
-      { id: '6.2.2', meca: 'course', notion: 'multpose', niv: [1, 1, 1], titre: { fr: 'Traverser l’Ebale', en: 'Cross the Ebale' } },
+      { id: '6.2.2', meca: 'course', notion: 'ppcm', niv: [1, 1, 1], titre: { fr: 'Traverser l’Ebale', en: 'Cross the Ebale' } },
     ] },
     { id: '6.3', titre: { fr: 'L’autre rive', en: 'The other bank' }, decor: 'fleuve', guide: 'manoach',
       intro: { fr: 'Attention aux remous ! On y est presque.', en: 'Watch out for the whirlpools! Almost there.' }, parties: [
@@ -201,7 +201,7 @@ const CHAPITRES = [
     { id: '8.1', titre: { fr: 'Christian le héron', en: 'Christian the heron' }, decor: 'fleuve', guide: 'christian',
       intro: { fr: 'Je vole haut, mais pas jusqu’aux étoiles.', en: 'I fly high, but not up to the stars.' }, parties: [
       { id: '8.1.1', meca: 'emotions', notion: 'perimetre', niv: [1, 1, 1], titre: { fr: 'Rassurer Christian', en: 'Reassure Christian' } },
-      { id: '8.1.2', meca: 'relier', notion: 'divtables', niv: [1, 1, 1], titre: { fr: 'Qui sait faire quoi ?', en: 'Who can do what?' } },
+      { id: '8.1.2', meca: 'relier', notion: 'pgcd', niv: [1, 1, 1], titre: { fr: 'Qui sait faire quoi ?', en: 'Who can do what?' } },
     ] },
     { id: '8.2', titre: { fr: '« Et si nous étions nombreux ? »', en: '“What if there were many of us?”' }, decor: 'fleuve', guide: 'cecilia',
       intro: { fr: 'Et si nous étions nombreux ?', en: 'What if there were many of us?' }, parties: [
@@ -242,7 +242,7 @@ const CHAPITRES = [
     { id: '10.2', titre: { fr: 'Plus haut, toujours plus haut', en: 'Higher, ever higher' }, decor: 'ciel', guide: 'manoach',
       intro: { fr: 'On y est presque ! Tout ce qu’on a appris, ensemble !', en: 'Almost there! Everything we learned, together!' }, parties: [
       { id: '10.2.1', meca: 'melange', notion: 'melange', niv: [2, 2, 2], titre: { fr: 'Tout ensemble', en: 'All together' } },
-      { id: '10.2.2', meca: 'melange', notion: 'melange', niv: [2, 2, 2], titre: { fr: 'La dernière épreuve', en: 'The last challenge' } },
+      { id: '10.2.2', meca: 'melange', notion: 'commerce', niv: [2, 2, 2], titre: { fr: 'La dernière épreuve', en: 'The last challenge' } },
     ] },
     { id: '10.3', titre: { fr: 'Mama !', en: 'Mama!' }, decor: 'lune', guide: 'lune',
       intro: { fr: 'Ma petite étoile !', en: 'My little star!' }, parties: [

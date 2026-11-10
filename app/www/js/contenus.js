@@ -207,28 +207,41 @@ const SCIENCES = {
   ],
 };
 
-// ---------- Histoire et géographie (Questionner le monde CE2, Histoire-géographie CM1) ----------
+// ---------- Histoire et géographie : la RDC et l'Afrique (à la demande de l'auteur) ----------
 const HISTOIRE = [
-  ['Qui était le chef gaulois vaincu à Alésia ?', 'Vercingétorix', ['Clovis', 'Charlemagne'], 1], ['La bataille d’Alésia a eu lieu en…', '52 av. J.-C.', ['800', '1789'], 1],
-  ['Les peintures de la grotte de Lascaux datent de…', 'la Préhistoire', ['le Moyen Âge', 'la Renaissance'], 0], ['Qui fut couronné empereur en l’an 800 ?', 'Charlemagne', ['Louis XIV', 'Napoléon'], 1],
-  ['Quel roi est surnommé le Roi-Soleil ?', 'Louis XIV', ['Henri IV', 'François Ier'], 1], ['Louis XIV a fait construire le château de…', 'Versailles', ['Chambord', 'la Bastille'], 1],
-  ['La prise de la Bastille a eu lieu le…', '14 juillet 1789', ['11 novembre 1918', '8 mai 1945'], 0], ['Napoléon Bonaparte est sacré empereur en…', '1804', ['1789', '1515'], 1],
-  ['François Ier a gagné la bataille de Marignan en…', '1515', ['1789', '800'], 1], ['Qui a délivré Orléans pendant la guerre de Cent Ans ?', 'Jeanne d’Arc', ['Marianne', 'Catherine de Médicis'], 1],
-  ['Le roi des Francs baptisé vers 496 est…', 'Clovis', ['Charlemagne', 'Louis XIV'], 1], ['Christophe Colomb arrive en Amérique en…', '1492', ['1789', '1914'], 1],
-  ['Gutenberg a mis au point…', 'l’imprimerie', ['l’électricité', 'le téléphone'], 1], ['Les châteaux forts ont été construits au…', 'Moyen Âge', ['XXe siècle', 'temps des Gaulois'], 0],
-  ['Jules César était un général…', 'romain', ['gaulois', 'chinois'], 1], ['La Déclaration des droits de l’homme et du citoyen date de…', '1789', ['1515', '1945'], 1],
-  ['La guerre de Cent Ans opposait la France à…', 'l’Angleterre', ['l’Espagne', 'l’Italie'], 2], ['Napoléon est vaincu à Waterloo en…', '1815', ['1804', '1789'], 2],
-  ['Le premier roi capétien, en 987, est…', 'Hugues Capet', ['Clovis', 'Charles VII'], 2], ['Henri IV signe l’édit de Nantes en…', '1598', ['1492', '1715'], 2],
-  ['La Renaissance est née en…', 'Italie', ['Angleterre', 'Russie'], 2], ['Le traité de Verdun (843) partage l’empire de…', 'Charlemagne', ['Napoléon', 'Clovis'], 2],
+  ['Le Congo est devenu indépendant le…', '30 juin 1960', ['14 juillet 1789', '1er janvier 1900'], 0], ['Le premier Premier ministre du Congo indépendant était…', 'Patrice Lumumba', ['Joseph Kasa-Vubu', 'Mobutu Sese Seko'], 0],
+  ['Le premier président du Congo indépendant était…', 'Joseph Kasa-Vubu', ['Patrice Lumumba', 'Laurent-Désiré Kabila'], 0], ['L’hymne national de la RDC s’appelle…', 'Debout Congolais', ['La Marseillaise', 'Nkosi Sikelel’ iAfrika'], 0],
+  ['Les pyramides de Gizeh se trouvent en…', 'Égypte', ['RDC', 'Maroc'], 0], ['L’Afrique est appelée le berceau de…', 'l’humanité', ['l’automobile', 'l’ordinateur'], 0],
+  ['Avant 1960, le Congo était une colonie de…', 'la Belgique', ['la France', 'l’Angleterre'], 0], ['Nelson Mandela a été président de…', 'l’Afrique du Sud', ['la RDC', 'l’Égypte'], 0],
+  ['De 1885 à 1908, le Congo était la propriété du roi…', 'Léopold II', ['Baudouin', 'Louis XIV'], 1], ['De 1908 à 1960, le pays s’appelait…', 'le Congo belge', ['le Zaïre', 'le royaume Kongo'], 1],
+  ['La conférence de Berlin, qui a partagé l’Afrique entre pays européens, a eu lieu en…', '1884-1885', ['1960', '1789'], 1], ['Le royaume Kongo avait pour capitale…', 'Mbanza-Kongo', ['Kinshasa', 'Lubumbashi'], 1],
+  ['Le navigateur portugais arrivé à l’embouchure du fleuve Congo en 1482 est…', 'Diogo Cão', ['Christophe Colomb', 'Vasco de Gama'], 1], ['De 1971 à 1997, la RDC s’appelait…', 'le Zaïre', ['le Congo belge', 'la Rhodésie'], 1],
+  ['Léopoldville a été renommée Kinshasa en…', '1966', ['1960', '2000'], 1], ['L’empire du Mali a été fondé par…', 'Soundiata Keïta', ['Shaka', 'Lumumba'], 1],
+  ['Mansa Moussa, célèbre pour sa richesse, était empereur du…', 'Mali', ['Congo', 'Kenya'], 1], ['La ville de savoir aux célèbres manuscrits, au Mali, est…', 'Tombouctou', ['Kinshasa', 'Le Caire'], 1],
+  ['Le premier pays d’Afrique subsaharienne indépendant, en 1957, est…', 'le Ghana', ['la RDC', 'le Nigeria'], 1], ['L’Organisation de l’unité africaine (OUA) a été créée en…', '1963', ['1885', '2010'], 1],
+  ['Kimpa Vita, prophétesse du royaume Kongo, est morte en…', '1706', ['1960', '1482'], 2], ['Simon Kimbangu, fondateur du kimbanguisme, a été arrêté en…', '1921', ['1960', '1885'], 2],
+  ['Mvemba a Nzinga, roi du Kongo au XVIe siècle, est aussi appelé…', 'Afonso Ier', ['Léopold II', 'Soundiata'], 2], ['La reine Nzinga a résisté aux Portugais dans l’actuel…', 'Angola', ['Kenya', 'Maroc'], 2],
+  ['Le Grand Zimbabwe est célèbre pour…', 'sa cité de pierre', ['ses pyramides', 'son désert'], 2], ['L’Union africaine a son siège à…', 'Addis-Abeba', ['Kinshasa', 'Dakar'], 2],
+  ['Le squelette de « Lucy », découvert en 1974, a été trouvé en…', 'Éthiopie', ['RDC', 'Afrique du Sud'], 2], ['Wangari Maathai, prix Nobel de la paix 2004, a fait planter des millions…', 'd’arbres', ['de routes', 'de maisons'], 2],
+  ['Mobutu a pris le pouvoir en…', '1965', ['1960', '1997'], 2], ['Le royaume Kuba est célèbre pour ses tissus en…', 'raphia', ['soie', 'coton bleu'], 2],
 ];
 const GEOGRAPHIE = [
-  ['Le fleuve Congo coule en…', 'Afrique', ['Europe', 'Asie'], 0], ['Le plus grand océan du monde est l’océan…', 'Pacifique', ['Atlantique', 'Indien'], 0], ['Entre l’Europe et l’Amérique se trouve l’océan…', 'Atlantique', ['Pacifique', 'Indien'], 0],
-  ['La capitale de la France est…', 'Paris', ['Lyon', 'Marseille'], 0], ['La capitale de la République démocratique du Congo est…', 'Kinshasa', ['Brazzaville', 'Lubumbashi'], 0], ['La capitale de la Belgique est…', 'Bruxelles', ['Liège', 'Anvers'], 0],
-  ['Le Soleil se lève à…', 'l’est', ['l’ouest', 'au nord'], 0], ['Le Soleil se couche à…', 'l’ouest', ['l’est', 'au sud'], 0], ['Sur une carte, le nord est en général…', 'en haut', ['en bas', 'à gauche'], 0],
-  ['Le plus long fleuve de France est…', 'la Loire', ['la Seine', 'le Rhône'], 1], ['Le plus haut sommet des Alpes est…', 'le mont Blanc', ['le Kilimandjaro', 'le Puy de Dôme'], 1], ['Le plus grand désert chaud du monde est…', 'le Sahara', ['le Kalahari', 'le Gobi'], 1],
-  ['Le fleuve Congo se jette dans l’océan…', 'Atlantique', ['Indien', 'Pacifique'], 1], ['Le plus long fleuve d’Afrique est…', 'le Nil', ['le Congo', 'le Niger'], 1], ['La capitale du Congo-Brazzaville est…', 'Brazzaville', ['Kinshasa', 'Pointe-Noire'], 1],
-  ['La capitale du Sénégal est…', 'Dakar', ['Abidjan', 'Bamako'], 2], ['La capitale du Cameroun est…', 'Yaoundé', ['Douala', 'Libreville'], 2], ['La capitale du Japon est…', 'Tokyo', ['Pékin', 'Séoul'], 2],
-  ['Le plus haut sommet d’Afrique est…', 'le Kilimandjaro', ['le mont Blanc', 'l’Everest'], 2], ['Le plus haut sommet du monde est…', 'l’Everest', ['le mont Blanc', 'le Kilimandjaro'], 2],
+  ['La capitale de la RDC est…', 'Kinshasa', ['Lubumbashi', 'Goma'], 0], ['Le grand fleuve de la RDC est…', 'le fleuve Congo', ['le Nil', 'le Niger'], 0],
+  ['La RDC se trouve sur le continent…', 'africain', ['européen', 'asiatique'], 0], ['La monnaie de la RDC est…', 'le franc congolais', ['l’euro', 'le dollar'], 0],
+  ['La langue officielle de la RDC est…', 'le français', ['le lingala', 'l’anglais'], 0], ['L’animal qui ne vit qu’en RDC, à la robe rayée comme un zèbre sur les pattes, est…', 'l’okapi', ['la girafe', 'le lion'], 0],
+  ['Le Soleil se lève à…', 'l’est', ['l’ouest', 'au nord'], 0], ['Le plus long fleuve d’Afrique est…', 'le Nil', ['le Congo', 'le Zambèze'], 0],
+  ['Le plus grand désert d’Afrique est…', 'le Sahara', ['le Kalahari', 'le Namib'], 0], ['Le fleuve Congo se jette dans l’océan…', 'Atlantique', ['Indien', 'Pacifique'], 0],
+  ['Les quatre langues nationales de la RDC sont le lingala, le kikongo, le swahili et…', 'le tshiluba', ['l’anglais', 'le wolof'], 1], ['Combien de provinces compte la RDC ?', '26', ['11', '50'], 1],
+  ['La ville au bord du lac Kivu, près du volcan Nyiragongo, est…', 'Goma', ['Matadi', 'Kisangani'], 1], ['La grande ville minière du Haut-Katanga est…', 'Lubumbashi', ['Mbandaka', 'Kikwit'], 1],
+  ['Le principal port maritime de la RDC est…', 'Matadi', ['Goma', 'Kisangani'], 1], ['Le singe qui ne vit qu’en RDC est…', 'le bonobo', ['le gorille', 'le babouin'], 1],
+  ['Le plus ancien parc national d’Afrique, en RDC, est…', 'le parc des Virunga', ['le parc du Serengeti', 'le parc Kruger'], 1], ['Le plus grand pays d’Afrique est…', 'l’Algérie', ['la RDC', 'le Nigeria'], 1],
+  ['Le deuxième plus grand pays d’Afrique est…', 'la RDC', ['l’Égypte', 'le Kenya'], 1], ['Le plus haut sommet d’Afrique est…', 'le Kilimandjaro', ['le mont Cameroun', 'le Nyiragongo'], 1],
+  ['Le plus grand lac d’Afrique est…', 'le lac Victoria', ['le lac Kivu', 'le lac Tchad'], 1], ['La capitale du Congo-Brazzaville, en face de Kinshasa, est…', 'Brazzaville', ['Pointe-Noire', 'Libreville'], 1],
+  ['La RDC a combien de pays voisins ?', '9', ['3', '15'], 2], ['Le lac Tanganyika est le deuxième lac le plus… du monde', 'profond', ['salé', 'petit'], 2],
+  ['Le fleuve Congo a le deuxième plus grand débit du monde, après…', 'l’Amazone', ['le Nil', 'le Mississippi'], 2], ['Le grand barrage hydroélectrique sur le fleuve Congo s’appelle…', 'Inga', ['Assouan', 'Kariba'], 2],
+  ['Le chef-lieu de la province de la Tshopo est…', 'Kisangani', ['Mbuji-Mayi', 'Bukavu'], 2], ['Le chef-lieu du Sud-Kivu est…', 'Bukavu', ['Goma', 'Kananga'], 2],
+  ['Le pays le plus peuplé d’Afrique est…', 'le Nigeria', ['la RDC', 'l’Égypte'], 2], ['La ligne imaginaire qui traverse la RDC est…', 'l’équateur', ['le tropique du Cancer', 'le méridien de Greenwich'], 2],
+  ['La capitale du Kenya est…', 'Nairobi', ['Kampala', 'Kigali'], 2], ['La capitale de l’Égypte est…', 'Le Caire', ['Alexandrie', 'Tunis'], 2],
 ];
 const CALENDRIER = [
   ['Combien de jours dans une semaine ?', '7', ['5', '10'], 0], ['Combien de mois dans une année ?', '12', ['10', '52'], 0], ['Quelle saison vient après l’été ?', 'l’automne', ['l’hiver', 'le printemps'], 0],
@@ -236,16 +249,16 @@ const CALENDRIER = [
   ['Combien de jours a une année bissextile ?', '366', ['365', '360'], 1], ['Combien de semaines environ dans une année ?', '52', ['12', '100'], 1],
 ];
 
-// ---------- Enseignement moral et civique ----------
+// ---------- Enseignement moral et civique (RDC) ----------
 const EMC = [
-  ['La devise de la République française est…', 'Liberté, Égalité, Fraternité', ['Travail, Famille, Patrie', 'Paix, Joie, Amour'], 0], ['Les couleurs du drapeau français sont…', 'bleu, blanc, rouge', ['vert, jaune, rouge', 'bleu, jaune, vert'], 0],
-  ['L’hymne national français s’appelle…', 'La Marseillaise', ['Frère Jacques', 'L’Internationale'], 0], ['La fête nationale française a lieu le…', '14 juillet', ['1er janvier', '25 décembre'], 0],
-  ['La femme au bonnet phrygien qui représente la République s’appelle…', 'Marianne', ['Jeanne d’Arc', 'Joséphine'], 1], ['Le chef de l’État en France est…', 'le président de la République', ['le maire', 'le roi'], 1],
-  ['En France, on peut voter à partir de…', '18 ans', ['12 ans', '30 ans'], 1], ['Un camarade est triste. Que faire ?', 'L’écouter et l’aider', ['Se moquer de lui', 'Faire comme si de rien n’était'], 0],
+  ['La devise de la RDC est…', 'Justice, Paix, Travail', ['Liberté, Égalité, Fraternité', 'Union, Discipline, Travail'], 0], ['Le drapeau de la RDC est bleu ciel avec…', 'une étoile jaune et une bande rouge bordée de jaune', ['trois bandes verticales', 'un soleil blanc'], 0],
+  ['La fête de l’indépendance de la RDC a lieu le…', '30 juin', ['14 juillet', '25 décembre'], 0], ['Un camarade est triste. Que faire ?', 'L’écouter et l’aider', ['Se moquer de lui', 'Faire comme si de rien n’était'], 0],
   ['Un enfant est embêté tous les jours dans la cour. Je…', 'préviens un adulte', ['ne dis rien', 'rejoins ceux qui l’embêtent'], 0], ['Les règles de la classe servent à…', 'bien vivre ensemble', ['punir les élèves', 'faire peur'], 0],
-  ['Tous les enfants ont le droit…', 'd’aller à l’école', ['de ne jamais dormir', 'de conduire une voiture'], 0], ['Qui dirige la commune ?', 'le maire', ['le président', 'le directeur d’école'], 1],
-  ['La Convention internationale des droits de l’enfant a été adoptée en…', '1989', ['1789', '2010'], 2], ['En France, les lois sont votées par…', 'le Parlement', ['le maire', 'les enfants'], 2],
-  ['« Mosapi moko elongolaka sili te » veut dire qu’…', 'ensemble, on est plus fort', ['il faut rester seul', 'il faut aller vite'], 0],
+  ['Tous les enfants ont le droit…', 'd’aller à l’école', ['de ne jamais dormir', 'de conduire une voiture'], 0], ['« Mosapi moko elongolaka sili te » veut dire qu’…', 'ensemble, on est plus fort', ['il faut rester seul', 'il faut aller vite'], 0],
+  ['Pour garder notre quartier propre, on…', 'jette ses déchets à la poubelle', ['jette tout dans le fleuve', 'brûle les plastiques'], 0], ['Le chef de l’État en RDC est…', 'le président de la République', ['le gouverneur', 'le roi'], 1],
+  ['En RDC, on peut voter à partir de…', '18 ans', ['12 ans', '30 ans'], 1], ['Qui dirige une province ?', 'le gouverneur', ['le directeur d’école', 'le chef de quartier'], 1],
+  ['Les lois de la RDC sont votées par…', 'le Parlement', ['les enfants', 'le gouverneur'], 2], ['La Convention internationale des droits de l’enfant a été adoptée en…', '1989', ['1960', '2010'], 2],
+  ['La Constitution actuelle de la RDC date de…', '2006', ['1960', '1997'], 2],
 ];
 
 // ---------- Anglais ----------

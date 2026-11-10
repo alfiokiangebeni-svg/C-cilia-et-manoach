@@ -33,10 +33,11 @@ const GAME_FN = {};
 
 // ======================= 1. Course dans le ciel (avion piloté par l'enfant) =======================
 GAME_FN.race = G => {
-  const A = G.area; decor(A, 'course', 'race');
+  // G.theme (facultatif) : course de moto wewa dans Kinshasa au lieu de l'avion
+  const T = G.theme || {}, A = G.area; decor(A, T.decor || 'course', 'race' + (T.id ? ' race-' + T.id : ''));
   A.append(h('div', 'speedlines'));
   const lanes = [40, 62, 84];
-  const pw = h('div', 'plane-wrap', `<div class="pilote" style="background-image:url(${avImg(G.av)})"></div>${IMG('jeux/avion', 'avion')}`);
+  const pw = h('div', 'plane-wrap', `<div class="pilote" style="background-image:url(${avImg(G.av)})"></div>${IMG(T.vehicule || 'jeux/avion', 'avion')}`);
   pw.style.top = `calc(${lanes[1]}% - 4rem)`; A.append(pw);
   const bar = h('div', 'racebar', `<span class="flag">🏁</span>`);
   const me = h('div', 'tok tete'), rival = h('div', 'tok', IMG('jeux/perroquet'));
@@ -84,8 +85,9 @@ GAME_FN.race = G => {
 
 // ======================= 2. Pêche sur le fleuve (l'enfant pêche depuis la pirogue) =======================
 GAME_FN.fish = G => {
-  const A = G.area; decor(A, 'peche', 'sea');
-  const boat = h('div', 'boat-wrap', `<div class="pecheur" style="background-image:url(${avImg(G.av)})"></div>${IMG('jeux/bateau', 'bateau')}`); A.append(boat);
+  // G.theme (facultatif) : Tarzan le pêcheur dans la pirogue au lieu de l'enfant
+  const T = G.theme || {}, A = G.area; decor(A, 'peche', 'sea' + (T.id ? ' sea-' + T.id : ''));
+  const boat = h('div', 'boat-wrap', `<div class="pecheur" style="background-image:url(${T.pecheur ? 'img/village/' + T.pecheur + '.webp' : avImg(G.av)})"></div>${IMG('jeux/bateau', 'bateau')}`); A.append(boat);
   const bucket = h('div', 'bucket', `${IMG('jeux/seau')}<b>0</b>`); A.append(bucket);
   [['algue', '6%'], ['corail', '26%'], ['algue', '70%'], ['corail', '88%']].forEach(([im, l], k) => { const s = h('div', 'seaweed', IMG('jeux/' + im)); s.style.left = l; s.style.animationDelay = k * .4 + 's'; A.append(s); });
   const svgL = document.createElementNS('http://www.w3.org/2000/svg', 'svg'); svgL.setAttribute('class', 'link-svg'); svgL.style.zIndex = 7; A.append(svgL);

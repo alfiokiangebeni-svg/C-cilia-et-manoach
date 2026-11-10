@@ -4,8 +4,8 @@
 const fs = require('fs'), path = require('path'), vm = require('vm');
 const www = path.resolve(__dirname, '../www');
 const ctx = {}; vm.createContext(ctx);
-vm.runInContext(fs.readFileSync(www + '/js/programme.js', 'utf8') + fs.readFileSync(www + '/js/histoire.js', 'utf8') + ';Object.assign(this,{CHAPITRES,MECANIQUES,PERSONNAGES,PAGES_LIVRE,NIVEAUX,NOTIONS,NOTIONS_PAR_JEU,SUJETS});', ctx);
-const { CHAPITRES, MECANIQUES, PERSONNAGES, PAGES_LIVRE, NIVEAUX, NOTIONS, NOTIONS_PAR_JEU, SUJETS } = ctx;
+vm.runInContext(fs.readFileSync(www + '/js/programme.js', 'utf8') + fs.readFileSync(www + '/js/histoire.js', 'utf8') + ';Object.assign(this,{CHAPITRES,MECANIQUES,PERSONNAGES,PAGES_LIVRE,NIVEAUX,NOTIONS,NOTIONS_PAR_JEU,SUJETS,VILLAGE});', ctx);
+const { CHAPITRES, MECANIQUES, PERSONNAGES, PAGES_LIVRE, NIVEAUX, NOTIONS, NOTIONS_PAR_JEU, SUJETS, VILLAGE } = ctx;
 const matieresJs = fs.readFileSync(www + '/js/matieres.js', 'utf8') + fs.readFileSync(www + '/js/engine.js', 'utf8');
 const jeux = fs.readFileSync(www + '/js/games.js', 'utf8');
 const existe = id => new RegExp(`GAME_FN\\.${id}\\s*=`).test(jeux) || fs.existsSync(`${www}/js/mecaniques/${id}.js`);
@@ -61,10 +61,13 @@ SUJETS.forEach(S => S.notions.forEach(id => {
   ok(N, `matière ${S.id} : notion inconnue ${id}`); if (!N) return;
   ok(new RegExp(`\\b${id}\\s*\\(`).test(matieresJs), `notion ${id} : pas de générateur GEN.${id}`);
   ok(N.p.length === 3 && N.titre.fr && N.ref.fr, `notion ${id} : 3 niveaux, titre et référence`);
-  (N.jeux || []).forEach(j => ok(['race', 'fish', 'link', 'sort'].includes(j), `notion ${id} : jeu ${j} non prévu pour les mots`));
+  (N.jeux || []).forEach(j => ok(['race', 'fish', 'link', 'sort', 'robot', 'afrique'].includes(j), `notion ${id} : jeu ${j} inconnu`));
   if ((N.jeux || []).includes('sort')) ok(N.tri && N.tri.length === 3, `notion ${id} : règle de tri pour 3 niveaux`);
 }));
 Object.keys(NOTIONS).forEach(id => ok(SUJETS.some(S => S.notions.includes(id)), `notion ${id} hors des matières`));
+// Village : chaque jeu existe (GAME_FN) et sa notion aussi
+const jeuxJs = fs.readFileSync(www + '/js/games.js', 'utf8') + fs.readFileSync(www + '/js/mecaniques/village.js', 'utf8');
+VILLAGE.forEach(v => { ok(NOTIONS[v.notion], `village ${v.id} : notion inconnue ${v.notion}`); ok(new RegExp(`GAME_FN\\.${v.jeu}\\s*=`).test(jeuxJs), `village ${v.id} : jeu ${v.jeu} introuvable`); if (v.img) ok(fs.existsSync(`${www}/img/village/${v.img}.webp`), `village ${v.id} : image ${v.img} manquante`); });
 // Les 12 pages du livre (+ dédicace) sont toutes débloquables
 const debloq = new Set(CHAPITRES.flatMap(c => c.pages).map(String));
 PAGES_LIVRE.forEach(p => ok(debloq.has(String(p.id)), `page du livre ${p.id} jamais débloquée`));
@@ -81,7 +84,7 @@ Object.entries(PERSONNAGES).forEach(([id, P]) => P.poses.forEach(pose => ok(A.pe
 (A.jeux || []).forEach(e => { const f = `${www}/${e.fichier}`; ok(fs.existsSync(f), `${e.fichier} manquant`); if (fs.existsSync(f)) ok(fs.statSync(f).size <= (e.fichier.includes('decors') ? 250 : 80) * 1024, `${e.fichier} trop lourd`); });
 A.scenes.forEach(e => { if (fs.existsSync(`${www}/${e.fichier}`)) ok(fs.statSync(`${www}/${e.fichier}`).size <= 250 * 1024, `${e.fichier} > 250 Ko`); });
 
-console.log(`Structure : ${CHAPITRES.length} chapitres, ${stages} stages, ${parties} parties, ${notionsVues.size} notions du programme, ${NIVEAUX.length} niveaux, ${SUJETS.length} matières, ${nbMat} notions dans les matières`);
+console.log(`Structure : ${CHAPITRES.length} chapitres, ${stages} stages, ${parties} parties, ${notionsVues.size} notions du programme, ${NIVEAUX.length} niveaux, ${SUJETS.length} matières, ${nbMat} notions dans les matières, ${VILLAGE.length} jeux du village`);
 console.log(`Images : ${(A.jeux || []).length} images de jeu 3D, ${presentes} sprites présents, ${silhouettes} remplacés par une silhouette, ${A.scenes.length} scènes attendues`);
 if (erreurs.length) { erreurs.forEach(e => console.log('FAIL', e)); process.exit(1); }
 console.log('STRUCTURE OK');

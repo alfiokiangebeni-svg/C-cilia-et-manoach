@@ -133,7 +133,7 @@ const NOTIONS = {
 
 // Notions compatibles avec chaque jeu V1 (vérifié par test/structure.js).
 const NOTIONS_PAR_JEU = {
-  race: null, fish: null, link: ['numeration', 'add', 'sous', 'complements', 'doubles', 'x10', 'tables', 'divtables', 'multpose', 'divreste', 'fractions', 'decimaux', 'mesures', 'durees', 'perimetre', 'suites'],
+  race: null, fish: null, link: ['numeration', 'add', 'sous', 'complements', 'doubles', 'x10', 'tables', 'divtables', 'multpose', 'divreste', 'fractions', 'decimaux', 'mesures', 'durees', 'perimetre', 'suites', 'ppcm', 'pgcd'],
   sort: ['comparer', 'multiples', 'add', 'sous', 'tables'], feed: ['partage'], monster: ['complements', 'tables'], color: ['tables'],
 };
 
@@ -206,27 +206,77 @@ Object.assign(NOTIONS, {
   // ---- Histoire, géographie, EMC ----
   temps: { titre: { fr: 'Le temps qui passe', en: 'Time and calendar' }, domaine: 'histoire-geographie', jeux: ['race', 'fish'],
     ref: { fr: 'Calendrier, siècles, chiffres romains, repères chronologiques', en: 'Calendar, centuries' }, p: N3({}) },
-  histoire: { titre: { fr: 'Repères d’histoire', en: 'History' }, domaine: 'histoire-geographie', jeux: ['race', 'fish'],
-    ref: { fr: 'CM1 : la Gaule et les Romains, le temps des rois, la Révolution et l’Empire', en: 'History' }, p: N3({}) },
-  geographie: { titre: { fr: 'Le monde', en: 'Geography' }, domaine: 'histoire-geographie', jeux: ['race', 'fish'],
-    ref: { fr: 'Se repérer : points cardinaux, continents, océans, fleuves, capitales', en: 'Geography' }, p: N3({}) },
+  histoire: { titre: { fr: 'Histoire de la RDC et de l’Afrique', en: 'History of the DRC and Africa' }, domaine: 'histoire-geographie', jeux: ['race', 'fish'],
+    ref: { fr: 'Histoire de la RDC (royaume Kongo, colonisation, indépendance) et de l’Afrique (Égypte, empire du Mali, indépendances)', en: 'History of the DRC and Africa' }, p: N3({}) },
+  geographie: { titre: { fr: 'Géographie de la RDC et de l’Afrique', en: 'Geography of the DRC and Africa' }, domaine: 'histoire-geographie', jeux: ['race', 'fish'],
+    ref: { fr: 'Géographie de la RDC (fleuve, provinces, villes, parcs) et de l’Afrique (pays, fleuves, lacs, déserts, capitales)', en: 'Geography of the DRC and Africa' }, p: N3({}) },
   emc: { titre: { fr: 'Vivre ensemble', en: 'Citizenship' }, domaine: 'emc', jeux: ['race', 'fish'],
-    ref: { fr: 'Enseignement moral et civique : respect, règles, symboles de la République, droits de l’enfant', en: 'Citizenship' }, p: N3({}) },
+    ref: { fr: 'Enseignement moral et civique : respect, règles, symboles de la RDC, droits de l’enfant, environnement', en: 'Citizenship' }, p: N3({}) },
   // ---- Anglais ----
   anglais: { titre: { fr: 'Mots anglais', en: 'English words' }, domaine: 'anglais', jeux: ['link', 'race', 'fish'],
     ref: { fr: 'Langues vivantes : couleurs, nombres, animaux, famille, politesse, jours, corps, nourriture', en: 'English vocabulary' }, p: N3({}) },
 });
 
+// ---- Nouvelles notions : commerce, PPCM / PGCD, problèmes de la vie, programmation, carte de l'Afrique ----
+Object.assign(NOTIONS, {
+  commerce: { titre: { fr: 'Acheter, vendre, bénéfice', en: 'Buying, selling, profit' }, domaine: 'problemes', jeux: ['race', 'fish'],
+    ref: { fr: 'Problèmes de monnaie : prix, monnaie rendue (CE2) ; prix d’achat, prix de vente, bénéfice et perte (CM1) ; pourcentages (génie)', en: 'Money problems' }, p: N3({}) },
+  ppcm: { titre: { fr: 'PPCM', en: 'Least common multiple' }, domaine: 'nombres', jeux: ['race', 'fish', 'link'],
+    ref: { fr: 'Multiples communs : plus petit multiple commun de deux nombres (prolongement du CM1)', en: 'LCM' }, p: N3({ max: 6 }, { max: 12 }, { max: 30 }) },
+  pgcd: { titre: { fr: 'PGCD', en: 'Greatest common divisor' }, domaine: 'nombres', jeux: ['race', 'fish', 'link'],
+    ref: { fr: 'Diviseurs communs : plus grand diviseur commun de deux nombres (prolongement du CM1)', en: 'GCD' }, p: N3({ dmax: 5, k: 4 }, { dmax: 9, k: 6 }, { dmax: 15, k: 9 }) },
+  cuisine: { titre: { fr: 'En cuisine', en: 'Cooking' }, domaine: 'vie', jeux: ['race', 'fish'],
+    ref: { fr: 'Problèmes de recettes : proportionnalité, fractions, masses, contenances, durées', en: 'Cooking problems' }, p: N3({}) },
+  menuiserie: { titre: { fr: 'L’atelier de l’oncle Robert', en: 'Uncle Robert’s workshop' }, domaine: 'vie', jeux: ['race', 'fish'],
+    ref: { fr: 'Longueurs, conversions, périmètres et aires, partages ; prix et bénéfice', en: 'Lengths and areas' }, p: N3({}) },
+  agronomie: { titre: { fr: 'Le champ d’Axel l’agronome', en: 'Axel’s field' }, domaine: 'vie', jeux: ['race', 'fish'],
+    ref: { fr: 'Multiplication en rangées, aires et périmètres de champs, masses, rendement, hectare', en: 'Farming problems' }, p: N3({}) },
+  peche: { titre: { fr: 'La pêche de Tarzan', en: 'Tarzan’s fishing' }, domaine: 'vie', jeux: ['race', 'fish'],
+    ref: { fr: 'Problèmes de pêche : additions, partages, prix au kilo, vitesse', en: 'Fishing problems' }, p: N3({}) },
+  trajets: { titre: { fr: 'En wewa', en: 'By moto-taxi' }, domaine: 'vie', jeux: ['race', 'fish'],
+    ref: { fr: 'Trajets : prix des courses, monnaie, distances, vitesses, durées', en: 'Trips' }, p: N3({}) },
+  chantier: { titre: { fr: 'Le chantier de la route', en: 'Building the road' }, domaine: 'vie', jeux: ['race', 'fish'],
+    ref: { fr: 'Longueurs (m, km), partages, aires, multiples communs', en: 'Road building' }, p: N3({}) },
+  programmation: { titre: { fr: 'Programmer le robot', en: 'Program the robot' }, domaine: 'sciences', jeux: ['robot'],
+    ref: { fr: 'Sciences et technologie : écrire un programme de déplacement (algorithmique, boucles pour le génie)', en: 'Coding' },
+    p: N3({ taille: 4, obstacles: 0, max: 5 }, { taille: 5, obstacles: 3, max: 7 }, { taille: 6, obstacles: 6, max: 10, boucles: true }) },
+  carteAfrique: { titre: { fr: 'La carte de l’Afrique', en: 'Map of Africa' }, domaine: 'histoire-geographie', jeux: ['afrique'],
+    ref: { fr: 'Se repérer sur la carte de l’Afrique : pays et capitales', en: 'Map of Africa' },
+    p: N3({ taille: 900, modes: ['toucher', 'nom'], connus: ['cd', 'cg', 'ao', 'eg', 'dz', 'za', 'ng', 'ma', 'ly', 'sd', 'td', 'et', 'ke', 'tz', 'ml', 'ne', 'cm', 'mg', 'zm', 'ss', 'cf', 'na', 'mz', 'mr', 'so', 'bw'], ouvert: 0 },
+      { taille: 150, modes: ['toucher', 'nom', 'capitale'], ouvert: 1 }, { taille: 12, modes: ['toucher', 'nom', 'capitale', 'capitale'], ouvert: 1, capitales: true }) },
+});
+
+// Le village : les personnages et leurs jeux (écran « Le village »)
+const VILLAGE = [
+  { id: 'marche', nom: { fr: 'Suzanne et Albertine au marché', en: 'Suzanne and Albertine at the market' }, img: 'suzanne', jeu: 'scene', notion: 'commerce',
+    theme: { id: 'marche', decor: 'marche', hote: 'albertine', bouton: 'billet', recompense: ['piece', 'billet'] } },
+  { id: 'tarzan', nom: { fr: 'Tarzan le pêcheur', en: 'Tarzan the fisherman' }, img: 'tarzan', jeu: 'fish', notion: 'peche', theme: { id: 'tarzan', pecheur: 'tarzan' } },
+  { id: 'robert', nom: { fr: 'Oncle Robert le menuisier', en: 'Uncle Robert the carpenter' }, img: 'robert', jeu: 'scene', notion: 'menuiserie',
+    theme: { id: 'atelier', decor: 'atelier', hote: 'robert', bouton: 'planche', recompense: ['tabouret', 'planche'] } },
+  { id: 'caleb', nom: { fr: 'Oncle Caleb le programmeur', en: 'Uncle Caleb the programmer' }, img: 'caleb', jeu: 'robot', notion: 'programmation' },
+  { id: 'agronome', nom: { fr: 'Axel l’agronome', en: 'Axel the agronomist' }, img: 'axel-agronome', jeu: 'scene', notion: 'agronomie',
+    theme: { id: 'champ', decor: 'champ', hote: 'axel-agronome', bouton: 'plantule', recompense: ['mais', 'plantule'] } },
+  { id: 'cuisine', nom: { fr: 'On cuisine !', en: 'Let’s cook!' }, img: 'marmite', jeu: 'scene', notion: 'cuisine',
+    theme: { id: 'cuisine', decor: 'cuisine', hote: 'suzanne', bouton: 'riz', recompense: ['tomates', 'oignons', 'manioc', 'poisson-grille', 'huile', 'riz'] } },
+  { id: 'oiseaux', nom: { fr: 'Le chasseur d’images', en: 'The bird photographer' }, img: 'appareil', jeu: 'oiseaux', notion: 'tables' },
+  { id: 'max', nom: { fr: 'Max et son flair', en: 'Max’s nose' }, img: 'max-assis', jeu: 'flair', notion: 'melange' },
+  { id: 'dames', nom: { fr: 'Le jeu de dames', en: 'Draughts' }, img: 'piece', jeu: 'dames', notion: 'tables' },
+  { id: 'wewa', nom: { fr: 'La course de wewa', en: 'The moto-taxi race' }, img: 'wewa', jeu: 'race', notion: 'trajets', theme: { id: 'wewa', decor: 'avenue', vehicule: 'village/wewa' } },
+  { id: 'route', nom: { fr: 'Construire la route', en: 'Build the road' }, img: 'camion', jeu: 'route', notion: 'chantier' },
+  { id: 'afrique', nom: { fr: 'La carte de l’Afrique', en: 'Map of Africa' }, img: null, icon: '🌍', jeu: 'afrique', notion: 'carteAfrique' },
+];
+
 // Les matières (écran « Matières »)
 const SUJETS = [
   { id: 'maths', icon: '🔢', color: '#3a86ff', titre: { fr: 'Mathématiques', en: 'Maths' },
-    notions: ['numeration', 'comparer', 'add', 'sous', 'complements', 'doubles', 'x10', 'tables', 'divtables', 'multpose', 'divreste', 'partage', 'multiples', 'fractions', 'decimaux', 'mesures', 'durees', 'perimetre', 'suites', 'probleme', 'proportion', 'melange'] },
+    notions: ['numeration', 'comparer', 'add', 'sous', 'complements', 'doubles', 'x10', 'tables', 'divtables', 'multpose', 'divreste', 'partage', 'multiples', 'ppcm', 'pgcd', 'fractions', 'decimaux', 'mesures', 'durees', 'perimetre', 'suites', 'probleme', 'proportion', 'commerce', 'melange'] },
+  { id: 'vie', icon: '🏘️', color: '#e07a5f', titre: { fr: 'Problèmes de la vie', en: 'Everyday problems' }, notions: ['cuisine', 'menuiserie', 'agronomie', 'peche', 'trajets', 'chantier'] },
   { id: 'grammaire', icon: '✏️', color: '#e85d04', titre: { fr: 'Grammaire', en: 'Grammar' }, notions: ['nature', 'pluriel', 'fonction', 'phrases'] },
   { id: 'conjugaison', icon: '⏰', color: '#d62828', titre: { fr: 'Conjugaison', en: 'Verbs' }, notions: ['conjPresent', 'conjFutur', 'conjImparfait', 'conjPasseCompose', 'conjPasseSimple', 'conjImperatif', 'conjTemps'] },
   { id: 'orthographe', icon: '🔤', color: '#f15bb5', titre: { fr: 'Orthographe', en: 'Spelling' }, notions: ['homophones', 'accord', 'motsJustes'] },
   { id: 'vocabulaire', icon: '📖', color: '#9b5de5', titre: { fr: 'Vocabulaire', en: 'Vocabulary' }, notions: ['vocabulaire', 'dictionnaire', 'lingala'] },
-  { id: 'sciences', icon: '🔬', color: '#06a77d', titre: { fr: 'Sciences', en: 'Science' }, notions: ['vivant', 'animaux', 'alimentation', 'corps', 'plantes', 'matiere', 'ciel', 'energie', 'conducteurs'] },
-  { id: 'histoire-geographie', icon: '🗺️', color: '#b5838d', titre: { fr: 'Histoire et géographie', en: 'History and geography' }, notions: ['temps', 'histoire', 'geographie'] },
+  { id: 'sciences', icon: '🔬', color: '#06a77d', titre: { fr: 'Sciences', en: 'Science' }, notions: ['vivant', 'animaux', 'alimentation', 'corps', 'plantes', 'matiere', 'ciel', 'energie', 'conducteurs', 'programmation'] },
+  { id: 'histoire-geographie', icon: '🗺️', color: '#b5838d', titre: { fr: 'Histoire et géographie (RDC, Afrique)', en: 'History and geography (DRC, Africa)' }, notions: ['temps', 'histoire', 'geographie', 'carteAfrique'] },
   { id: 'emc', icon: '🤝', color: '#2a9d8f', titre: { fr: 'Vivre ensemble', en: 'Citizenship' }, notions: ['emc'] },
   { id: 'anglais', icon: '🇬🇧', color: '#457b9d', titre: { fr: 'Anglais', en: 'English' }, notions: ['anglais'] },
 ];

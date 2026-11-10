@@ -1,6 +1,7 @@
 // Robot : résout automatiquement les 70 parties × 3 niveaux (CE2, CM1, génie) = 210 manches, puis les 28 entraînements de tables.
 // Chaque partie doit se terminer par la célébration, donner au moins une luciole, sans aucune erreur JavaScript.
-// Usage : node test/toutes-les-parties.js [shots] [âge] [parties id1,id2…] [matières id1,id2…]
+// Usage : node test/toutes-les-parties.js [shots] [âge] [parties id1,id2…] [matières id1,id2…] [village id1,id2…]
+// Inclut aussi les 12 jeux du village aux 3 niveaux.
 // Inclut aussi les 30 notions des autres matières (français, sciences, histoire-géo, EMC, anglais) aux 3 niveaux.
 const { chromium } = require('playwright');
 const fs = require('fs'); fs.mkdirSync(__dirname + '/out', { recursive: true });
@@ -27,6 +28,25 @@ window.__step = () => {
     const txt = document.querySelector('.crate span').textContent.split(' = ')[0];
     const q = Q_OBJ.get(txt) || { ans: __num(txt) };
     return clickEl(document.querySelectorAll('.bin')[catQ(state.tri, q)]);
+  }
+  // Jeux du village : la réponse vient du texte de la question (ou de la clé posée sur la zone de jeu)
+  const zone = document.getElementById('area'), cle = zone.dataset.cle;
+  const viaCle = () => (cle && Q_OBJ.has(cle) ? Q_OBJ.get(cle) : null);
+  if (['oiseaux', 'flair', 'route', 'scene'].includes(g)) {
+    const txt = g === 'scene' ? document.querySelector('.hote-bulle').textContent : qt; if (!txt) return 'noq';
+    const a = __rep(txt); return clickEl([...zone.querySelectorAll('[data-v]')].find(b => __eq(a, b.dataset.v) && !b.classList.contains('good')));
+  }
+  if (g === 'robot') { const q = viaCle(); if (!q) return 'noq'; return clickEl([...zone.querySelectorAll('.prog')].find(b => b.dataset.v === q.ans && !b.classList.contains('good'))); }
+  if (g === 'afrique') {
+    const q = viaCle(); if (!q) return 'noq';
+    if (q.carte.mode === 'toucher') { const pth = zone.querySelector('path[data-id="' + q.ans + '"]'); if (pth.classList.contains('bon')) return 'busy'; pth.dispatchEvent(new MouseEvent('click', { bubbles: true })); return true; }
+    return clickEl([...zone.querySelectorAll('.rep-carte')].find(b => b.dataset.v === q.ans && !b.classList.contains('good')));
+  }
+  if (g === 'dames') {
+    const reps = [...zone.querySelectorAll('.rep-dames')];
+    if (reps.length) { const a = __rep(qt); return clickEl(reps.find(b => __eq(a, b.dataset.v))); }
+    const cible = zone.querySelector('.cd.cible'); if (cible) return clickEl(cible);
+    const p = zone.querySelector('.pion.peut'); return p ? clickEl(p.parentElement) : 'busy';
   }
   if (g === 'color') {
     const z = [...document.querySelectorAll('.color-stage .zone')].find(z => !z.dataset.ok); if (!z) return 'busy';
@@ -69,6 +89,20 @@ async function age(b, age, ids, shots) {
       if (typeof last === 'string' && last.startsWith('ERR')) break;
     }
     lignes.push(`${age} matière ${id} ${ok ? 'OK' : 'FAIL ' + last}`); console.log(lignes[lignes.length - 1]);
+    await pg.evaluate(() => { Celebrate.hide(); Play.stop(); });
+  }
+  const village = process.argv[6] ? process.argv[6].split(',') : process.argv[4] ? [] : await pg.evaluate(() => VILLAGE.map(v => v.id));
+  for (const id of village) {
+    await pg.evaluate(id => Play.village(id), id);
+    let ok = false, last;
+    for (let s = 0; s < 160; s++) {
+      await pg.waitForTimeout(350);
+      if (await pg.evaluate(() => document.getElementById('celebrate').classList.contains('on'))) { ok = true; break; }
+      if (shots && s === 2) await pg.screenshot({ path: `${__dirname}/out/v_${age}_${id}.png` });
+      last = await pg.evaluate(() => { try { return __step(); } catch (e) { return 'ERR ' + e.message; } });
+      if (typeof last === 'string' && last.startsWith('ERR')) break;
+    }
+    lignes.push(`${age} village ${id} ${ok ? 'OK' : 'FAIL ' + last}`); console.log(lignes[lignes.length - 1]);
     await pg.evaluate(() => { Celebrate.hide(); Play.stop(); });
   }
   if (age === 1 && !process.argv[4]) for (const op of ['×', '÷']) for (let n = 0; n <= 13; n++) {

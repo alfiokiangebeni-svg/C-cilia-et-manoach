@@ -43,3 +43,12 @@ Même style, même méthode (planches sur fond magenta, `HAUTEUR=<px> python3 ou
 | `img/fruits/` | banane, pomme, fraise, carotte, orange, mangue, raisin, noix de coco |
 | `img/animaux/` | singe, éléphant, lapin, girafe, panda, perroquet, koala, hippopotame |
 | `img/decors/` | accueil (fleuve au crépuscule), nuit étoilée, course (ciel au-dessus du fleuve), pêche (fleuve en coupe), partage (natte devant la maison), Glouton (clairière), tri (cour du village) — 1280 × 720, ≤ 250 Ko |
+
+## Le village (V2.3)
+
+| Fichiers | Contenu |
+|---|---|
+| `img/village/` personnages | Suzanne et Albertine (vendeuses du marché, pagnes wax), Tarzan (pêcheur, chapeau de paille, filet), oncle Robert (menuisier, tablier, scie), oncle Caleb (programmeur, lunettes, ordinateur), Axel l'agronome (chapeau, bottes, jeune plant) — apparences proposées, à valider par l'auteur |
+| `img/village/` Max | chien brun et blanc au collier rouge : renifle, assis, creuse, tient un os |
+| `img/village/` objets | 5 oiseaux, appareil photo, moto wewa, camion, panneau, os, monticule, marmite, riz, manioc, tomates, oignons, poisson grillé, huile de palme, billet, pièce, caisse, planche, tabouret, robot, jeune plant, maïs |
+| `img/decors/` | marché de Kinshasa, atelier, champ, route dans la savane, avenue de Kinshasa, cuisine de la cour, bureau de Caleb, grand arbre, jardin |

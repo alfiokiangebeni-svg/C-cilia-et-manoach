@@ -717,6 +717,186 @@
   {
    "fichier": "img/decors/tri.webp",
    "taille": "1280 px, ≤ 250 Ko"
+  },
+  {
+   "fichier": "img/village/albertine.webp",
+   "taille": "≤ 80 Ko"
+  },
+  {
+   "fichier": "img/village/appareil.webp",
+   "taille": "≤ 80 Ko"
+  },
+  {
+   "fichier": "img/village/axel-agronome.webp",
+   "taille": "≤ 80 Ko"
+  },
+  {
+   "fichier": "img/village/billet.webp",
+   "taille": "≤ 80 Ko"
+  },
+  {
+   "fichier": "img/village/caisse-sous.webp",
+   "taille": "≤ 80 Ko"
+  },
+  {
+   "fichier": "img/village/caleb.webp",
+   "taille": "≤ 80 Ko"
+  },
+  {
+   "fichier": "img/village/camion.webp",
+   "taille": "≤ 80 Ko"
+  },
+  {
+   "fichier": "img/village/huile.webp",
+   "taille": "≤ 80 Ko"
+  },
+  {
+   "fichier": "img/village/mais.webp",
+   "taille": "≤ 80 Ko"
+  },
+  {
+   "fichier": "img/village/manioc.webp",
+   "taille": "≤ 80 Ko"
+  },
+  {
+   "fichier": "img/village/marmite.webp",
+   "taille": "≤ 80 Ko"
+  },
+  {
+   "fichier": "img/village/max-assis.webp",
+   "taille": "≤ 80 Ko"
+  },
+  {
+   "fichier": "img/village/max-creuse.webp",
+   "taille": "≤ 80 Ko"
+  },
+  {
+   "fichier": "img/village/max-flaire.webp",
+   "taille": "≤ 80 Ko"
+  },
+  {
+   "fichier": "img/village/max-os.webp",
+   "taille": "≤ 80 Ko"
+  },
+  {
+   "fichier": "img/village/monticule.webp",
+   "taille": "≤ 80 Ko"
+  },
+  {
+   "fichier": "img/village/oignons.webp",
+   "taille": "≤ 80 Ko"
+  },
+  {
+   "fichier": "img/village/oiseau-bleu.webp",
+   "taille": "≤ 80 Ko"
+  },
+  {
+   "fichier": "img/village/oiseau-jaune.webp",
+   "taille": "≤ 80 Ko"
+  },
+  {
+   "fichier": "img/village/oiseau-orange.webp",
+   "taille": "≤ 80 Ko"
+  },
+  {
+   "fichier": "img/village/oiseau-rouge.webp",
+   "taille": "≤ 80 Ko"
+  },
+  {
+   "fichier": "img/village/oiseau-vert.webp",
+   "taille": "≤ 80 Ko"
+  },
+  {
+   "fichier": "img/village/os.webp",
+   "taille": "≤ 80 Ko"
+  },
+  {
+   "fichier": "img/village/panneau.webp",
+   "taille": "≤ 80 Ko"
+  },
+  {
+   "fichier": "img/village/piece.webp",
+   "taille": "≤ 80 Ko"
+  },
+  {
+   "fichier": "img/village/planche.webp",
+   "taille": "≤ 80 Ko"
+  },
+  {
+   "fichier": "img/village/plantule.webp",
+   "taille": "≤ 80 Ko"
+  },
+  {
+   "fichier": "img/village/poisson-grille.webp",
+   "taille": "≤ 80 Ko"
+  },
+  {
+   "fichier": "img/village/riz.webp",
+   "taille": "≤ 80 Ko"
+  },
+  {
+   "fichier": "img/village/robert.webp",
+   "taille": "≤ 80 Ko"
+  },
+  {
+   "fichier": "img/village/robot.webp",
+   "taille": "≤ 80 Ko"
+  },
+  {
+   "fichier": "img/village/suzanne.webp",
+   "taille": "≤ 80 Ko"
+  },
+  {
+   "fichier": "img/village/tabouret.webp",
+   "taille": "≤ 80 Ko"
+  },
+  {
+   "fichier": "img/village/tarzan.webp",
+   "taille": "≤ 80 Ko"
+  },
+  {
+   "fichier": "img/village/tomates.webp",
+   "taille": "≤ 80 Ko"
+  },
+  {
+   "fichier": "img/village/wewa.webp",
+   "taille": "≤ 80 Ko"
+  },
+  {
+   "fichier": "img/decors/marche.webp",
+   "taille": "1280 px, ≤ 250 Ko"
+  },
+  {
+   "fichier": "img/decors/atelier.webp",
+   "taille": "1280 px, ≤ 250 Ko"
+  },
+  {
+   "fichier": "img/decors/champ.webp",
+   "taille": "1280 px, ≤ 250 Ko"
+  },
+  {
+   "fichier": "img/decors/route.webp",
+   "taille": "1280 px, ≤ 250 Ko"
+  },
+  {
+   "fichier": "img/decors/avenue.webp",
+   "taille": "1280 px, ≤ 250 Ko"
+  },
+  {
+   "fichier": "img/decors/cuisine.webp",
+   "taille": "1280 px, ≤ 250 Ko"
+  },
+  {
+   "fichier": "img/decors/bureau.webp",
+   "taille": "1280 px, ≤ 250 Ko"
+  },
+  {
+   "fichier": "img/decors/arbre.webp",
+   "taille": "1280 px, ≤ 250 Ko"
+  },
+  {
+   "fichier": "img/decors/jardin.webp",
+   "taille": "1280 px, ≤ 250 Ko"
   }
  ]
 }

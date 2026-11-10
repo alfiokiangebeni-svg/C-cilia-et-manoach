@@ -253,7 +253,7 @@ const Store = {
     this.data.current = v1.current || null;
     this.save(); return true;
   },
-  complet(p) { p.lucioles = p.lucioles || {}; p.livre = p.livre || {}; p.coloriages = p.coloriages || {}; p.tables = p.tables || {}; p.matieres = p.matieres || {}; if (!(p.age >= 0 && p.age <= 2)) p.age = 0; return p; },
+  complet(p) { p.lucioles = p.lucioles || {}; p.livre = p.livre || {}; p.coloriages = p.coloriages || {}; p.tables = p.tables || {}; p.matieres = p.matieres || {}; p.village = p.village || {}; if (!(p.age >= 0 && p.age <= 2)) p.age = 0; return p; },
   save() { try { localStorage.setItem(this.key, JSON.stringify(this.data)); } catch (e) {} },
   profile() { return this.data.profiles.find(p => p.id === this.data.current) || null; },
   lucioles(id) { const p = this.profile(); return (p && p.lucioles[id]) || 0; },

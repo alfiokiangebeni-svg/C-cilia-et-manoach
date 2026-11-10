@@ -42,6 +42,8 @@ const out = path.resolve(process.argv[4] || __dirname + '/out'); fs.mkdirSync(ou
   await pg.evaluate(() => { state.sujet = 'conjugaison'; show('matiere'); }); await pg.waitForTimeout(500); await S('19_conjugaison');
   await pg.evaluate(() => Play.matiere('homophones')); await pg.waitForTimeout(1300); await S('20_homophones');
   await pg.evaluate(() => Play.matiere('vivant')); await pg.waitForTimeout(1300); await S('21_vivant');
+  await pg.evaluate(() => { Play.stop(); show('village'); }); await pg.waitForTimeout(600); await S('22_village');
+  for (const [k, id] of [['23', 'marche'], ['24', 'afrique'], ['25', 'dames'], ['26', 'oiseaux']]) { await pg.evaluate(id => Play.village(id), id); await pg.waitForTimeout(1300); await S(`${k}_village_${id}`); }
   await pg.evaluate(() => { Play.stop(); show('home'); });
   console.log('ERR', JSON.stringify(errs));
   await b.close();

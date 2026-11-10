@@ -118,10 +118,24 @@ const RENDER = {
     const nb = Object.keys(p.livre).length;
     const z = h('button', 'chap-card livre-card', `<div class="num">📖</div><div class="nm">${t('myBook')}</div><div class="stars">${nb}/${PAGES_LIVRE.length}</div>`);
     z.onclick = () => { Sound.tap(); show('livre'); }; g.append(z);
+    const vg = h('button', 'chap-card village-card', `<div class="num">🏘️</div><div class="nm">${t('village')}</div><div class="stars">${VILLAGE.length}</div>`);
+    vg.onclick = () => { Sound.tap(); show('village'); }; g.append(vg);
     const mt = h('button', 'chap-card matieres-card', `<div class="num">📚</div><div class="nm">${t('subjects')}</div><div class="stars">${SUJETS.length}</div>`);
     mt.onclick = () => { Sound.tap(); show('matieres'); }; g.append(mt);
     const tb = h('button', 'chap-card tables-card', `<div class="num">×÷</div><div class="nm">${t('tables')}</div><div class="stars">1 → 13</div>`);
     tb.onclick = () => { Sound.tap(); show('tables'); }; g.append(tb);
+  },
+  // Le village : les personnages et leurs jeux
+  village() {
+    const p = Store.profile(); if (!p) return show('profiles');
+    $('#village-stars').textContent = `${VILLAGE.reduce((a, v) => a + (p.village[v.id] || 0), 0)} / ${VILLAGE.length * 3}`;
+    const g = $('#village-grid'); g.innerHTML = '';
+    VILLAGE.forEach(v => {
+      const st = p.village[v.id] || 0, im = v.img ? `<img src="img/village/${v.img}.webp" alt="" draggable="false">` : `<span class="ic">${v.icon}</span>`;
+      const c = h('button', 'village-card-btn' + (st ? ' faite' : ''), `<div class="portrait">${im}</div><b>${esc(tx(v.nom))}</b><small>${esc(tx(NOTIONS[v.notion].titre))}</small><i>${starStr(st)}</i>`);
+      c.dataset.village = v.id; c.onclick = () => { Sound.init(); Sound.tap(); Play.village(v.id); };
+      g.append(c);
+    });
   },
   // Matières : maths, grammaire, conjugaison, orthographe, vocabulaire, sciences, histoire-géographie, EMC, anglais
   matieres() {
@@ -234,6 +248,17 @@ const Play = {
       cfg: M.ages[niv], partie: pa, chip: `${M.icon} ${tx(N.titre)}`,
     });
   },
+  // Un jeu du village : un personnage, un jeu, une notion
+  village(id) {
+    const p = Store.profile(), niv = p.age, V = VILLAGE.find(x => x.id === id), N = NOTIONS[V.notion];
+    state.mode = 'village'; state.village = id;
+    this.lancer({
+      game: V.jeu, lvl: 0, theme: V.theme || null,
+      sk: Object.assign({ notion: V.notion, niv }, N.p[niv]),
+      glouton: MONSTER_MODES[0][0], tri: { type: 'parity' }, cfg: {}, partie: null,
+      chip: `${tx(V.nom)}`,
+    });
+  },
   // Entraînement d'une notion d'une matière (hors histoire)
   matiere(id) {
     const p = Store.profile(), niv = p.age, N = NOTIONS[id], S = SUJETS.find(x => x.notions.includes(id));
@@ -267,7 +292,7 @@ const Play = {
     $('#play-level').textContent = c.chip;
     const qEl = h('div', 'question'); area.append(qEl);
     const G = {
-      area, age: p.age, lvl, av: avOf(p), sk: c.sk, glouton: c.glouton, tri: c.tri, cfg: c.cfg, partie: c.partie,
+      area, age: p.age, lvl, av: avOf(p), sk: c.sk, glouton: c.glouton, tri: c.tri, cfg: c.cfg, partie: c.partie, theme: c.theme || null,
       alive: () => sid === self.sid,
       later(fn, ms) { const id = setTimeout(() => { if (sid === self.sid) fn(); }, ms); self.timers.push(id); return id; },
       raf(fn) { const loop = () => { if (sid !== self.sid) return; fn(); self.rafs.push(requestAnimationFrame(loop)); }; loop(); },
@@ -299,6 +324,10 @@ const Play = {
     const p = Store.profile(), e = this.errors;
     // Enfant génie : plus exigeant (3 lucioles seulement sans aucune erreur)
     const n = p.age === 2 ? (e === 0 ? 3 : e <= 2 ? 2 : 1) : (e <= 1 ? 3 : e <= 4 ? 2 : 1);
+    if (state.mode === 'village') {
+      p.village[state.village] = Math.max(p.village[state.village] || 0, n); Store.save();
+      Celebrate.show(n, [], extra, null); return;
+    }
     if (state.mode === 'matiere') {
       p.matieres[state.matiere] = Math.max(p.matieres[state.matiere] || 0, n); Store.save();
       Celebrate.show(n, [], extra, null); return;
@@ -339,18 +368,20 @@ const Celebrate = {
   hide() { $('#celebrate').classList.remove('on'); Fireworks.stop(); },
   suivante() {
     if (state.mode === 'tables') return state.table.n && state.table.n < 13 ? { table: state.table.n + 1 } : null;
+    if (state.mode === 'village') { const k = VILLAGE.findIndex(x => x.id === state.village); return VILLAGE[k + 1] ? { village: VILLAGE[k + 1].id } : null; }
     if (state.mode === 'matiere') { const L = SUJETS.find(x => x.id === state.sujet).notions, k = L.indexOf(state.matiere); return L[k + 1] ? { notion: L[k + 1] } : null; }
     const k = PARTIES.findIndex(p => p.id === state.partie); return PARTIES[k + 1] || null;
   },
 };
 $('#cel-map').onclick = () => { Sound.tap(); Celebrate.hide(); Play.stop(); show(ecranRetour('hub')); };
-$('#cel-replay').onclick = () => { Sound.tap(); Celebrate.hide(); if (state.mode === 'tables') Play.table(state.table.op, state.table.n); else if (state.mode === 'matiere') Play.matiere(state.matiere); else Play.start(state.partie); };
+$('#cel-replay').onclick = () => { Sound.tap(); Celebrate.hide(); if (state.mode === 'tables') Play.table(state.table.op, state.table.n); else if (state.mode === 'matiere') Play.matiere(state.matiere); else if (state.mode === 'village') Play.village(state.village); else Play.start(state.partie); };
 // Partie suivante : dans le même stage on enchaîne ; sinon on passe par la scène d'ouverture du stage suivant
 $('#cel-next').onclick = () => {
   Sound.tap(); const nx = Celebrate.suivante(); Celebrate.hide();
   if (!nx) { Play.stop(); show(ecranRetour('hub')); return; }
   if (state.mode === 'tables') { Play.table(state.table.op, nx.table); return; }
   if (state.mode === 'matiere') { Play.matiere(nx.notion); return; }
+  if (state.mode === 'village') { Play.village(nx.village); return; }
   const cur = partie(state.partie);
   if (nx.st === cur.st) Play.start(nx.id); else { Play.stop(); state.chap = nx.ch.id; state.stage = nx.st.id; show('stage'); }
 };
@@ -392,26 +423,26 @@ function parentPanel() {
     <div class="row"><b>${t('sound')} :</b> <button class="btn ${Store.data.sound ? 'green' : 'red'}" id="pp-sound">${Store.data.sound ? '🔊' : '🔇'}</button></div>
     ${p ? `<div class="row"><b>${esc(p.name)} — ${t('changeAge')} :</b> ${AGES.map(a => `<button class="btn" data-age="${a.id}" style="--c:${a.color};font-size:1.2rem;${p.age === a.id ? 'outline:.25rem solid #2b2d42' : ''}">${a.range}</button>`).join('')}</div>
     <div class="row"><button class="btn orange" id="pp-reset">↺ ${t('reset')}</button><button class="btn red" id="pp-del">🗑 ${t('del')}</button></div>` : ''}
-    <div class="small-note">Cécilia &amp; Manoach V2.0 · ${CHAPITRES.length} chapitres · ${PARTIES.length} parties · CE2, CM1, génie · tables 1 → 13 · ${SUJETS.length} matières · hors ligne, sans publicité, aucune donnée collectée.</div>
+    <div class="small-note">Cécilia &amp; Manoach V2.0 · ${CHAPITRES.length} chapitres · ${PARTIES.length} parties · CE2, CM1, génie · tables 1 → 13 · ${SUJETS.length} matières · ${VILLAGE.length} jeux du village · carte de l’Afrique : @svg-maps/world (CC BY 4.0) · hors ligne, sans publicité, aucune donnée collectée.</div>
     <button class="btn blue" id="pp-close">${t('close')}</button>`);
   $$('#modal-box [data-l]').forEach(b => b.onclick = () => { LANG = b.dataset.l; Store.data.lang = LANG; Store.save(); applyLang(); parentPanel(); if (RENDER[current]) RENDER[current](); });
   $('#pp-sound').onclick = () => { Store.data.sound = !Store.data.sound; Sound.on = Store.data.sound; Store.save(); parentPanel(); RENDER.home(); };
   $$('#modal-box [data-age]').forEach(b => b.onclick = () => { p.age = +b.dataset.age; Store.save(); parentPanel(); if (RENDER[current]) RENDER[current](); });
   const confirm2 = (btn, fn) => { if (btn.dataset.armed) fn(); else { btn.dataset.armed = 1; btn.textContent = '⚠ ' + t('confirm'); } };
-  const rs = $('#pp-reset'); if (rs) rs.onclick = () => confirm2(rs, () => { p.lucioles = {}; p.livre = {}; p.coloriages = {}; p.tables = {}; p.matieres = {}; Store.save(); Modal.close(); if (RENDER[current]) RENDER[current](); });
+  const rs = $('#pp-reset'); if (rs) rs.onclick = () => confirm2(rs, () => { p.lucioles = {}; p.livre = {}; p.coloriages = {}; p.tables = {}; p.matieres = {}; p.village = {}; Store.save(); Modal.close(); if (RENDER[current]) RENDER[current](); });
   const dl = $('#pp-del'); if (dl) dl.onclick = () => confirm2(dl, () => { Store.data.profiles = Store.data.profiles.filter(x => x.id !== p.id); Store.data.current = null; Store.save(); Modal.close(); show('profiles'); });
   $('#pp-close').onclick = Modal.close;
 }
 
 // ---------------- Boutons et retour ----------------
-const ecranRetour = defaut => (state.mode === 'tables' ? 'tables' : state.mode === 'matiere' ? 'matiere' : defaut);
+const ecranRetour = defaut => ({ tables: 'tables', matiere: 'matiere', village: 'village' }[state.mode] || defaut);
 function goBack() {
   if ($('#modal').classList.contains('on')) { Modal.close(); return true; }
   if ($('#celebrate').classList.contains('on')) { Celebrate.hide(); Play.stop(); show(ecranRetour('stage')); return true; }
   switch (current) {
     case 'play': Play.stop(); show(ecranRetour('stage')); return true;
     case 'stage': show('chapitre'); return true;
-    case 'chapitre': case 'livre': case 'tables': case 'matieres': show('hub'); return true;
+    case 'chapitre': case 'livre': case 'tables': case 'matieres': case 'village': show('hub'); return true;
     case 'matiere': show('matieres'); return true;
     case 'free': show('livre'); return true;
     case 'hub': show('profiles'); return true;

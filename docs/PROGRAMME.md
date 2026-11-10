@@ -1,49 +1,18 @@
 # Le programme scolaire dans le jeu
 
-Le jeu suit les **programmes de mathématiques de l’Éducation nationale (France)** et leurs repères annuels de progression :
+Le jeu suit les **programmes de l’Éducation nationale (France)** pour les mathématiques et le français, avec leurs repères annuels, et met l’accent sur la **RDC et l’Afrique** pour l’histoire, la géographie et l’instruction civique (à la demande de l’auteur).
 
-| Niveau dans le jeu | Classe (France) | Âge |
+| Niveau dans le jeu | Classe | Âge |
 |---|---|---|
-| 3e primaire | CE2 (fin du cycle 2) | 8-9 ans |
-| 4e primaire | CM1 (début du cycle 3) | 9-10 ans |
-| Enfant génie | mêmes notions que le CM1, beaucoup plus difficiles | — |
+| 3e primaire | CE2 | 8-9 ans |
+| 4e primaire | CM1 | 9-10 ans |
+| Enfant génie | mêmes notions, beaucoup plus difficiles | — |
 
-Le niveau se choisit à la création du profil (« Quelle est ta classe ? ») et se change dans l’espace parents. Les 70 parties de l’histoire sont les mêmes pour tous : c’est la difficulté des questions qui change.
+Le niveau se choisit à la création du profil et se change dans l’espace parents. **Toutes les fonctions sont débloquées** (`TOUT_OUVERT = true` dans `app.js`).
 
-**Enfant génie** : nombres plus grands (jusqu’au million et aux décimaux), tables jusqu’à 13, plus de réponses proposées, perroquet plus rapide dans la course, 10 questions au lieu de 8, et 3 lucioles seulement sans aucune erreur.
+**Enfant génie** : nombres plus grands, tables jusqu’à 13, plus de réponses proposées, adversaires plus rapides, 10 questions au lieu de 8, 3 lucioles seulement sans aucune erreur.
 
-## Les notions (programme.js)
-
-Exemples tirés au hasard par le jeu pour chaque niveau.
-
-| Notion | Compétence du programme | 3e primaire (CE2) | 4e primaire (CM1) | Enfant génie |
-|---|---|---|---|---|
-| Les grands nombres | Nombres et calculs — composer, décomposer les nombres entiers (CE2 : jusqu’à 10 000 ; CM1 : jusqu’au million) | 88 centaines = ? → 8 800 | 400 000 + 30 000 + 6 000 + 700 + 40 + 8 = ? → 436 748 | 4 + 80 + 700 + 900 000 + 3 000 + 10 000 + 9 000 000 = ? → 9 913 784 |
-| Comparer et ranger | Comparer, ranger, encadrer des nombres entiers puis décimaux (CM1) | 543 → 543 | 65 583 → 65 583 | 3,02 → 3,02 |
-| Additions | Calcul mental et posé : addition de nombres entiers (CE2 : < 1 000 ; CM1 : < 10 000) | 291 + 87 = ? → 378 | 2 081 + 1 304 = ? → 3 385 | 602 443 + 188 310 = ? → 790 753 |
-| Soustractions | Calcul mental et posé : soustraction de nombres entiers | 344 − 112 = ? → 232 | 4 131 − 658 = ? → 3 473 | 682 525 − 5 471 = ? → 677 054 |
-| Compléments | Calcul mental : compléments à 100 (CE2), à 1 000 (CM1), à l’unité pour les décimaux | 85 + ? = 100 → 15 | 640 + ? = 1 000 → 360 | 0,65 + ? = 1 → 0,35 |
-| Doubles et moitiés | Calcul mental : doubles et moitiés | double de 43 = ? → 86 | moitié de 644 = ? → 322 | moitié de 70 = ? → 35 |
-| × 10, × 100, ÷ 10 | Multiplier, diviser par 10, 100, 1 000 | 900 ÷ 10 = ? → 90 | 710 ÷ 10 = ? → 71 | 7,11 × 1 000 = ? → 7 110 |
-| Tables de multiplication | Mémoriser les tables de multiplication (CE2 : 2 à 9 ; CM1 : jusqu’à 12 ; génie : jusqu’à 13) | 2 × 9 = ? → 18 | 3 × 12 = ? → 36 | 8 × 6 = ? → 48 |
-| Tables de division | Division exacte à l’aide des tables | 3 ÷ 3 = ? → 1 | 99 ÷ 9 = ? → 11 | 108 ÷ 12 = ? → 9 |
-| Multiplications | Multiplication posée (CE2 : par un nombre à 1 chiffre ; CM1 : à 2 chiffres) | 34 × 2 = ? → 68 | 26 × 17 = ? → 442 | 321 × 83 = ? → 26 643 |
-| Division avec reste | Division euclidienne : quotient et reste (introduite en CE2, posée en CM1) | 29 ÷ 2 → quotient ? → 14 | 38 ÷ 9 → quotient ? → 4 | 249 ÷ 10 → quotient ? → 24 |
-| Partager équitablement | Résoudre des problèmes de partage (sens de la division) | 12 ÷ 2 = ? → 6 | 21 ÷ 3 = ? → 7 | 117 ÷ 9 = ? → 13 |
-| Multiples et divisibilité | Nombres pairs/impairs, multiples ; critères de divisibilité par 2, 3, 5, 9, 10 (CM1) | 188 → 188 | 236 → 236 | 303 → 303 |
-| Fractions | CE2 : moitié, tiers, quart ; CM1 : fraction d’une quantité (3/4 de 20) | la moitié de 10 = ? → 5 | 4/10 de 80 = ? → 32 | 3/12 de 96 = ? → 24 |
-| Nombres décimaux et monnaie | CE2 : euros et centimes ; CM1 : nombres décimaux (dixièmes, centièmes), addition et soustraction | 7 € et 60 c = ? centimes → 760 | 6,1 − 0,6 = ? → 5,5 | 7,4 − 4,4 = ? → 3 |
-| Longueurs, masses, contenances | Grandeurs et mesures : unités de longueur, masse, contenance et conversions | 5 km = ? m → 5 000 | 1 m = ? mm → 1 000 | 4,28 L = ? cL → 428 |
-| Heures et durées | Grandeurs et mesures : heures, minutes, secondes, jours ; calcul de durées | 8 min = ? s → 480 | 7 min 8 s = ? s → 428 | 6 j 14 h = ? h → 158 |
-| Périmètres et aires | Espace et géométrie : périmètre du carré et du rectangle ; aire (CM1) | Rectangle 7 cm × 12 cm : périmètre ? → 38 | Rectangle 6 cm × 10 cm : périmètre ? → 32 | Rectangle 28 cm × 32 cm : périmètre ? → 120 |
-| Suites de nombres | Compter de 2 en 2, de 5 en 5, de 10 en 10, de 25 en 25… ; régularités | 44, 46, 48, 50, … ? → 52 | 2 505, 2 255, 2 005, 1 755, … ? → 1 505 | 36, 49, 64, 81, … ? → 100 |
-| Problèmes | Résoudre des problèmes en une étape (CE2) puis en deux étapes (CM1) | Cécilia compte 39 étoiles, puis encore 35. Combien en tout ? → 74 | 90 lucioles forment 5 marches égales. Combien de lucioles par marche ? → 18 | 275 lucioles en groupes de 18. Combien de groupes complets ? → 15 |
-| Proportionnalité | Situations de proportionnalité simples (CM1) | 1 sac contient 3 billes. Combien de billes dans 4 sacs ? → 12 | 3 mangues coûtent 18 €. Combien coûtent 6 mangues ? → 36 | 5 kg de riz coûtent 12,5 €. Combien coûtent 9 kg ? → 22,5 |
-| Tout ce qu’on a appris | Révision de l’année | 950 − 100 = ? → 850 | 43 × 19 = ? → 817 | 13 × 8 = ? → 104 |
-
-## Les épreuves de l’histoire
-
-Chaque partie associe une **mécanique de jeu** (l’aventure) et une **notion du programme** (ce que l’enfant apprend). La progression suit l’année scolaire : numération et additions d’abord, tables de multiplication, puis division, mesures, fractions, décimaux et problèmes.
+## Les épreuves de l’histoire (70 parties)
 
 | Chapitre | Partie | Notion |
 |---|---|---|
@@ -85,7 +54,7 @@ Chaque partie associe une **mécanique de jeu** (l’aventure) et une **notion d
 | 6. Thérèse la tortue | 6.1.1 Parler à Thérèse | Heures et durées |
 | 6. Thérèse la tortue | 6.1.2 Les mots du fleuve | Longueurs, masses, contenances |
 | 6. Thérèse la tortue | 6.2.1 Les bons passages | Tables de division |
-| 6. Thérèse la tortue | 6.2.2 Traverser l’Ebale | Multiplications |
+| 6. Thérèse la tortue | 6.2.2 Traverser l’Ebale | PPCM |
 | 6. Thérèse la tortue | 6.3.1 Les remous | Division avec reste |
 | 6. Thérèse la tortue | 6.3.2 Les nénuphars | Problèmes |
 | 6. Thérèse la tortue | 6.3.3 Accoster chez Axel | Fractions |
@@ -97,7 +66,7 @@ Chaque partie associe une **mécanique de jeu** (l’aventure) et une **notion d
 | 7. Axel le baobab | 7.3.2 Vite, de la lumière ! | Division avec reste |
 | 7. Axel le baobab | 7.3.3 Tiens bon, petite étoile | Problèmes |
 | 8. Christian et les amis | 8.1.1 Rassurer Christian | Périmètres et aires |
-| 8. Christian et les amis | 8.1.2 Qui sait faire quoi ? | Tables de division |
+| 8. Christian et les amis | 8.1.2 Qui sait faire quoi ? | PGCD |
 | 8. Christian et les amis | 8.2.1 Réfléchir ensemble | Tables de multiplication |
 | 8. Christian et les amis | 8.2.2 Les amis arrivent | Compléments |
 | 8. Christian et les amis | 8.3.1 Le plan | Tables de multiplication |
@@ -113,99 +82,152 @@ Chaque partie associe une **mécanique de jeu** (l’aventure) et une **notion d
 | 10. Chez Maman la Lune | 10.1.1 Sur l’escalier | Nombres décimaux et monnaie |
 | 10. Chez Maman la Lune | 10.1.2 Le bec bien serré | Proportionnalité |
 | 10. Chez Maman la Lune | 10.2.1 Tout ensemble | Tout ce qu’on a appris |
-| 10. Chez Maman la Lune | 10.2.2 La dernière épreuve | Tout ce qu’on a appris |
+| 10. Chez Maman la Lune | 10.2.2 La dernière épreuve | Acheter, vendre, bénéfice |
 | 10. Chez Maman la Lune | 10.3.1 Les retrouvailles | Heures et durées |
 | 10. Chez Maman la Lune | 10.3.2 Colorier la scène | Tables de multiplication |
 | 10. Chez Maman la Lune | 10.3.3 Le clin d’œil | Tables de division |
 
+## Le village (12 jeux)
+
+Depuis la carte, la case **Le village** réunit les personnages et leurs jeux. Chaque jeu se joue au niveau de l’enfant et garde ses étoiles (`village` dans la sauvegarde).
+
+| Jeu | Personnage / mécanique | Notion | Exemple (4e primaire) |
+|---|---|---|---|
+| Suzanne et Albertine au marché | scène avec le personnage, réponses en images | Acheter, vendre, bénéfice | Suzanne achète un pagne 8 000 FC et veut gagner 1 000 FC. À quel prix doit-elle le vendre (FC) ? → 9 000 |
+| Tarzan le pêcheur | pêche depuis la pirogue | La pêche de Tarzan | Tarzan vend sa pêche 9 300 FC. L’essence de la pirogue a coûté 3 400 FC. Que lui reste-t-il (FC) ? → 5 900 |
+| Oncle Robert le menuisier | scène avec le personnage, réponses en images | L’atelier de l’oncle Robert | Une étagère mesure 40 cm sur 45 cm. Quelle est son aire (cm²) ? → 1 800 |
+| Oncle Caleb le programmeur | programmer le robot sur une grille | Programmer le robot | Quel programme amène le robot jusqu’à l’étoile ? → ↑ ↑ |
+| Axel l’agronome | scène avec le personnage, réponses en images | Le champ d’Axel l’agronome | Pour clôturer un champ de 37 m sur 28 m, combien de mètres de clôture faut-il ? → 130 |
+| On cuisine ! | scène avec le personnage, réponses en images | En cuisine | La moitié de 3 L d’huile de palme, c’est combien de centilitres ? → 150 |
+| Le chasseur d’images | photographier l’oiseau à la bonne réponse | Tables de multiplication | undefined → 24 |
+| Max et son flair | Max renifle et creuse le bon monticule | Tout ce qu’on a appris | 17 km 904 m = ? m → 17 904 |
+| Le jeu de dames | jeu de dames 6 × 6 contre l’ordinateur, une question avant chaque coup | Tables de multiplication | undefined → 36 |
+| La course de wewa | course | En wewa | Le chauffeur fait 6 courses à 2 000 FC dans la matinée. Combien gagne-t-il (FC) ? → 12 000 |
+| Construire la route | chaque bonne réponse pose un tronçon de route | Le chantier de la route | Le camion fait 8 voyages de 16 tonnes. Combien de tonnes en tout ? → 128 |
+| La carte de l’Afrique | carte de l’Afrique : toucher un pays, le nommer, sa capitale | La carte de l’Afrique | Touche : Mozambique → mz |
+
+> **Le chasseur d’images** : le cahier des charges interdit toute violence ; le chasseur d’oiseaux est donc devenu un photographe qui « attrape » les oiseaux en photo.
+
+> **Carte de l’Afrique** : tracés des pays issus de [@svg-maps/world](https://github.com/VictorCazanave/svg-maps) (licence CC BY 4.0), noms et capitales ajoutés en français. Mention dans l’espace parents.
+
 ## Entraînement : tables de 1 à 13
 
-Depuis la carte, la carte « Tables de 1 à 13 » ouvre 28 entraînements libres :
+28 entraînements : multiplication (avion) et division (pêche) de 1 à 13, plus « Toutes ». Étoiles dans `tables`.
 
-- tables de **multiplication** de 1 à 13 (jeu de l’avion) et « Toutes » (mélange des 13 tables) ;
-- tables de **division** de 1 à 13 (jeu de la pêche) et « Toutes ».
+## Les matières (10 matières, 64 notions)
 
-Chaque table donne 1 à 3 lucioles, gardées dans le profil (champ `tables` de la sauvegarde), sans toucher à la progression de l’histoire.
+Contenus en données dans `app/www/js/contenus.js` (chaque élément porte son niveau : 0 = CE2, 1 = CM1, 2 = génie) ; un enseignant peut les relire et les compléter sans toucher au code.
 
-> Le programme français demande la maîtrise des tables jusqu’à 9 (fin CE2, consolidées en CM1). Les tables 10 à 13 sont un entraînement en plus, demandé par l’auteur.
+### 🔢 Mathématiques
 
-## Les autres matières (écran « Matières »)
+| Notion | Programme | 3e primaire | 4e primaire | Génie |
+|---|---|---|---|---|
+| Les grands nombres | Nombres et calculs — composer, décomposer les nombres entiers (CE2 : jusqu’à 10 000 ; CM1 : jusqu’au million) | 1 000 + 400 + 20 + 4 = ? → 1 424 | 800 000 + 20 000 + 7 000 + 600 + 30 + 7 = ? → 827 637 | 200 + 1 000 + 80 000 + 4 000 000 + 4 + 700 000 + 70 = ? → 4 781 274 |
+| Comparer et ranger | Comparer, ranger, encadrer des nombres entiers puis décimaux (CM1) | 1 011 → 1 011 | 47 151 → 47 151 | 3,55 → 3,55 |
+| Additions | Calcul mental et posé : addition de nombres entiers (CE2 : < 1 000 ; CM1 : < 10 000) | 279 + 68 = ? → 347 | 2 592 + 2 255 = ? → 4 847 | 456 663 + 31 332 = ? → 487 995 |
+| Soustractions | Calcul mental et posé : soustraction de nombres entiers | 878 − 85 = ? → 793 | 4 399 − 446 = ? → 3 953 | 999 335 − 9 988 = ? → 989 347 |
+| Compléments | Calcul mental : compléments à 100 (CE2), à 1 000 (CM1), à l’unité pour les décimaux | 5 + ? = 100 → 95 | 810 + ? = 1 000 → 190 | 0,75 + ? = 1 → 0,25 |
+| Doubles et moitiés | Calcul mental : doubles et moitiés | moitié de 84 = ? → 42 | moitié de 674 = ? → 337 | double de 64 = ? → 128 |
+| × 10, × 100, ÷ 10 | Multiplier, diviser par 10, 100, 1 000 | 510 ÷ 10 = ? → 51 | 4 200 ÷ 100 = ? → 42 | 383 ÷ 100 = ? → 3,83 |
+| Tables de multiplication | Mémoriser les tables de multiplication (CE2 : 2 à 9 ; CM1 : jusqu’à 12 ; génie : jusqu’à 13) | undefined → 81 | undefined → 55 | undefined → 169 |
+| Tables de division | Division exacte à l’aide des tables | undefined → 9 | undefined → 11 | undefined → 5 |
+| Multiplications | Multiplication posée (CE2 : par un nombre à 1 chiffre ; CM1 : à 2 chiffres) | 36 × 3 = ? → 108 | 21 × 17 = ? → 357 | 466 × 51 = ? → 23 766 |
+| Division avec reste | Division euclidienne : quotient et reste (introduite en CE2, posée en CM1) | 27 ÷ 2 → quotient ? → 13 | 37 ÷ 3 → quotient ? → 12 | 252 ÷ 8 → quotient ? → 31 |
+| Partager équitablement | Résoudre des problèmes de partage (sens de la division) | undefined → 2 | undefined → 6 | undefined → 1 |
+| Multiples et divisibilité | Nombres pairs/impairs, multiples ; critères de divisibilité par 2, 3, 5, 9, 10 (CM1) | 21 → 21 | 587 → 587 | 4 888 → 4 888 |
+| PPCM | Multiples communs : plus petit multiple commun de deux nombres (prolongement du CM1) | Plus petit multiple commun de 2 et 4 ? → 4 | PPCM de 2 et 3 ? → 6 | PPCM de 22 et 18 ? → 198 |
+| PGCD | Diviseurs communs : plus grand diviseur commun de deux nombres (prolongement du CM1) | Plus grand diviseur commun de 4 et 8 ? → 4 | PGCD de 12 et 15 ? → 3 | PGCD de 70 et 56 ? → 14 |
+| Fractions | CE2 : moitié, tiers, quart ; CM1 : fraction d’une quantité (3/4 de 20) | le quart de 8 = ? → 2 | 2/3 de 21 = ? → 14 | 2/3 de 24 = ? → 16 |
+| Nombres décimaux et monnaie | CE2 : euros et centimes ; CM1 : nombres décimaux (dixièmes, centièmes), addition et soustraction | 1 € et 30 c = ? centimes → 130 | 12,8 − 4,6 = ? → 8,2 | 9,46 − 1,99 = ? → 7,47 |
+| Longueurs, masses, contenances | Grandeurs et mesures : unités de longueur, masse, contenance et conversions | 1 L = ? cL → 100 | 12 km 767 m = ? m → 12 767 | 1,33 kg = ? g → 1 330 |
+| Heures et durées | Grandeurs et mesures : heures, minutes, secondes, jours ; calcul de durées | 1 h 15 min = ? min → 75 | 2 h 50 min = ? min → 170 | 5 h = ? s → 18 000 |
+| Périmètres et aires | Espace et géométrie : périmètre du carré et du rectangle ; aire (CM1) | Rectangle 9 cm × 8 cm : périmètre ? → 34 | Carré de 6 cm de côté : périmètre ? → 24 | Carré de 16 cm de côté : périmètre ? → 64 |
+| Suites de nombres | Compter de 2 en 2, de 5 en 5, de 10 en 10, de 25 en 25… ; régularités | 182, 192, 202, 212, … ? → 222 | 503, 528, 553, 578, … ? → 603 | 4, 12, 36, 108, … ? → 324 |
+| Problèmes | Résoudre des problèmes en une étape (CE2) puis en deux étapes (CM1) | Thérèse voit 80 nénuphars. 20 s’envolent avec le vent. Combien en reste-t-il ? → 60 | 198 lucioles forment 9 marches égales. Combien de lucioles par marche ? → 22 | L’escalier compte 275 marches. Les 3/5 sont déjà construites. Combien de marches sont construites ? → 165 |
+| Proportionnalité | Situations de proportionnalité simples (CM1) | 1 sac contient 3 billes. Combien de billes dans 9 sacs ? → 27 | 3 mangues coûtent 9 €. Combien coûtent 12 mangues ? → 36 | 2 kg de riz coûtent 14 €. Combien coûtent 7 kg ? → 49 |
+| Acheter, vendre, bénéfice | Problèmes de monnaie : prix, monnaie rendue (CE2) ; prix d’achat, prix de vente, bénéfice et perte (CM1) ; pourcentages (génie) | Albertine vend des tomates à 200 FC et des oignons à 600 FC. Combien pour les deux (FC) ? → 800 | Albertine achète des avocats 4 700 FC mais les revend seulement 4 100 FC. Quelle est sa perte (FC) ? → 600 | Suzanne achète un sac de mangues 5 100 FC, en tire 4 tas vendus 1 600 FC chacun. Bénéfice (FC) ? → 1 300 |
+| Tout ce qu’on a appris | Révision de l’année | 305 + 91 = ? → 396 | Rectangle 17 cm × 7 cm : périmètre ? → 48 | 5/8 de 72 = ? → 45 |
 
-Depuis la carte, la case **Matières** ouvre 9 matières et 53 notions, chacune jouable aux trois niveaux (3e primaire, 4e primaire, génie). Chaque notion se joue avec l’avion, la pêche, les étoiles à relier ou le grand tri, et garde ses étoiles (champ `matieres` de la sauvegarde).
+### 🏘️ Problèmes de la vie
 
-Les contenus (listes de mots, phrases, questions) sont dans `app/www/js/contenus.js` : chaque élément porte son niveau (0 = CE2, 1 = CM1, 2 = génie). Un enseignant peut les relire et les compléter sans toucher au code.
+| Notion | Programme | 3e primaire | 4e primaire | Génie |
+|---|---|---|---|---|
+| En cuisine | Problèmes de recettes : proportionnalité, fractions, masses, contenances, durées | Le pondu pour 4 personnes demande 3 bottes de feuilles de manioc. Combien pour 8 personnes ? → 6 | Albertine fait 36 beignets et les partage entre 6 enfants. Combien chacun ? → 6 | Les 3/4 de 4 L d’eau, c’est combien de centilitres ? → 300 |
+| L’atelier de l’oncle Robert | Longueurs, conversions, périmètres et aires, partages ; prix et bénéfice | Le dessus d’une table est un carré de 60 cm de côté. Quel est son périmètre (cm) ? → 240 | Une étagère mesure 50 cm sur 30 cm. Quelle est son aire (cm²) ? → 1 500 | Un plateau mesure 1,5 m sur 0,6 m. Aire en m² ? → 0,9 |
+| Le champ d’Axel l’agronome | Multiplication en rangées, aires et périmètres de champs, masses, rendement, hectare | Axel a 67 graines. Il en sème 14. Combien lui en reste-t-il ? → 53 | 240 plants sont répartis en 10 rangées égales. Combien par rangée ? → 24 | Axel vend 486 kg de manioc à 800 FC le kg. Combien gagne-t-il (FC) ? → 388 800 |
+| La pêche de Tarzan | Problèmes de pêche : additions, partages, prix au kilo, vitesse | Tarzan range 14 poissons dans 2 paniers égaux. Combien par panier ? → 7 | Tarzan pêche 13 poissons par jour pendant 6 jours. Combien en tout ? → 78 | Recette 48 100 FC, dépenses 18 900 FC pour l’essence et le filet. Bénéfice (FC) ? → 29 200 |
+| En wewa | Trajets : prix des courses, monnaie, distances, vitesses, durées | La course coûte 1 500 FC. Tu paies avec 2 000 FC. Combien te rend le chauffeur (FC) ? → 500 | Le wewa parcourt 150 km en 3 jours, autant chaque jour. Combien de km par jour ? → 50 | À 30 km/h, combien de minutes pour parcourir 10 km ? → 20 |
+| Le chantier de la route | Longueurs (m, km), partages, aires, multiples communs | Le camion transporte 8 tonnes de cailloux par voyage. Combien en 3 voyages ? → 24 | On construit 5 000 m de route en 8 jours, autant chaque jour. Combien de mètres par jour ? → 625 | Un panneau tous les 200 m et un lampadaire tous les 300 m. Distance avant qu’ils soient de nouveau au même endroit (m) ? → 600 |
 
 ### ✏️ Grammaire
 
-| Notion | Programme | Exemple 3e primaire | Exemple 4e primaire | Exemple génie |
+| Notion | Programme | 3e primaire | 4e primaire | Génie |
 |---|---|---|---|---|
-| Nature des mots | Identifier les classes de mots : nom, verbe, adjectif, déterminant, pronom (CE2) ; adverbe, préposition (CM1) ; conjonction | « magnifique » est un… → adjectif | « attrapera » est un… → verbe | « elle » est un… → pronom |
-| Pluriel et féminin | Accord en genre et en nombre : pluriels en -s, -x, -aux ; féminins particuliers | Au pluriel : un cheveu → ? → des cheveux | Au pluriel : une étoile → ? → des étoiles | Au pluriel : un travail → ? → des travaux |
-| Sujet, verbe, compléments | Identifier le verbe et le sujet (CE2), le complément d’objet (CM1), les compléments circonstanciels | « Manoach joue du tambour. » Quel est le sujet ? → Manoach | « Le héron transporte l’étoile. » Quel est le COD ? → l’étoile | « Au bord du fleuve, Thérèse se repose. » Quel est le complément de lieu ? → Au bord du fleuve |
-| Types et formes de phrases | Phrases déclaratives, interrogatives, exclamatives, impératives ; forme affirmative et négative | « Grimpez sur mon dos. » Type de phrase ? → impérative | « Ne pleure pas. » Type de phrase ? → impérative | « Les enfants n’ont pas peur. » Forme de la phrase ? → négative |
+| Nature des mots | Identifier les classes de mots : nom, verbe, adjectif, déterminant, pronom (CE2) ; adverbe, préposition (CM1) ; conjonction | « grimpons » est un… → verbe | « fleuve » est un… → nom | « dormait » est un… → verbe |
+| Pluriel et féminin | Accord en genre et en nombre : pluriels en -s, -x, -aux ; féminins particuliers | Au pluriel : un nez → ? → des nez | Au féminin : un acteur → ? → une actrice | Au pluriel : un clou → ? → des clous |
+| Sujet, verbe, compléments | Identifier le verbe et le sujet (CE2), le complément d’objet (CM1), les compléments circonstanciels | « Thérèse porte les enfants sur son dos. » Quel est le verbe ? → porte | « Cécilia prend la petite étoile. » Quel est le COD ? → la petite étoile | « Thérèse porte les enfants sur son dos. » Quel est le verbe ? → porte |
+| Types et formes de phrases | Phrases déclaratives, interrogatives, exclamatives, impératives ; forme affirmative et négative | « Où est tombée la petite étoile ? » Type de phrase ? → interrogative | « Appelez les lucioles ! » Type de phrase ? → impérative | « L’étoile ne brille plus. » Forme de la phrase ? → négative |
 
 ### ⏰ Conjugaison
 
-| Notion | Programme | Exemple 3e primaire | Exemple 4e primaire | Exemple génie |
+| Notion | Programme | 3e primaire | 4e primaire | Génie |
 |---|---|---|---|---|
-| Le présent | Présent des verbes du 1er groupe, être, avoir, aller, faire, dire, venir, pouvoir, voir, vouloir, prendre ; 2e groupe (CM1) | Présent : elle (compter) → ? → elle compte | Présent : vous (briller) → ? → vous brillez | Présent : elles (être) → ? → elles sont |
-| Le futur | Futur simple des verbes étudiés | Futur : vous (danser) → ? → vous danserez | Futur : ils (finir) → ? → ils finiront | Futur : ils (trouver) → ? → ils trouveront |
-| L’imparfait | Imparfait des verbes étudiés | Imparfait : il (venir) → ? → il venait | Imparfait : nous (faire) → ? → nous faisions | Imparfait : nous (dire) → ? → nous disions |
-| Le passé composé | Passé composé avec être et avoir | Passé composé : elle (avoir) → ? → elle a eu | Passé composé : il (faire) → ? → il a fait | Passé composé : il (briller) → ? → il a brillé |
-| Le passé simple | Passé simple aux 3es personnes (CM1) ; toutes les personnes (génie) | Passé simple : ils (danser) → ? → ils dansèrent | Passé simple : elle (grimper) → ? → elle grimpa | Passé simple : vous (chercher) → ? → vous cherchâtes |
-| L’impératif | Impératif présent (CM1) | Impératif présent : (nous) grimper → ? → grimpons | Impératif présent : (tu) réussir → ? → réussis | Impératif présent : (tu) obéir → ? → obéis |
-| Reconnaître le temps | Identifier le temps d’un verbe conjugué | « j’ai compté » : quel temps ? → passé composé | « il remplit » : quel temps ? → passé simple | « nous écouterions » : quel temps ? → conditionnel présent |
+| Le présent | Présent des verbes du 1er groupe, être, avoir, aller, faire, dire, venir, pouvoir, voir, vouloir, prendre ; 2e groupe (CM1) | Présent : vous (dire) → ? → vous dites | Présent : vous (parler) → ? → vous parlez | Présent : il (aller) → ? → il va |
+| Le futur | Futur simple des verbes étudiés | Futur : ils (avoir) → ? → ils auront | Futur : tu (avoir) → ? → tu auras | Futur : vous (aller) → ? → vous irez |
+| L’imparfait | Imparfait des verbes étudiés | Imparfait : vous (sauter) → ? → vous sautiez | Imparfait : vous (faire) → ? → vous faisiez | Imparfait : tu (chanter) → ? → tu chantais |
+| Le passé composé | Passé composé avec être et avoir | Passé composé : elles (porter) → ? → elles ont porté | Passé composé : tu (chanter) → ? → tu as chanté | Passé composé : vous (dire) → ? → vous avez dit |
+| Le passé simple | Passé simple aux 3es personnes (CM1) ; toutes les personnes (génie) | Passé simple : ils (marcher) → ? → ils marchèrent | Passé simple : elles (dessiner) → ? → elles dessinèrent | Passé simple : ils (grandir) → ? → ils grandirent |
+| L’impératif | Impératif présent (CM1) | Impératif présent : (nous) porter → ? → portons | Impératif présent : (tu) dire → ? → dis | Impératif présent : (tu) écouter → ? → écoute |
+| Reconnaître le temps | Identifier le temps d’un verbe conjugué | « je faisais » : quel temps ? → imparfait | « il dessina » : quel temps ? → passé simple | « nous trouverions » : quel temps ? → conditionnel présent |
 
 ### 🔤 Orthographe
 
-| Notion | Programme | Exemple 3e primaire | Exemple 4e primaire | Exemple génie |
+| Notion | Programme | 3e primaire | 4e primaire | Génie |
 |---|---|---|---|---|
-| Homophones | a/à, et/est, on/ont, son/sont (CE2) ; ces/ses, ce/se, ou/où (CM1) ; c’est/s’est, leur/leurs, peu/peut/peux… | Ce soir, ___ compte les étoiles. → on | La maison ___ ils habitent est au bord du fleuve. → où | Les enfants appellent ___ amis. → leurs |
-| Accords dans le groupe nominal | Accord de l’adjectif avec le nom (genre et nombre), féminins irréguliers | Accorde : des étoiles (brillant) → brillantes | Accorde : des mangues (sucré) → sucrées | Accorde : une fête (public) → publique |
-| Écrire les mots | Orthographe lexicale : mots invariables et mots fréquents, m devant m, b, p, lettres muettes | Lequel est bien écrit : pompié, ponpier, pompier ? → pompier | Lequel est bien écrit : énemi, ennemi, ennemit ? → ennemi | Lequel est bien écrit : immence, imense, immense ? → immense |
+| Homophones | a/à, et/est, on/ont, son/sont (CE2) ; ces/ses, ce/se, ou/où (CM1) ; c’est/s’est, leur/leurs, peu/peut/peux… | Il prend une mangue ___ une banane. → et | Christian ___ pose sur la branche. → se | Ils rangent ___ jouets. → leurs |
+| Accords dans le groupe nominal | Accord de l’adjectif avec le nom (genre et nombre), féminins irréguliers | Accorde : des mangues (sucré) → sucrées | Accorde : une eau (frais) → fraîche | Accorde : une (fou) idée → folle |
+| Écrire les mots | Orthographe lexicale : mots invariables et mots fréquents, m devant m, b, p, lettres muettes | Lequel est bien écrit : quatre, catre, quattre ? → quatre | Lequel est bien écrit : ôpital, hopital, hôpital ? → hôpital | Lequel est bien écrit : bibliotèque, bibliothéque, bibliothèque ? → bibliothèque |
 
 ### 📖 Vocabulaire
 
-| Notion | Programme | Exemple 3e primaire | Exemple 4e primaire | Exemple génie |
+| Notion | Programme | 3e primaire | 4e primaire | Génie |
 |---|---|---|---|---|
-| Contraires et synonymes | Contraires (CE2), synonymes et préfixes (CM1) | Contraire de « allumer » ? → éteindre | Synonyme de « beau » ? → joli | Synonyme de « peur » ? → frayeur |
-| Ordre alphabétique | Utiliser le dictionnaire : ordre alphabétique (1re, 2e, 3e lettre…) | Lequel vient en premier dans le dictionnaire : étoile, lune, nuit, rivière ? → étoile | Lequel vient en premier dans le dictionnaire : maison, miel, mangue, moustique ? → maison | Lequel vient en premier dans le dictionnaire : lumière, lumignon, lumineux, lumbago ? → lumbago |
-| Les mots lingala du livre | Ouverture aux langues : le lexique du livre | « Mbote » (lingala) veut dire… → Bonjour | « Monzoto » (lingala) veut dire… → Étoile | « Ebale » (lingala) veut dire… → Le fleuve |
+| Contraires et synonymes | Contraires (CE2), synonymes et préfixes (CM1) | Contraire de « plein » ? → vide | Contraire de « lisible » ? → illisible | Synonyme de « content » ? → heureux |
+| Ordre alphabétique | Utiliser le dictionnaire : ordre alphabétique (1re, 2e, 3e lettre…) | Lequel vient en premier dans le dictionnaire : pirogue, jungle, ciel, lune ? → ciel | Lequel vient en premier dans le dictionnaire : tigre, terre, tortue, tambour ? → tambour | Lequel vient en premier dans le dictionnaire : brancard, brandir, branche, branlant ? → brancard |
+| Les mots lingala du livre | Ouverture aux langues : le lexique du livre | « Mama » (lingala) veut dire… → Maman | « Monzoto » (lingala) veut dire… → Étoile | « Ebale » (lingala) veut dire… → Le fleuve |
 
 ### 🔬 Sciences
 
-| Notion | Programme | Exemple 3e primaire | Exemple 4e primaire | Exemple génie |
+| Notion | Programme | 3e primaire | 4e primaire | Génie |
 |---|---|---|---|---|
-| Vivant ou non vivant | Le vivant : distinguer le vivant du non-vivant | Montre : vivant ou non vivant ? → non vivant | Mousse : vivant ou non vivant ? → vivant | Fossile : vivant ou non vivant ? → non vivant |
-| Les animaux | Classer les animaux, cycles de vie (métamorphoses) | Les mammifères nourrissent leurs petits avec… → du lait | Le têtard devient… → une grenouille | Un animal sans squelette intérieur est… → un invertébré |
-| Se nourrir | Régimes alimentaires des animaux, groupes d’aliments, chaînes alimentaires | La girafe mange des feuilles : elle est… → herbivore | L’être humain mange de tout : il est… → omnivore | Les végétaux qui fabriquent leur matière grâce à la lumière sont des… → producteurs |
-| Le corps humain | Organes, squelette, muscles, sens, santé | Quel organe commande le corps ? → le cerveau | Quel organe commande le corps ? → le cerveau | Le cœur est… → un muscle |
-| Les plantes | Besoins des végétaux, germination, de la fleur au fruit | La partie qui porte les feuilles est… → la tige | Les feuilles ont besoin de… pour fabriquer la matière de la plante → lumière | Les feuilles ont besoin de… pour fabriquer la matière de la plante → lumière |
-| L’eau et la matière | États de l’eau (solide, liquide, gaz) et changements d’état | La buée sur une vitre froide, c’est… → la condensation | La buée sur une vitre froide, c’est… → la condensation | Les nuages se forment par… → condensation |
-| La Terre, le Soleil, la Lune | La Terre dans le système solaire, jour et nuit, saisons | La Lune brille car elle renvoie la lumière… → du Soleil | Le jour et la nuit viennent de… → la rotation de la Terre sur elle-même | Combien de temps met la Terre pour faire le tour du Soleil ? → 365 jours |
-| Électricité et énergie | Circuits électriques, sécurité, énergies renouvelables | Une pile fournit… → de l’électricité | Pour qu’une ampoule s’allume, le circuit doit être… → fermé | Une pile fournit… → de l’électricité |
-| Conducteur ou isolant | Matériaux conducteurs et isolants | Fil de cuivre : conducteur ou isolant ? → conducteur | Verre : conducteur ou isolant ? → isolant | Ballon en caoutchouc : conducteur ou isolant ? → isolant |
+| Vivant ou non vivant | Le vivant : distinguer le vivant du non-vivant | Sable : vivant ou non vivant ? → non vivant | Herbe : vivant ou non vivant ? → vivant | Flocon : vivant ou non vivant ? → non vivant |
+| Les animaux | Classer les animaux, cycles de vie (métamorphoses) | Le héron est… → un oiseau | La baleine est… → un mammifère | Un animal sans squelette intérieur est… → un invertébré |
+| Se nourrir | Régimes alimentaires des animaux, groupes d’aliments, chaînes alimentaires | Le riz fait partie des… → féculents | Le poisson fait partie du groupe… → viandes, poissons, œufs | Les vers de terre et les champignons qui recyclent les déchets sont des… → décomposeurs |
+| Le corps humain | Organes, squelette, muscles, sens, santé | Combien de dents de lait a un enfant ? → 20 | Combien de dents a un adulte ? → 32 | Quels organes filtrent le sang pour faire l’urine ? → les reins |
+| Les plantes | Besoins des végétaux, germination, de la fleur au fruit | Après la fleur, la plante forme… → un fruit | Après la fleur, la plante forme… → un fruit | Après la fleur, la plante forme… → un fruit |
+| L’eau et la matière | États de l’eau (solide, liquide, gaz) et changements d’état | Le sucre mis dans l’eau… → se dissout | Le passage de solide à liquide s’appelle… → la fusion | L’air est-il de la matière ? → oui |
+| La Terre, le Soleil, la Lune | La Terre dans le système solaire, jour et nuit, saisons | La plus grosse planète du système solaire est… → Jupiter | La Lune brille car elle renvoie la lumière… → du Soleil | Les saisons viennent de… → l’inclinaison de l’axe de la Terre |
+| Électricité et énergie | Circuits électriques, sécurité, énergies renouvelables | Un barrage produit de l’électricité avec… → l’eau | Le charbon est une énergie… → non renouvelable | Ne jamais toucher… → une prise électrique avec les doigts |
+| Conducteur ou isolant | Matériaux conducteurs et isolants | Feuille de papier : conducteur ou isolant ? → isolant | Clou en fer : conducteur ou isolant ? → conducteur | Ballon en caoutchouc : conducteur ou isolant ? → isolant |
+| Programmer le robot | Sciences et technologie : écrire un programme de déplacement (algorithmique, boucles pour le génie) | Quel programme amène le robot jusqu’à l’étoile ? → ← ← | Quel programme amène le robot jusqu’à l’étoile ? → ↑ → ↑ ↑ ↑ | Quel programme amène le robot jusqu’à l’étoile ? → 2→ 2↓ |
 
-### 🗺️ Histoire et géographie
+### 🗺️ Histoire et géographie (RDC, Afrique)
 
-| Notion | Programme | Exemple 3e primaire | Exemple 4e primaire | Exemple génie |
+| Notion | Programme | 3e primaire | 4e primaire | Génie |
 |---|---|---|---|---|
-| Le temps qui passe | Calendrier, siècles, chiffres romains, repères chronologiques | En chiffres romains, XII = ? → 12 | En chiffres romains, LIV = ? → 54 | Combien de semaines environ dans une année ? → 52 |
-| Repères d’histoire | CM1 : la Gaule et les Romains, le temps des rois, la Révolution et l’Empire | Le roi des Francs baptisé vers 496 est… → Clovis | Christophe Colomb arrive en Amérique en… → 1492 | Napoléon est vaincu à Waterloo en… → 1815 |
-| Le monde | Se repérer : points cardinaux, continents, océans, fleuves, capitales | La capitale de la République démocratique du Congo est… → Kinshasa | Sur une carte, le nord est en général… → en haut | La capitale du Sénégal est… → Dakar |
+| Le temps qui passe | Calendrier, siècles, chiffres romains, repères chronologiques | Combien de jours a une année bissextile ? → 366 | Combien de jours a une année bissextile ? → 366 | En chiffres romains, MXXVIII = ? → 1028 |
+| Histoire de la RDC et de l’Afrique | Histoire de la RDC (royaume Kongo, colonisation, indépendance) et de l’Afrique (Égypte, empire du Mali, indépendances) | La conférence de Berlin, qui a partagé l’Afrique entre pays européens, a eu lieu en… → 1884-1885 | Le premier Premier ministre du Congo indépendant était… → Patrice Lumumba | De 1885 à 1908, le Congo était la propriété du roi… → Léopold II |
+| Géographie de la RDC et de l’Afrique | Géographie de la RDC (fleuve, provinces, villes, parcs) et de l’Afrique (pays, fleuves, lacs, déserts, capitales) | Le plus grand désert d’Afrique est… → le Sahara | Le plus grand lac d’Afrique est… → le lac Victoria | La RDC a combien de pays voisins ? → 9 |
+| La carte de l’Afrique | Se repérer sur la carte de l’Afrique : pays et capitales | Touche : Soudan → sd | Touche : Libye → ly | Quel est le pays en jaune ? → Lesotho |
 
 ### 🤝 Vivre ensemble
 
-| Notion | Programme | Exemple 3e primaire | Exemple 4e primaire | Exemple génie |
+| Notion | Programme | 3e primaire | 4e primaire | Génie |
 |---|---|---|---|---|
-| Vivre ensemble | Enseignement moral et civique : respect, règles, symboles de la République, droits de l’enfant | Un enfant est embêté tous les jours dans la cour. Je… → préviens un adulte | Qui dirige la commune ? → le maire | En France, les lois sont votées par… → le Parlement |
+| Vivre ensemble | Enseignement moral et civique : respect, règles, symboles de la RDC, droits de l’enfant, environnement | La devise de la RDC est… → Justice, Paix, Travail | En RDC, on peut voter à partir de… → 18 ans | La fête de l’indépendance de la RDC a lieu le… → 30 juin |
 
 ### 🇬🇧 Anglais
 
-| Notion | Programme | Exemple 3e primaire | Exemple 4e primaire | Exemple génie |
+| Notion | Programme | 3e primaire | 4e primaire | Génie |
 |---|---|---|---|---|
-| Mots anglais | Langues vivantes : couleurs, nombres, animaux, famille, politesse, jours, corps, nourriture | « rouge » en anglais ? → red | « oiseau » en anglais ? → bird | « les enfants » en anglais ? → the children |
-
-## Tout est débloqué
-
-À la demande de l’auteur, toutes les fonctions sont ouvertes dès le départ : les 10 chapitres, les 70 parties, les pages du livre, les coloriages, les tables et les matières. Pour revenir au déblocage progressif (une partie s’ouvre quand la précédente a une luciole), mettre `TOUT_OUVERT = false` dans `app.js`.
+| Mots anglais | Langues vivantes : couleurs, nombres, animaux, famille, politesse, jours, corps, nourriture | « trois » en anglais ? → three | « noir » en anglais ? → black | « les enfants » en anglais ? → the children |
