@@ -72,3 +72,7 @@ Outils utilisés (Ubuntu) : `apt install android-sdk aapt zipalign apksigner dal
 ## V2.3 — APK de test
 
 `releases/CeciliaManoach-V2.3-test.apk` (≈ 4,7 Mo, versionCode 5) : le village (12 jeux), histoire-géographie RDC et Afrique, bénéfice, PPCM et PGCD. Même clé de test : s'installe par-dessus la 2.2 en gardant les profils.
+
+## V2.4 — APK de test
+
+`releases/CeciliaManoach-V2.4-test.apk` (≈ 4,7 Mo, versionCode 6) : jeux de mémoire (multiplications, additions, verbes). Même clé de test : s’installe par-dessus la 2.3.
