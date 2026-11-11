@@ -20,7 +20,9 @@ const out = path.resolve(process.argv[4] || __dirname + '/out'); fs.mkdirSync(ou
   await go('.lang-btn >> nth=0', '03_profils');
   await go('.profile-card.add', '04_personnage');
   await go('#create-next', '05_niveau');
-  await go('.age-card >> nth=' + (process.argv[2] || 0), '06_carte', 700);
+  // Choix de la classe : niveau de jeu 0 / 1 / 2 → 3e / 4e / 5e primaire ; l'académie s'ouvre
+  await go('.age-card >> nth=' + (2 + (+process.argv[2] || 0)), '06_academie', 700);
+  await pg.evaluate(() => show('hub')); await pg.waitForTimeout(600); await S('06b_carte');
   await go('.chap-card >> nth=0', '07_chapitre');
   await go('.stage-card >> nth=0', '08_stage');
   // Une partie par jeu V1 rhabillé

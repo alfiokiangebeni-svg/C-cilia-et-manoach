@@ -679,3 +679,117 @@ img.avatar { display: block; height: 100%; width: auto; max-width: 100%; margin:
 .village-card-btn .portrait .ic { font-size: 2.6rem; }
 .village-card-btn b { font-size: .85rem; }
 .carte-mem .recto.l1 { font-size: min(2rem, 3.3vw); } .carte-mem .recto.l2 { font-size: min(1.35rem, 2.3vw); } .carte-mem .recto.l3 { font-size: min(1.05rem, 1.9vw); }
+
+/* ================= Académie scolaire – École primaire RDC ================= */
+.acad-screen { background: linear-gradient(180deg, var(--nuit1) 0%, var(--nuit2) 70%, var(--crepuscule) 100%); }
+.acad-screen .topbar .title { font-size: 1.6rem; -webkit-text-stroke-color: var(--encre); text-shadow: 0 .2rem 0 var(--encre); }
+.acad-chips { display: flex; gap: .4rem; flex-wrap: wrap; justify-content: flex-end; max-width: 45%; }
+.acad-chips .chip.sel { background: var(--etoile); }
+.acad-chips .tete { width: 1.8rem; height: 1.8rem; }
+.acad-body { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; padding: .4rem 1.2rem 3rem; user-select: text; -webkit-user-select: text; }
+.acad-h { color: #fff; font-size: 1.6rem; margin: 1.2rem 0 .6rem; text-shadow: 0 .15rem 0 var(--encre); }
+.acad-note { background: rgba(255,255,255,.88); border-left: .4rem solid var(--orange); border-radius: .8rem; padding: .6rem 1rem; font-size: 1.15rem; }
+.tag { display: inline-block; background: var(--etoile); color: var(--encre); border-radius: 1rem; padding: .1rem .7rem; font-size: 1rem; margin: .15rem; }
+.tag.ok { background: var(--green); color: #fff; }
+.acad-cycles { display: grid; grid-template-columns: repeat(3, 1fr); gap: .8rem; }
+.acad-cycle { background: rgba(255,255,255,.12); border: .2rem solid var(--c); border-radius: 1.2rem; padding: .5rem; }
+.cy-nom { color: #fff; font-size: 1.15rem; text-align: center; margin-bottom: .4rem; }
+.cy-classes { display: flex; gap: .5rem; justify-content: center; }
+.acad-classe { flex: 1; background: var(--c); color: #fff; border-radius: 1rem; padding: .5rem; display: flex; flex-direction: column; align-items: center; box-shadow: 0 .3rem 0 rgba(0,0,0,.25); }
+.acad-classe b { font-size: 2rem; line-height: 1; } .acad-classe small { font-size: .95rem; }
+.acad-classe.sel { outline: .3rem solid var(--etoile); transform: scale(1.05); }
+.acad-classe.actuelle::after { content: '🎒'; font-size: 1rem; }
+.acad-classe.locked { filter: grayscale(.8) brightness(.8); }
+.acad-mats { display: grid; grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr)); gap: .8rem; }
+.acad-mat { background: #fff; border-radius: 1.2rem; padding: .8rem; display: flex; flex-direction: column; align-items: center; gap: .25rem; border-bottom: .45rem solid var(--c); box-shadow: 0 .3rem 0 rgba(0,0,0,.2); text-align: center; }
+.acad-mat .ic { font-size: 2.4rem; } .acad-mat b { font-size: 1.2rem; } .acad-mat small { font-size: .95rem; opacity: .75; }
+.acad-mat .compl { font-size: .85rem; color: #6c757d; }
+.barre { width: 100%; height: .6rem; background: #e9ecef; border-radius: 1rem; overflow: hidden; }
+.barre span { display: block; height: 100%; background: var(--c); }
+.acad-actions, .res-actions { display: flex; flex-wrap: wrap; gap: .7rem; justify-content: center; margin-top: 1.2rem; }
+.acad-actions .btn { font-size: 1.3rem; padding: .6rem 1.1rem; }
+.acad-chap { background: rgba(255,255,255,.95); border-radius: 1.2rem; padding: .6rem .9rem; margin: .8rem 0; }
+.acad-chap h3 { margin: .2rem 0 .5rem; font-size: 1.3rem; }
+.acad-lecon { width: 100%; display: flex; align-items: center; gap: .8rem; background: #f8f9fa; border-radius: 1rem; padding: .5rem .8rem; margin: .35rem 0; text-align: left; border-left: .45rem solid #ced4da; }
+.acad-lecon.st-ok { border-left-color: var(--green); } .acad-lecon.st-cours { border-left-color: var(--orange); }
+.acad-lecon.locked { opacity: .55; }
+.acad-lecon .txt { flex: 1; display: flex; flex-direction: column; } .acad-lecon .txt b { font-size: 1.2rem; } .acad-lecon .txt small { font-size: .95rem; opacity: .7; }
+.acad-lecon .etat { display: flex; flex-direction: column; align-items: center; font-size: 1.4rem; min-width: 4rem; }
+.acad-lecon .etat small { font-size: .9rem; } .acad-lecon .etat i { color: var(--or); font-style: normal; font-size: 1rem; }
+.acad-emoji { font-size: 2.6rem; line-height: 1; } .acad-emoji.petit { font-size: 2rem; } .acad-emoji.grand { font-size: 4rem; }
+.acad-illu { width: 3rem; height: 3rem; object-fit: contain; } .acad-illu.grand { width: 6rem; height: 6rem; }
+.acad-illu.q-img, .acad-emoji.q-img { width: 9rem; height: 9rem; display: block; margin: .4rem auto; }
+.acad-carte { background: var(--creme); border-radius: 1.4rem; padding: 1rem 1.3rem; box-shadow: 0 .4rem 0 rgba(0,0,0,.25); max-width: 54rem; margin: .6rem auto; font-size: 1.3rem; }
+.lec-tete { display: flex; align-items: center; gap: 1rem; } .lec-tete h2 { margin: .2rem 0; font-size: 2rem; } .lec-tete small { opacity: .7; }
+.acad-carte .bloc { background: #fff; border-radius: 1rem; padding: .5rem 1rem; margin: .7rem 0; }
+.acad-carte .bloc h4 { margin: .3rem 0; color: var(--nuit2); }
+.acad-carte .bloc.ex { background: #fff6e0; } .acad-carte .bloc.essai { background: #e9f7ef; }
+.lec-go { text-align: center; }
+.opts { display: grid; grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr)); gap: .6rem; margin: .6rem 0; }
+.opts.col { grid-template-columns: 1fr; }
+.opt { background: #fff; border: .2rem solid #ced4da; border-radius: 1rem; padding: .7rem 1rem; font-size: 1.35rem; text-align: center; box-shadow: 0 .25rem 0 rgba(0,0,0,.12); }
+.opt:active { transform: translateY(.2rem); }
+.opt.juste { background: var(--green); color: #fff; border-color: var(--green); }
+.opt.faux { background: var(--red); color: #fff; border-color: var(--red); }
+.quiz-carte .q { font-size: 1.7rem; text-align: center; margin: .6rem 0; white-space: pre-line; }
+.q-prog { display: flex; gap: .4rem; justify-content: center; }
+.q-prog span { width: 2.2rem; height: .7rem; border-radius: 1rem; background: #dee2e6; }
+.q-prog span.ici { background: var(--blue); } .q-prog span.ok { background: var(--green); } .q-prog span.ko { background: var(--red); } .q-prog span.fait { background: var(--violet); }
+.q-type { text-align: center; font-size: 1.05rem; opacity: .7; margin-top: .4rem; }
+.q-type .pts { background: var(--etoile); border-radius: 1rem; padding: 0 .5rem; opacity: 1; }
+.fb { text-align: center; min-height: 1.6rem; } .suite { text-align: center; }
+.saisie { display: flex; flex-direction: column; align-items: center; gap: .5rem; }
+.saisie .ecran { min-width: 12rem; min-height: 3rem; background: #fff; border: .2rem solid var(--blue); border-radius: .8rem; font-size: 2rem; text-align: center; padding: .2rem 1rem; }
+.pave { display: grid; grid-template-columns: repeat(3, 4.2rem); gap: .4rem; }
+.touche { background: #fff; border-radius: .8rem; font-size: 1.8rem; height: 3.4rem; box-shadow: 0 .25rem 0 rgba(0,0,0,.15); }
+#aq-chrono.urgent { background: var(--red); color: #fff; }
+.res-tete { text-align: center; border-top: .6rem solid var(--c, var(--green)); }
+.res-tete .note { font-size: 4rem; font-weight: 700; color: var(--c); } .res-tete .mention { font-size: 2rem; }
+.res-tete .gros { font-size: 4rem; } .res-tete p.ok { color: #198754; font-size: 1.4rem; } .res-tete p.ko { color: #b02a37; font-size: 1.3rem; }
+.corrections { max-width: 54rem; margin: 0 auto; }
+.corr { background: #fff; border-radius: 1rem; padding: .6rem 1rem; margin: .5rem 0; border-left: .5rem solid var(--green); font-size: 1.2rem; }
+.corr.ko { border-left-color: var(--red); } .corr .explication { background: #fff8e1; border-radius: .6rem; padding: .3rem .6rem; margin-top: .3rem; }
+.acad-table { width: 100%; border-collapse: collapse; background: #fff; border-radius: .8rem; overflow: hidden; font-size: 1.15rem; margin: .4rem 0; }
+.acad-table th { background: var(--nuit2); color: #fff; padding: .4rem; } .acad-table td { padding: .35rem .5rem; border-bottom: .1rem solid #e9ecef; text-align: center; }
+.acad-table td:first-child { text-align: left; }
+.badges { display: grid; grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr)); gap: .6rem; }
+.badge { background: rgba(255,255,255,.5); border-radius: 1rem; padding: .5rem; display: flex; flex-direction: column; align-items: center; text-align: center; filter: grayscale(1); opacity: .7; }
+.badge.on { background: #fff; filter: none; opacity: 1; box-shadow: 0 .3rem 0 var(--or); }
+.badge span { font-size: 2.4rem; } .badge small { font-size: .9rem; opacity: .7; }
+.nouveaux-badges { text-align: center; } .nouveaux-badges .badge { display: inline-flex; margin: .3rem; }
+.liste { display: flex; flex-wrap: wrap; color: #fff; }
+.suivi-kpi { display: grid; grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr)); gap: .6rem; }
+.suivi-kpi div { background: #fff; border-radius: 1rem; padding: .6rem; text-align: center; display: flex; flex-direction: column; }
+.suivi-kpi b { font-size: 1.5rem; } .suivi-kpi small { opacity: .7; }
+.reco { background: #fff; border-radius: 1rem; padding: .6rem 1rem .6rem 2rem; font-size: 1.15rem; }
+#acad-suivi .row { background: rgba(255,255,255,.9); border-radius: 1rem; padding: .5rem; margin: .4rem 0; justify-content: flex-start; }
+#acad-suivi .small-note { color: #fff; margin: 1rem auto; opacity: .8; }
+.bulletin-doc { background: #fff; color: #111; font-size: 1.15rem; }
+.bul-tete { display: flex; justify-content: space-between; align-items: center; border-bottom: .2rem solid #111; padding-bottom: .4rem; }
+.bul-tete b { font-size: 1.4rem; display: block; } .bul-tete small { opacity: .7; } .bul-ic { font-size: 2.6rem; }
+.bul-id { width: 100%; margin: .6rem 0; } .bul-id td { padding: .2rem .3rem; }
+.bul-app { background: #f1f3f5; border-radius: .6rem; padding: .5rem; }
+.bul-sign { display: flex; justify-content: space-around; margin: 1.6rem 0 2.4rem; }
+.bul-sign span { border-top: .1rem solid #111; padding-top: .3rem; min-width: 12rem; text-align: center; }
+@media (max-width: 700px) {
+  .acad-cycles { grid-template-columns: 1fr; }
+  .acad-screen .topbar .title { font-size: 1.25rem; }
+  .acad-chips { max-width: 55%; }
+}
+/* Impression du bulletin : seul le document est imprimé */
+@media print {
+  html, body { overflow: visible !important; height: auto !important; background: #fff !important; }
+  body.impression > *:not(#acad-bulletin) { display: none !important; }
+  body.impression #acad-bulletin { position: static !important; display: block !important; background: #fff !important; }
+  body.impression #acad-bulletin .topbar, body.impression #acad-bulletin .res-actions { display: none !important; }
+  body.impression #acad-bulletin .acad-body { overflow: visible !important; padding: 0 !important; }
+  body.impression .bulletin-doc { box-shadow: none !important; max-width: none !important; margin: 0 !important; }
+}
+/* Choix de la classe (6 classes + test de positionnement) */
+#age-list { display: grid; grid-template-columns: repeat(4, minmax(0, 11rem)); gap: .8rem; justify-content: center; }
+#age-list .age-card { width: auto; padding: .6rem .5rem; gap: .15rem; }
+#age-list .age-card .ic { font-size: 2.6rem; line-height: 1; } #age-list .age-card .rg { font-size: 1.45rem; } #age-list .age-card .nm { font-size: 1.05rem; }
+@media (max-height: 500px) {
+  .pave { grid-template-columns: repeat(6, 3.6rem); } .touche { height: 2.8rem; font-size: 1.5rem; }
+  .quiz-carte .q { font-size: 1.5rem; margin: .3rem 0; } .opt { padding: .5rem .8rem; }
+}

@@ -38,7 +38,17 @@ Cahier des charges complet : [INSTRUCTION-V2.md](INSTRUCTION-V2.md)
 - [x] Jeux de mémoire : multiplications, additions, verbes (V2.4)
 - [ ] Validation des apparences des nouveaux personnages par l'auteur
 
+## V2.5 — Académie scolaire – École primaire RDC
+Détails : [ACADEMIE.md](ACADEMIE.md)
+- [x] 6 classes (1re → 6e primaire), 3 cycles, 12 matières (dont 2 modules complémentaires), 160 leçons
+- [x] Quiz de 5 questions /20, barème, validation à 14/20, corrections et explications, nouvelles questions
+- [x] Progression, étoiles, badges, médailles, trophées, diplômes, régularité
+- [x] Bulletin trimestriel imprimable (PDF), tableau de bord parent / enseignant
+- [x] Test de positionnement, examens de fin d'année, examens blancs ENAFEP (non officiels)
+- [ ] Relecture des leçons et questions par un enseignant congolais (programme MINEDU-NC)
+- [ ] Kikongo, swahili, tshiluba ; lecture audio des consignes en 1re-2e ; plus de leçons par matière
+
 ## V3.0 — Au-delà du calcul
 - [ ] Nouveaux jeux : lecture, sciences, hygiène, missions (voir le catalogue des 24 projets)
-- [ ] Tableau de bord parent / enseignant
+- [x] Tableau de bord parent / enseignant (V2.5)
 - [ ] Version iOS (WKWebView) et PC

@@ -253,7 +253,13 @@ const Store = {
     this.data.current = v1.current || null;
     this.save(); return true;
   },
-  complet(p) { p.lucioles = p.lucioles || {}; p.livre = p.livre || {}; p.coloriages = p.coloriages || {}; p.tables = p.tables || {}; p.matieres = p.matieres || {}; p.village = p.village || {}; if (!(p.age >= 0 && p.age <= 2)) p.age = 0; return p; },
+  complet(p) { p.lucioles = p.lucioles || {}; p.livre = p.livre || {}; p.coloriages = p.coloriages || {}; p.tables = p.tables || {}; p.matieres = p.matieres || {}; p.village = p.village || {}; if (!(p.age >= 0 && p.age <= 2)) p.age = 0;
+    // Académie (V2.5) : les anciens profils CE2 / CM1 / génie commencent en 3e / 4e / 5e primaire
+    const a = p.academie = p.academie || { classe: [3, 4, 5][p.age] };
+    a.lecons = a.lecons || {}; a.quiz = a.quiz || []; a.examens = a.examens || []; a.badges = a.badges || {}; a.erreurs = a.erreurs || {};
+    a.jours = a.jours || []; a.temps = a.temps || { total: 0, mat: {}, jours: {} }; a.diag = a.diag || null; a.ordreLibre = !!a.ordreLibre;
+    if (!(a.classe >= 1 && a.classe <= 6)) a.classe = 3;
+    return p; },
   save() { try { localStorage.setItem(this.key, JSON.stringify(this.data)); } catch (e) {} },
   profile() { return this.data.profiles.find(p => p.id === this.data.current) || null; },
   lucioles(id) { const p = this.profile(); return (p && p.lucioles[id]) || 0; },

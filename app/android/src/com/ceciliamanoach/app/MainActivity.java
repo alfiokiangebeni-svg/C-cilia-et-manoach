@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.print.PrintAttributes;
+import android.print.PrintManager;
+import android.webkit.JavascriptInterface;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -29,9 +32,26 @@ public class MainActivity extends Activity {
         web.setWebViewClient(new WebViewClient());
         web.setWebChromeClient(new WebChromeClient());
         web.setOverScrollMode(View.OVER_SCROLL_NEVER);
+        web.addJavascriptInterface(new Pont(), "AndroidApp");
         setContentView(web);
         hideBars();
         if (b != null) web.restoreState(b); else web.loadUrl("file:///android_asset/index.html");
+    }
+
+    // Pont JavaScript : impression du bulletin par le service d'impression d'Android (« Enregistrer au format PDF »).
+    // Aucune permission nécessaire, aucune donnée envoyée.
+    class Pont {
+        @JavascriptInterface
+        public void imprimer(final String titre) {
+            runOnUiThread(new Runnable() {
+                @Override public void run() {
+                    if (Build.VERSION.SDK_INT < 21) return;
+                    PrintManager pm = (PrintManager) getSystemService(PRINT_SERVICE);
+                    String nom = (titre == null || titre.isEmpty()) ? "Bulletin" : titre;
+                    pm.print(nom, web.createPrintDocumentAdapter(nom), new PrintAttributes.Builder().setMediaSize(PrintAttributes.MediaSize.ISO_A4).build());
+                }
+            });
+        }
     }
 
     private void hideBars() {

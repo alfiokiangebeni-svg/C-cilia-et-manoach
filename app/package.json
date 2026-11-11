@@ -1,10 +1,11 @@
 {
   "name": "cecilia-manoach",
-  "version": "2.4.0",
+  "version": "2.5.0",
   "private": true,
   "description": "Cécilia & Manoach et la petite étoile — jeu éducatif pour enfants de 4 à 12 ans (Android, hors-ligne)",
   "scripts": {
-    "test": "node test/structure.js && node test/toutes-les-parties.js",
+    "test": "node test/structure.js && node test/toutes-les-parties.js && node test/academie.js",
+    "test:academie": "node test/academie.js",
     "test:structure": "node test/structure.js",
     "test:ecrans": "node test/parcours-ecrans.js 0 && node test/langues-zoo-parents.js && node test/coloriage.js",
     "captures": "DSF=1 node test/parcours-ecrans.js 0 800x380 ../docs/captures/v2/telephone && DSF=1 node test/parcours-ecrans.js 0 1280x800 ../docs/captures/v2/tablette"

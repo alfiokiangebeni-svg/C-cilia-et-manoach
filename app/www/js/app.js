@@ -67,8 +67,8 @@ const RENDER = {
   profiles() {
     const box = $('#profile-list'); box.innerHTML = '';
     Store.data.profiles.forEach(p => {
-      const c = h('button', 'profile-card', `${avHTML(avOf(p).id)}<div class="nm">${esc(p.name)}</div><div class="st">✨ ${Store.totalLucioles(p)} · ${esc(tx(NIVEAUX[p.age].nom))}</div>`);
-      c.onclick = () => { Sound.tap(); Store.data.current = p.id; Store.save(); show('hub'); };
+      const c = h('button', 'profile-card', `${avHTML(avOf(p).id)}<div class="nm">${esc(p.name)}</div><div class="st">🎓 ${classeAcad(p.academie.classe).nom} · ✨ ${Store.totalLucioles(p)}</div>`);
+      c.onclick = () => { Sound.tap(); Store.data.current = p.id; Store.save(); show('academie'); };
       box.append(c);
     });
     if (Store.data.profiles.length < 4) {
@@ -423,7 +423,7 @@ function parentPanel() {
     <div class="row"><b>${t('sound')} :</b> <button class="btn ${Store.data.sound ? 'green' : 'red'}" id="pp-sound">${Store.data.sound ? '🔊' : '🔇'}</button></div>
     ${p ? `<div class="row"><b>${esc(p.name)} — ${t('changeAge')} :</b> ${AGES.map(a => `<button class="btn" data-age="${a.id}" style="--c:${a.color};font-size:1.2rem;${p.age === a.id ? 'outline:.25rem solid #2b2d42' : ''}">${a.range}</button>`).join('')}</div>
     <div class="row"><button class="btn orange" id="pp-reset">↺ ${t('reset')}</button><button class="btn red" id="pp-del">🗑 ${t('del')}</button></div>` : ''}
-    <div class="small-note">Cécilia &amp; Manoach V2.0 · ${CHAPITRES.length} chapitres · ${PARTIES.length} parties · CE2, CM1, génie · tables 1 → 13 · ${SUJETS.length} matières · ${VILLAGE.length} jeux du village · carte de l’Afrique : @svg-maps/world (CC BY 4.0) · hors ligne, sans publicité, aucune donnée collectée.</div>
+    <div class="small-note">Cécilia &amp; Manoach V2.5 · Académie : 6 classes, ${LECONS_ACAD.length} leçons · ${CHAPITRES.length} chapitres · ${PARTIES.length} parties · CE2, CM1, génie · tables 1 → 13 · ${SUJETS.length} matières · ${VILLAGE.length} jeux du village · carte de l’Afrique : @svg-maps/world (CC BY 4.0) · hors ligne, sans publicité, aucune donnée collectée.</div>
     <button class="btn blue" id="pp-close">${t('close')}</button>`);
   $$('#modal-box [data-l]').forEach(b => b.onclick = () => { LANG = b.dataset.l; Store.data.lang = LANG; Store.save(); applyLang(); parentPanel(); if (RENDER[current]) RENDER[current](); });
   $('#pp-sound').onclick = () => { Store.data.sound = !Store.data.sound; Sound.on = Store.data.sound; Store.save(); parentPanel(); RENDER.home(); };
